@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+展示所有的数据
+
+<body>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>密码</th>
+        </tr>
+        </thead>
+
+            {% for line in user_list %}
+                <tr>
+                    <td>{{ line.name }}</td>
+                    <td>{{ line.age }}</td>
+                    <td>{{ line.sex }}</td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>
