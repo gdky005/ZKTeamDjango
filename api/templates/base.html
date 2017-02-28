@@ -1,0 +1,20 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "css/zkteam_styles.css" %}" rel="stylesheet">
+</head>
+<body>
+<div id="content">
+    {% block content %}
+
+    {% endblock %}
+</div>
+<div id="sidebar">
+    <h2>我的内容</h2>
+    <p>卓客 team</p>
+</div>
+</body>
+</html>
