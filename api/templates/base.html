@@ -3,18 +3,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>
+        {% block title %}
+            <p>默认  标题</p>
+        {% endblock %}
+    </title>
     <link href="{% static "css/zkteam_styles.css" %}" rel="stylesheet">
 </head>
 <body>
 <div id="content">
     {% block content %}
-
+        <p>默认 content</p>
     {% endblock %}
 </div>
 <div id="sidebar">
-    <h2>我的内容</h2>
-    <p>卓客 team</p>
+    {% block sidebar %}
+        <p>默认 sidebar</p>
+    {% endblock %}
 </div>
 </body>
 </html>

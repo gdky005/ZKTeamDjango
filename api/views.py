@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from api import models
 
 
@@ -11,3 +11,7 @@ def show(request):
 
 def home(request):
     return render(request, 'index.html')
+
+
+def page_not_found(request):
+    return render_to_response('')
