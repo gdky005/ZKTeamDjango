@@ -10,4 +10,4 @@ def show(request):
 
 
 def home(request):
-    return render(request, "index.html")
+    return render(request, 'index.html')
