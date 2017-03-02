@@ -12,16 +12,19 @@
     <table border="1">
         <thead>
         <tr>
+            <th>用户ID</th>
             <th>用户名</th>
-            <th>密码</th>
+            <th>性别</th>
+            <th>年龄</th>
         </tr>
         </thead>
 
             {% for line in user_list %}
                 <tr>
-                    <td>{{ line.name }}</td>
-                    <td>{{ line.age }}</td>
+                    <td>{{ line.id }}</td>
+                    <td><b>{{ line.name }}</b></td>
                     <td>{{ line.sex }}</td>
+                    <td>{{ line.age }}</td>
                 </tr>
             {% endfor %}
 
