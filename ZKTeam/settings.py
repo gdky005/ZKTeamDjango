@@ -27,9 +27,9 @@ SECRET_KEY = '$8+qwz$9-=m5#t6h02*zd1=n_gur4n=q1d&3jk0kmx+=&(0l^e'
 #
 # ALLOWED_HOSTS = ['*']
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -90,8 +90,12 @@ DATABASES = {
         # The following settings are not used with sqlite3:
         'USER': 'root',
         'PASSWORD': 'wq12345678',
-        'HOST': '127.0.0.1',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'HOST': '120.27.112.240',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '3306',  # Set to empty string for default.
+	'OPTIONS': {
+		'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+		'charset': 'utf8',	
+	},
     }
 }
 
