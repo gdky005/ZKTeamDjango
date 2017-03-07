@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -30,7 +29,6 @@ SECRET_KEY = '$8+qwz$9-=m5#t6h02*zd1=n_gur4n=q1d&3jk0kmx+=&(0l^e'
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -75,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ZKTeam.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -90,15 +87,15 @@ DATABASES = {
         # The following settings are not used with sqlite3:
         'USER': 'root',
         'PASSWORD': 'wq12345678',
-        'HOST': '120.27.112.240',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'HOST': '120.27.112.240',
+        # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '3306',  # Set to empty string for default.
-	'OPTIONS': {
-		'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-		'charset': 'utf8',	
-	},
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8',
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -118,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -131,7 +127,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
