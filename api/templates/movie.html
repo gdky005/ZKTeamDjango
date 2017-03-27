@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    p {
+        text-align: center;
+        font-weight: bold;
+        font-size: xx-large;
+        color: red;
+    }
+
+    body{
+       text-align: center;
+    }
+
+</style>
+<body>
+
+<p><b>展示豆瓣 top250 的数据</b></p>
+
+<body>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>电影排名：</th>
+            <th>电影名字：</th>
+            <th>电影详情：</th>
+            <th>电影评级：</th>
+            <th>电影括弧：</th>
+        </tr>
+        </thead>
+
+        {% for movie in movie_list %}
+            <tr>
+                <td><b>{{ movie.id }}</b></td>
+                <td><b>{{ movie.title }}</b></td>
+                <td>{{ movie.movieInfo }}</td>
+                <td>{{ movie.star }}</td>
+                <td>{{ movie.quote }}</td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>
