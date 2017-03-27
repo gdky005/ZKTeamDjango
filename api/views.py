@@ -35,16 +35,16 @@ def jsonMovie(request):
         word = list(movie_list)
         # data = json.dumps(word)  # 把list转成json
 
-        resultResponse = ResultResponse(0, "ok", word)
-
-        return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False),
-                            content_type="application/json")
-        # return HttpResponse(data, content_type="application/json")
+        return getHttpResponse(0, "ok", word)
     except Error:
-        resultResponse = ResultResponse(10000, "Error", "")
+        return getHttpResponse(10000, "Error", "")
 
-        return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False),
-                            content_type="application/json")
+
+def getHttpResponse(code, message, word):
+    resultResponse = ResultResponse(code, message, word)
+    return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False),
+                        content_type="application/json")
+    # return HttpResponse(data, content_type="application/json")
 
 
 def home(request):
