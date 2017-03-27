@@ -15,3 +15,7 @@ class MovieInfo(models.Model):
     movieInfo = models.TextField(max_length=None)
     star = models.IntegerField(default=0)
     quote = models.TextField(max_length=None)
+
+    def toJSON(self):
+        import json
+        return json.dumps(dict([(attr, getattr(self, attr)) for attr in [f.name for f in self._meta.fields]]))
