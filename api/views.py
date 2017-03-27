@@ -10,7 +10,8 @@ def show(request):
 
 
 def movie(request):
-    movie_list = models.MovieInfo.objects.all()[:10]  # 取出该表所有的数据
+    maxData = int(request.GET.get("pageCount"))
+    movie_list = models.MovieInfo.objects.all()[:maxData]  # 取出该表所有的数据
 
     return render(request, "movie.html", {"movie_list": movie_list})
 
