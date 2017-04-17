@@ -19,3 +19,22 @@ class MovieInfo(models.Model):
     def toJSON(self):
         import json
         return json.dumps(dict([(attr, getattr(self, attr)) for attr in [f.name for f in self._meta.fields]]))
+
+
+class MasterInfo(models.Model):
+    id = models.IntegerField(auto_created=True, primary_key=True)
+    name = models.TextField(max_length=None)
+    uid = models.IntegerField(default=0)
+    img = models.TextField(max_length=None)
+    info = models.TextField(max_length=None)
+    isVip = models.BooleanField(default=False)
+    index = models.IntegerField(default=0)
+    blog = models.IntegerField(max_length=None)
+
+
+class MasterArticle(models.Model):
+    id = models.IntegerField(auto_created=True, primary_key=True)
+    uid = models.IntegerField(default=0)
+    des = models.TextField(max_length=None)
+    article_title = models.IntegerField(max_length=None)
+    article_address = models.IntegerField(max_length=None)
