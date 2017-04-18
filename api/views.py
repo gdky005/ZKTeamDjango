@@ -16,10 +16,44 @@ def masterInfo(request):
     return render(request, "master_info.html", {"users": users})
 
 
+def jsonMasterInfo(request):
+    maxData = 5
+
+    count = request.GET.get("pageCount")
+    if count:
+        maxData = int(count)
+
+    try:
+        users = models.MasterInfo.objects.all().values()[:maxData]  # 取出该表所有的数据
+        user_list = list(users)
+        # data = json.dumps(word)  # 把list转成json
+
+        return getHttpResponse(0, "ok", user_list)
+    except Error:
+        return getHttpResponse(10000, "Error", "")
+
+
 def masterArticle(request):
     user_article = models.MasterArticle.objects.all()  # 取出该表所有的数据
 
     return render(request, "master_article.html", {"user_article": user_article})
+
+
+def jsonMasterArticle(request):
+    maxData = 5
+
+    count = request.GET.get("pageCount")
+    if count:
+        maxData = int(count)
+
+    try:
+        master_article = models.MasterArticle.objects.all().values()[:maxData]  # 取出该表所有的数据
+        article = list(master_article)
+        # data = json.dumps(word)  # 把list转成json
+
+        return getHttpResponse(0, "ok", article)
+    except Error:
+        return getHttpResponse(10000, "Error", "")
 
 
 def show(request):
