@@ -23,8 +23,9 @@ class MovieInfo(models.Model):
 
 class MasterInfo(models.Model):
     id = models.IntegerField(auto_created=True, primary_key=True)
-    name = models.TextField(max_length=None)
     uid = models.IntegerField(default=0)
+    name = models.TextField(max_length=None)
+    nick_name = models.TextField(max_length=None)
     img = models.TextField(max_length=None)
     info = models.TextField(max_length=None)
     isVip = models.BooleanField(default=False)
@@ -35,6 +36,8 @@ class MasterInfo(models.Model):
 class MasterArticle(models.Model):
     id = models.IntegerField(auto_created=True, primary_key=True)
     uid = models.IntegerField(default=0)
+    name = models.TextField(max_length=None)
+    nick_name = models.TextField(max_length=None)
     des = models.TextField(max_length=None)
     article_title = models.IntegerField(max_length=None)
     article_address = models.IntegerField(max_length=None)
