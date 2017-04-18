@@ -10,6 +10,18 @@ from api.ResultResponse import ResultResponse
 
 
 # Create your views here.
+def masterInfo(request):
+    users = models.MasterInfo.objects.all()  # 取出该表所有的数据
+
+    return render(request, "master_info.html", {"users": users})
+
+
+def masterArticle(request):
+    user_article = models.MasterArticle.objects.all()  # 取出该表所有的数据
+
+    return render(request, "master_article.html", {"user_article": user_article})
+
+
 def show(request):
     user_list = models.UserInfo.objects.all()  # 取出该表所有的数据
 

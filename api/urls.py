@@ -6,6 +6,8 @@ urlpatterns = [
     url(r'^show/', views.show, name="show"),
     url(r'^movie/', views.movie, name="movie"),
     url(r'^json/movie/', views.jsonMovie, name="jsonMovie"),
+    url(r'^masterInfo/', views.masterInfo, name="masterInfo"),
+    url(r'^masterArticle/', views.masterArticle, name="masterArticle"),
     # handler404 = views.page_not_found,
 
 ]

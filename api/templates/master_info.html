@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+展示所有用户信息
+
+<body>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>用户ID</th>
+            <th>用户Uid</th>
+            <th>姓名</th>
+            <th>昵称</th>
+            <th>图像</th>
+            <th>信息</th>
+            <th>vip</th>
+            <th>博客地址</th>
+        </tr>
+        </thead>
+
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.uid }}</td>
+                    <td><b>{{ user.name }}</b></td>
+                    <td><b>{{ user.nick_name }}</b></td>
+                    <td>{{ user.img }}</td>
+                    <td>{{ user.info }}</td>
+                    <td>{{ user.isVip }}</td>
+                    <td>{{ user.blog }}</td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>

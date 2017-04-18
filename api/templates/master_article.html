@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+展示所有文章信息
+
+<body>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>用户ID</th>
+            <th>用户Uid</th>
+            <th>姓名</th>
+            <th>昵称</th>
+            <th>描述</th>
+            <th>文章标题</th>
+            <th>文章地址</th>
+        </tr>
+        </thead>
+
+            {% for  article in user_article %}
+                <tr>
+                    <td>{{ article.id }}</td>
+                    <td>{{ article.uid }}</td>
+                    <td><b>{{ article.name }}</b></td>
+                    <td><b>{{ article.nick_name }}</b></td>
+                    <td>{{ article.des }}</td>
+                    <td>{{ article.article_title }}</td>
+                    <td>{{ article.article_address }}</td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>
