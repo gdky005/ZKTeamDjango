@@ -34,20 +34,21 @@ def jsonMasterInfo(request):
 
 
 def masterArticle(request):
-    user_article = models.MasterArticle.objects.all()  # 取出该表所有的数据
+    uid = request.GET.get("uid")
+    user_article = models.MasterArticle.objects.filter(uid=uid)
 
     return render(request, "master_article.html", {"user_article": user_article})
 
 
 def jsonMasterArticle(request):
     maxData = 5
-
+    uid = request.GET.get("uid")
     count = request.GET.get("pageCount")
     if count:
         maxData = int(count)
 
     try:
-        master_article = models.MasterArticle.objects.all().values()[:maxData]  # 取出该表所有的数据
+        master_article = models.MasterArticle.objects.filter(uid=uid).values()[:maxData]  # 取出该表所有的数据
         article = list(master_article)
         # data = json.dumps(word)  # 把list转成json
 
