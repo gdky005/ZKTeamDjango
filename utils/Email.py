@@ -16,7 +16,7 @@ def send(subject, info):
 
     if my_pass.__eq__(""):
         ret = False
-        print("filed")
+        print("filed， 请输入邮件发送人的密码，谢谢！")
         return ret
 
     try:
