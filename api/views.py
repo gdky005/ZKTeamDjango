@@ -17,7 +17,7 @@ def masterInfo(request):
 
 
 def jsonMasterInfo(request):
-    maxData = 10
+    maxData = 5
 
     count = request.GET.get("pageCount")
     if count:
