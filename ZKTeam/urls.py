@@ -21,5 +21,6 @@ from api import views
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('api.urls', namespace='api', app_name='api'))
+    url(r'^api/', include('api.urls', namespace='api', app_name='api')),
+    url(r'^aoc/', include('aoc.urls', namespace='aoc', app_name='aoc'))
 ]
