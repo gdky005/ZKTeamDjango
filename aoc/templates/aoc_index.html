@@ -6,10 +6,36 @@
 {% endblock %}
 
 {% block content %}
-<h1>我是 卓客 AOC</h1>
-    卓客 AOC
-    卓客 AOC
-    卓客 AOC
+展示 开源项目 信息
+
+<body>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>项目 ID</th>
+            <th>项目名称</th>
+            <th>项目图片</th>
+            <th>项目地址</th>
+            <th>项目简介</th>
+        </tr>
+        </thead>
+
+            {% for project in projects %}
+                <tr>
+                    <td>{{ project.id }}</td>
+                    <td>{{ project.name }}</td>
+                    <td><b>{{ project.pic }}</b></td>
+                    <td><b>{{ project.address }}</b></td>
+                    <td><b>{{ project.des }}</b></td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
 
 {% endblock %}
 

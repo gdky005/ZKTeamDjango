@@ -4,5 +4,6 @@ from django.shortcuts import render
 from aoc import models
 
 
-def home(request):
-    return render(request, 'aoc_index.html')
+def githubProjectInfo(request):
+    projects = models.ProjectInfo.objects.all()
+    render(request, 'aoc_index.html', {"projects": projects})
