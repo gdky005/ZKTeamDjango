@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'api',
     'aoc',
     'DouYin',
+    'Consume12315',
 ]
 
 MIDDLEWARE = [

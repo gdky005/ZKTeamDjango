@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^api/', include('api.urls', namespace='api', app_name='api')),
     url(r'^aoc/', include('aoc.urls', namespace='aoc', app_name='aoc')),
     url(r'^DouYin/', include('DouYin.urls', namespace='DouYin', app_name='DouYin')),
+    url(r'^Consume12315/', include('Consume12315.urls', namespace='Consume12315', app_name='Consume12315')),
 ]

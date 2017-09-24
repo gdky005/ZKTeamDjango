@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+展示所有的数据
+
+<body>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>索引</th>
+            <th>问题编号</th>
+            <th>问题</th>
+            <th>回答</th>
+        </tr>
+        </thead>
+
+            {% for line in projects %}
+                <tr>
+                    <td>{{ line.id }}</td>
+                    <td><b>{{ line.number }}</b></td>
+                    <td>{{ line.question }}</td>
+                    <td>{{ line.answer }}</td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>
