@@ -35,6 +35,5 @@ def githubProjectJson(request):
 
 def getHttpResponse(code, message, word):
     resultResponse = ResultResponse(code, message, word)
-    return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False),
-                        content_type="application/json")
-    # return HttpResponse(data, content_type="application/json")
+    return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False, ),
+                        content_type="application/json;charset=utf-8")
