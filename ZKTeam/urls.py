@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('api.urls', namespace='api', app_name='api')),
-    url(r'^aoc/', include('aoc.urls', namespace='aoc', app_name='aoc'))
+    url(r'^aoc/', include('aoc.urls', namespace='aoc', app_name='aoc')),
+    url(r'^DouYin/', include('DouYin.urls', namespace='DouYin', app_name='DouYin')),
 ]
