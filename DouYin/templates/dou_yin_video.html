@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+{#{{  }}#}
+    DouYin
+{% endblock %}
+
+{% block content %}
+展示 DouYin 信息
+
+<body>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>名字：</th>
+            <th>图片</th>
+        </tr>
+        </thead>
+
+            {% for project in projects %}
+                <tr>
+                    <td>{{ project.id }}</td>
+                    <td>{{ project.name }}</td>
+                    <td><b>{{ project.pic }}</b></td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
