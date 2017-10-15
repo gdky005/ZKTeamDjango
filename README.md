@@ -108,5 +108,11 @@ python manage.py makemigrations
 # 2. 将生成的py文件应用到数据库
 python manage.py migrate
 ```
-
-
+8. 本地调试：
+```
+python manage.py runserver
+```
+9. 在网页里面输入：
+```
+http://127.0.0.1:8000/XXX/index.html
+```
