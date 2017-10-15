@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绝地求生</title>
+</head>
+<body>
+<h1>展示所有 绝地求生 的数据</h1>
+
+<body>
+<div>
+    <table border="1" cellpadding="15">
+        <thead>
+        <tr>
+            <th width="3%">索引</th>
+            <th width="7%">问题编号</th>
+            <th width="20%">问题</th>
+            <th width="70%">回答</th>
+        </tr>
+        </thead>
+
+            {% for line in projects %}
+                <tr>
+                    <td>{{ line.id }}</td>
+                    <td><b>{{ line.number }}</b></td>
+                    <td>{{ line.question }}</td>
+                    <td>{{ line.answer }}</td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'aoc',
     'DouYin',
     'Consume12315',
+    'JueDiQiuSheng',
 ]
 
 MIDDLEWARE = [
