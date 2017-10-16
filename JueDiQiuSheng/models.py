@@ -8,3 +8,4 @@ class JDQSCategory(models.Model):
     jid = models.IntegerField()
     name = models.TextField()
     url = models.TextField()
+    picUrl = models.TextField()

@@ -12,19 +12,19 @@
     <table border="1" cellpadding="15">
         <thead>
         <tr>
-            <th width="3%">索引</th>
-            <th width="7%">问题编号</th>
-            <th width="20%">问题</th>
-            <th width="70%">回答</th>
+            <th width="3%">jid</th>
+            <th width="7%">名字</th>
+            <th width="20%">文章地址</th>
+            <th width="70%">图片地址</th>
         </tr>
         </thead>
 
             {% for line in projects %}
                 <tr>
-                    <td>{{ line.id }}</td>
-                    <td><b>{{ line.number }}</b></td>
-                    <td>{{ line.question }}</td>
-                    <td>{{ line.answer }}</td>
+                    <td>{{ line.jid }}</td>
+                    <td><b>{{ line.name }}</b></td>
+                    <td>{{ line.url }}</td>
+                    <td>{{ line.picUrl }}</td>
                 </tr>
             {% endfor %}
 
