@@ -9,3 +9,5 @@ class JDQSCategory(models.Model):
     name = models.TextField()
     url = models.TextField()
     picUrl = models.TextField()
+    categoryId = models.TextField(default="")
+    categoryName = models.TextField(default="")
