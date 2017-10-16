@@ -12,10 +12,12 @@
     <table border="1" cellpadding="15">
         <thead>
         <tr>
-            <th width="3%">jid</th>
-            <th width="7%">名字</th>
-            <th width="20%">文章地址</th>
-            <th width="70%">图片地址</th>
+            <th width="5%">jid</th>
+            <th width="20%">名字</th>
+            <th width="5%">分类 Id</th>
+            <th width="10%">分类名称</th>
+            <th width="30%">文章地址</th>
+            <th width="30%">图片地址</th>
         </tr>
         </thead>
 
@@ -23,6 +25,8 @@
                 <tr>
                     <td>{{ line.jid }}</td>
                     <td><b>{{ line.name }}</b></td>
+                    <td>{{ line.categoryId }}</td>
+                    <td>{{ line.categoryName }}</td>
                     <td>{{ line.url }}</td>
                     <td>{{ line.picUrl }}</td>
                 </tr>
