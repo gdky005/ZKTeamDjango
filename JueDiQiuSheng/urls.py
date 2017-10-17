@@ -4,4 +4,5 @@ from JueDiQiuSheng import views
 
 urlpatterns = [
     url(r'^index.html',  views.JDQS, name="JDQS"),
+    url(r'^detail.html',  views.JDQSDetail, name="JDQS"),
 ]

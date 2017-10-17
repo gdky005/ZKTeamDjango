@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绝地求生</title>
+</head>
+<body>
+<h1>展示所有 绝地求生 的数据</h1>
+
+<body>
+<div>
+    <table border="1" cellpadding="15">
+        <thead>
+        <tr>
+            <th width="5%">jid</th>
+            <th width="20%">文章名称</th>
+            <th width="20%">文章作者</th>
+            <th width="45%">文章内容</th>
+        </tr>
+        </thead>
+
+            {% for line in projects %}
+                <tr>
+                    <td>{{ line.jid }}</td>
+                    <td><b>{{ line.artifactName }}</b></td>
+                    <td>{{ line.artifactAuthor }}</td>
+                    <td>{{ line.content }}</td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>
