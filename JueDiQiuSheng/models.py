@@ -17,6 +17,8 @@ class JDQSItem(models.Model):
     picUrl = models.TextField(default="")
     artifactName = models.TextField(default="")
     artifactDate = models.TextField(default="")
+    artifactSourceUrl = models.TextField(default="")
+    artifactUrl = models.TextField(default="")
 
 
 class JDQSContent(models.Model):
