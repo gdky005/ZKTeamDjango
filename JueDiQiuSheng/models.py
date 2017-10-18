@@ -14,7 +14,7 @@ class JDQSItem(models.Model):
     id = models.IntegerField(primary_key=True, default=1).auto_created
     jid = models.IntegerField()
     categoryId = models.ForeignKey(JDQSCategory)
-    picUrl = models.URLField
+    picUrl = models.TextField(default="")
     artifactName = models.TextField(default="")
     artifactDate = models.TextField(default="")
 
