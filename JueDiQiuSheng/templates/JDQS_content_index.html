@@ -17,7 +17,8 @@
             <th width="10%">artifactAuthor</th>
             <th width="20%">artifactContent</th>
             <th width="20%">artifactUrl</th>
-            <th width="20%">artifactSourceUrl</th>
+            <th width="10%">artifactSourceUrl</th>
+            <th width="10%">CollectionTime</th>
         </tr>
         </thead>
 
@@ -29,6 +30,7 @@
                     <td>{{ line.artifactContent }}</td>
                     <td>{{ line.artifactUrl }}</td>
                     <td>{{ line.artifactSourceUrl }}</td>
+                    <td>{{ line.CollectionTime }}</td>
                 </tr>
             {% endfor %}
 

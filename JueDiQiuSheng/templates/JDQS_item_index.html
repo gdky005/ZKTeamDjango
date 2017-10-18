@@ -17,7 +17,8 @@
             <th width="20%">picUrl</th>
             <th width="20%">artifactName</th>
             <th width="20%">artifactDate</th>
-            <th width="20%">artifactSourceUrl</th>
+            <th width="10%">artifactSourceUrl</th>
+            <th width="10%">CollectionTime</th>
         </tr>
         </thead>
 
@@ -29,6 +30,7 @@
                     <td>{{ line.artifactName }}</td>
                     <td>{{ line.artifactDate }}</td>
                     <td>{{ line.artifactSourceUrl }}</td>
+                    <td>{{ line.CollectionTime }}</td>
                 </tr>
             {% endfor %}
 
