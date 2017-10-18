@@ -12,19 +12,19 @@
     <table border="1" cellpadding="15">
         <thead>
         <tr>
-            <th width="5%">jid</th>
-            <th width="20%">文章名称</th>
-            <th width="20%">文章作者</th>
-            <th width="45%">文章内容</th>
+            <th width="10%">id</th>
+            <th width="10%">categoryId</th>
+            <th width="30%">categoryName</th>
+            <th width="50%">categoryUrl</th>
         </tr>
         </thead>
 
             {% for line in projects %}
                 <tr>
-                    <td>{{ line.jid }}</td>
-                    <td><b>{{ line.artifactName }}</b></td>
-                    <td>{{ line.artifactAuthor }}</td>
-                    <td>{{ line.content }}</td>
+                    <td>{{ line.id }}</td>
+                    <td><b>{{ line.categoryId }}</b></td>
+                    <td>{{ line.categoryName }}</td>
+                    <td>{{ line.categoryUrl }}</td>
                 </tr>
             {% endfor %}
 

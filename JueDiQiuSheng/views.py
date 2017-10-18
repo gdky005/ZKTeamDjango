@@ -16,6 +16,27 @@ def JDQS(request):
     return render(request, "JDQS_index.html", {"projects": projects})
 
 
+def JDQSCategory(request):
+    projects = models.JDQSCategory.objects.all()
+    return render(request, "JDQS_category_index.html", {"projects": projects})
+
+
+def JDQSItem(request):
+    projects = models.JDQSItem.objects.all()
+    return render(request, "JDQS_item_index.html", {"projects": projects})
+
+
+def JDQSContent(request):
+    projects = models.JDQSContent.objects.all()
+    return render(request, "JDQS_content_index.html", {"projects": projects})
+
+
+
+
+
+
+
+
 def JDQSJson(request):
     maxData = 5
     count = request.GET.get("pageCount")
@@ -31,11 +52,6 @@ def JDQSJson(request):
         return getHttpResponse(0, "ok", projects)
     except Error:
         return getHttpResponse(10000, "Error", "")
-
-
-def JDQSDetail(request):
-    projects = models.JDQSDetail.objects.all()
-    return render(request, "JDQS_Detail.html", {"projects": projects})
 
 
 # 发送通用的 Response

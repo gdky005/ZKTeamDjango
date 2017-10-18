@@ -1,39 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>绝地求生</title>
+
+    <style>
+        body {
+            text-align: center
+        }
+
+        .div {
+            margin: 0 auto;
+            width: 400px;
+            height: 100px;
+            border: 1px solid #F00
+        }
+
+        span { display:block; width: 400px; float:left; text-a;
+        text-align: center}
+    </style>
 </head>
 <body>
-<h1>展示所有 绝地求生 的数据</h1>
 
-<body>
+
 <div>
-    <table border="1" cellpadding="15">
-        <thead>
-        <tr>
-            <th width="5%">jid</th>
-            <th width="20%">名字</th>
-            <th width="5%">分类 Id</th>
-            <th width="10%">分类名称</th>
-            <th width="30%">文章地址</th>
-            <th width="30%">图片地址</th>
-        </tr>
-        </thead>
 
-            {% for line in projects %}
-                <tr>
-                    <td>{{ line.jid }}</td>
-                    <td><b>{{ line.name }}</b></td>
-                    <td>{{ line.categoryId }}</td>
-                    <td>{{ line.categoryName }}</td>
-                    <td>{{ line.url }}</td>
-                    <td>{{ line.picUrl }}</td>
-                </tr>
-            {% endfor %}
+    <h1>绝地求生</h1>
 
+    <span>      《绝地求生：大逃杀》是一款由Bluehole和Playerunknown联合开发的第一人称射击游戏，采用虚幻4引擎制作。玩家们会在一个偏远的岛屿上出生，然后展开一场赢家通吃的生存竞赛，最后只会有1个人存活。当然，和其他生存游戏一样，玩家需要在广袤复杂的地图中收集武器、车辆、物资，而且也会有安全区域不断缩小的机制。
+    </span>
 
-    </table>
+    <img  src="http://img1.gamersky.com/upimg/pic/2017/10/16/201710161706307881.jpg" style="margin-top: 15.5px; height: 50%; width: 50%;"/>
+
 </div>
 </body>
 
