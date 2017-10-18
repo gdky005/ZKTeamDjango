@@ -10,7 +10,7 @@ class JDQSCategory(models.Model):
 
 
 class JDQSItem(models.Model):
-    jid = models.IntegerField(primary_key=True, default=1).auto_created
+    id = models.IntegerField(primary_key=True, default=1).auto_created
     categoryId = models.ForeignKey(JDQSCategory)
     picUrl = models.TextField(default="")
     artifactName = models.TextField(default="")
