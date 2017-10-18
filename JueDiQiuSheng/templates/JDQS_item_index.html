@@ -28,9 +28,9 @@
                     <td><b>{{ line.categoryId }}</b></td>
                     <td>{{ line.picUrl }}</td>
                     <td>{{ line.artifactName }}</td>
-                    <td>{{ line.artifactDate }}</td>
+                    <td>{{ line.artifactDate|date:"Y-m-d" }}</td>
                     <td>{{ line.artifactSourceUrl }}</td>
-                    <td>{{ line.CollectionTime }}</td>
+                    <td>{{ line.CollectionTime|date:"Y-m-d H:i:s" }}</td>
                 </tr>
             {% endfor %}
 

@@ -30,7 +30,7 @@
                     <td>{{ line.artifactContent }}</td>
                     <td>{{ line.artifactUrl }}</td>
                     <td>{{ line.artifactSourceUrl }}</td>
-                    <td>{{ line.CollectionTime }}</td>
+                    <td>{{ line.CollectionTime|date:"Y-m-d H:i:s" }}</td>
                 </tr>
             {% endfor %}
 

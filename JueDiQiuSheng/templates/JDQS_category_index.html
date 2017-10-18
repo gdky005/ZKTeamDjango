@@ -26,7 +26,7 @@
                     <td><b>{{ line.categoryId }}</b></td>
                     <td>{{ line.categoryName }}</td>
                     <td>{{ line.categoryUrl }}</td>
-                    <td>{{ line.CollectionTime }}</td>
+                    <td>{{ line.CollectionTime|date:"Y-m-d H:i:s" }}</td>
                 </tr>
             {% endfor %}
 
