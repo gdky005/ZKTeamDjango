@@ -4,15 +4,13 @@ from django.db import models
 # Create your models here.
 
 class JDQSCategory(models.Model):
-    id = models.IntegerField(primary_key=True, default=1).auto_created
-    categoryId = models.IntegerField(default=0)
+    categoryId = models.IntegerField(primary_key=True, default=1).auto_created
     categoryName = models.TextField(default="")
     categoryUrl = models.TextField(default="")
 
 
 class JDQSItem(models.Model):
-    id = models.IntegerField(primary_key=True, default=1).auto_created
-    jid = models.IntegerField()
+    jid = models.IntegerField(primary_key=True, default=1).auto_created
     categoryId = models.ForeignKey(JDQSCategory)
     picUrl = models.TextField(default="")
     artifactName = models.TextField(default="")
