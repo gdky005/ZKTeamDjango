@@ -7,7 +7,7 @@ class JDQSCategory(models.Model):
     id = models.IntegerField(primary_key=True, default=1).auto_created
     categoryId = models.IntegerField(default=0)
     categoryName = models.TextField(default="")
-    categoryUrl = models.URLField
+    categoryUrl = models.TextField(default="")
 
 
 class JDQSItem(models.Model):
@@ -25,5 +25,5 @@ class JDQSContent(models.Model):
     artifactName = models.TextField(default="")
     artifactAuthor = models.TextField(default="")
     artifactContent = models.TextField(default="")
-    artifactUrl = models.URLField
-    artifactSourceUrl = models.URLField
+    artifactUrl = models.TextField(default="")
+    artifactSourceUrl = models.TextField(default="")
