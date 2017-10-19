@@ -28,7 +28,7 @@
                     <td>{{ line.id }}</td>
                     <td><b>{{ line.categoryId_id }}</b></td>
                     <td>{{ line.picUrl }}</td>
-                    <td>{{ line.artifactUrl }}</td>
+                    <td>{{ line.artifactUrl|safe }}</td>
                     <td>{{ line.artifactName }}</td>
                     <td>{{ line.artifactDate|date:"Y-m-d" }}</td>
                     <td>{{ line.artifactSourceUrl }}</td>
