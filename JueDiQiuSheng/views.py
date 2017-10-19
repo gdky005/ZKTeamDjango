@@ -21,6 +21,13 @@ def JDQSCategory(request):
     return render(request, "JDQS_category_index.html", {"projects": projects})
 
 
+def JDQSDetail(request):
+    jid = request.GET.get("jid")
+    detail = models.JDQSContent.objects.get(jid_id=jid)
+
+    return render(request, "JDQS_artifact_index.html", {"detail": detail})
+
+
 def JDQSItem(request):
     projects = models.JDQSItem.objects.all()
     return render(request, "JDQS_item_index.html", {"projects": projects})
