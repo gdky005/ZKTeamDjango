@@ -13,7 +13,6 @@
         <thead>
         <tr>
             <th width="10%">id</th>
-            <th width="10%">categoryId</th>
             <th width="30%">categoryName</th>
             <th width="40%">categoryUrl</th>
             <th width="10%">CollectionTime</th>
@@ -23,10 +22,9 @@
             {% for line in projects %}
                 <tr>
                     <td>{{ line.id }}</td>
-                    <td><b>{{ line.categoryId }}</b></td>
                     <td>{{ line.categoryName }}</td>
                     <td>{{ line.categoryUrl }}</td>
-                    <td>{{ line.CollectionTime|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ line.artifactCollection|date:"Y-m-d H:i:s" }}</td>
                 </tr>
             {% endfor %}
 

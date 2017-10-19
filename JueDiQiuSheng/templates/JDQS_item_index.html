@@ -12,27 +12,27 @@
     <table border="1" cellpadding="15">
         <thead>
         <tr>
-            <th width="5%">jid</th>
+            <th width="5%">id</th>
             <th width="5%">categoryId</th>
             <th width="10%">picUrl</th>
             <th width="40%">artifactUrl</th>
             <th width="10%">artifactName</th>
             <th width="10%">artifactDate</th>
             <th width="10%">artifactSourceUrl</th>
-            <th width="10%">CollectionTime</th>
+            <th width="10%">artifactCollection</th>
         </tr>
         </thead>
 
             {% for line in projects %}
                 <tr>
-                    <td>{{ line.jid }}</td>
-                    <td><b>{{ line.categoryId }}</b></td>
+                    <td>{{ line.id }}</td>
+                    <td><b>{{ line.categoryId_id }}</b></td>
                     <td>{{ line.picUrl }}</td>
                     <td>{{ line.artifactUrl }}</td>
                     <td>{{ line.artifactName }}</td>
                     <td>{{ line.artifactDate|date:"Y-m-d" }}</td>
                     <td>{{ line.artifactSourceUrl }}</td>
-                    <td>{{ line.CollectionTime|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ line.artifactCollection|date:"Y-m-d H:i:s" }}</td>
                 </tr>
             {% endfor %}
 

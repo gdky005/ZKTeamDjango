@@ -24,13 +24,13 @@
 
             {% for line in projects %}
                 <tr>
-                    <td>{{ line.jid }}</td>
+                    <td>{{ line.jid.categoryId.id }}</td>
                     <td><b>{{ line.artifactName }}</b></td>
                     <td>{{ line.artifactAuthor }}</td>
                     <td>{{ line.artifactContent }}</td>
-                    <td>{{ line.artifactUrl }}</td>
+                    <td>{{ line.artifactUrl|safe }}</td>
                     <td>{{ line.artifactSourceUrl }}</td>
-                    <td>{{ line.CollectionTime|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ line.artifactCollection|date:"Y-m-d H:i:s" }}</td>
                 </tr>
             {% endfor %}
 
