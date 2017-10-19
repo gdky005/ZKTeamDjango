@@ -31,10 +31,19 @@ def JDQSContent(request):
     return render(request, "JDQS_content_index.html", {"projects": projects})
 
 
+def JDQSItemJson(request):
+    maxData = 5
+    count = request.GET.get("pageCount")
+    if count:
+        maxData = int(count)
 
+    try:
+        project_info = models.JDQSItem.objects.values()[:maxData]  # 取出该表所有的数据
+        projects = list(project_info)
 
-
-
+        return getHttpResponse(0, "ok", projects)
+    except Error:
+        return getHttpResponse(10000, "Error", "")
 
 
 def JDQSJson(request):
