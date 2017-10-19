@@ -23,9 +23,11 @@ def JDQSCategory(request):
 
 def JDQSDetail(request):
     jid = request.GET.get("jid")
-    detail = models.JDQSContent.objects.get(jid_id=jid)
-
-    return render(request, "JDQS_artifact_index.html", {"detail": detail})
+    if jid is not None:
+        detail = models.JDQSContent.objects.get(jid_id=jid)
+        return render(request, "JDQS_artifact_index.html", {"detail": detail})
+    else:
+        return JDQS(request)
 
 
 def JDQSItem(request):
