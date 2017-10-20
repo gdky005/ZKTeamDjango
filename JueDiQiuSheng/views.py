@@ -12,18 +12,17 @@ from api.ResultResponse import ResultResponse
 
 
 def JDQS(request):
-    projects = models.JDQSCategory.objects.all()
+    # projects = models.JDQSCategory.objects.all()
+    projects = None
     return render(request, "JDQS_index.html", {"projects": projects})
 
 
 def JDQSCategory(request):
-    projects = models.JDQSCategory.objects.all()
-    return render(request, "JDQS_category_index.html", {"projects": projects})
+    return getSplitData(request, "JDQS_category_index.html", models.JDQSCategory)
 
 
 def JDQSPicCategory(request):
-    projects = models.JDQSPicCategory.objects.all()
-    return render(request, "JDQS_pic_category_index.html", {"projects": projects})
+    return getSplitData(request, "JDQS_pic_category_index.html", models.JDQSPicCategory)
 
 
 def JDQSDetail(request):
@@ -36,35 +35,44 @@ def JDQSDetail(request):
 
 
 def JDQSItem(request):
-    projects = models.JDQSItem.objects.all()
-    return render(request, "JDQS_item_index.html", {"projects": projects})
+    return getSplitData(request, "JDQS_item_index.html", models.JDQSItem)
 
 
 def JDQSPicUrl(request):
-    projects = models.JDQSPicUrl.objects.all()
-    return render(request, "JDQS_pic_url_item_index.html", {"projects": projects})
+    return getSplitData(request, "JDQS_pic_url_item_index.html", models.JDQSPicUrl)
 
 
 def JDQSContent(request):
-    projects = models.JDQSContent.objects.all()
-    return render(request, "JDQS_content_index.html", {"projects": projects})
+    return getSplitData(request, "JDQS_content_index.html", models.JDQSContent)
 
 
-
-
-def JDQSItemJson(request):
+# 对数据可以直接分页处理
+def getSplitData(request, html, obj):
     maxData = 5
     count = request.GET.get("pageCount")
     if count:
         maxData = int(count)
+    projects = obj.objects.values()[:maxData]
+    # projects = list(projects)
+    # projects = models.JDQSContent.objects.all()
+    return render(request, html, {"projects": projects})
 
-    try:
-        project_info = models.JDQSItem.objects.values()[:maxData]  # 取出该表所有的数据
-        projects = list(project_info)
 
-        return getHttpResponse(0, "ok", projects)
-    except Error:
-        return getHttpResponse(10000, "Error", "")
+def JDQSItemJson(request):
+    # maxData = 5
+    # count = request.GET.get("pageCount")
+    # if count:
+    #     maxData = int(count)
+    #
+    # try:
+    #     project_info = models.JDQSItem.objects.values()[:maxData]  # 取出该表所有的数据
+    #     projects = list(project_info)
+    #
+    #     return getHttpResponse(0, "ok", projects)
+    # except Error:
+    #     return getHttpResponse(10000, "Error", "")
+
+    return sendJsonResponse(request, models.JDQSItem)
 
 
 def JDQSPicCategoryJson(request):

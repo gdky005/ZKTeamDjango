@@ -12,7 +12,8 @@
     <table border="1" cellpadding="15">
         <thead>
         <tr>
-            <th width="10%">jid</th>
+            <th width="5%">id</th>
+            <th width="5%">jid</th>
             <th width="20%">artifactName</th>
             <th width="10%">artifactAuthor</th>
             <th width="20%">artifactContent</th>
@@ -24,7 +25,8 @@
 
             {% for line in projects %}
                 <tr>
-                    <td>{{ line.jid.categoryId.id }}</td>
+                    <td>{{ line.id }}</td>
+                    <td>{{ line.jid_id }}</td>
                     <td><b>{{ line.artifactName }}</b></td>
                     <td>{{ line.artifactAuthor }}</td>
                     <td>{{ line.artifactContent }}</td>
