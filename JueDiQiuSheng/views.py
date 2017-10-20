@@ -35,7 +35,14 @@ def JDQSDetail(request):
 
 
 def JDQSItem(request):
-    return getSplitData(request, "JDQS_item_index.html", models.JDQSItem)
+    jid = request.GET.get("jid")
+    obj = None
+    if jid is not None:
+        obj = models.JDQSItem.objects.filter(categoryId_id=jid)
+    else:
+        obj = models.JDQSItem
+
+    return getSplitData(request, "JDQS_item_index.html", obj)
 
 
 def JDQSPicUrl(request):
@@ -52,7 +59,11 @@ def getSplitData(request, html, obj):
     count = request.GET.get("pageCount")
     if count:
         maxData = int(count)
-    projects = obj.objects.values()[:maxData]
+    try:
+        projects = obj.objects.values()[:maxData]
+    except Exception as e:
+        projects = obj.values()[:maxData]
+        pass
     # projects = list(projects)
     # projects = models.JDQSContent.objects.all()
     return render(request, html, {"projects": projects})
