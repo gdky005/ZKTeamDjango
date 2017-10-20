@@ -21,6 +21,11 @@ def JDQSCategory(request):
     return render(request, "JDQS_category_index.html", {"projects": projects})
 
 
+def JDQSPicCategory(request):
+    projects = models.JDQSPicCategory.objects.all()
+    return render(request, "JDQS_pic_category_index.html", {"projects": projects})
+
+
 def JDQSDetail(request):
     jid = request.GET.get("jid")
     if jid is not None:
@@ -35,9 +40,16 @@ def JDQSItem(request):
     return render(request, "JDQS_item_index.html", {"projects": projects})
 
 
+def JDQSPicUrl(request):
+    projects = models.JDQSPicUrl.objects.all()
+    return render(request, "JDQS_pic_url_item_index.html", {"projects": projects})
+
+
 def JDQSContent(request):
     projects = models.JDQSContent.objects.all()
     return render(request, "JDQS_content_index.html", {"projects": projects})
+
+
 
 
 def JDQSItemJson(request):

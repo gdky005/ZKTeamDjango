@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绝地求生</title>
+</head>
+<body>
+<h1>展示所有 绝地求生 的数据</h1>
+
+<body>
+<div>
+    <table border="1" cellpadding="15">
+        <thead>
+        <tr>
+            <th width="10%">picCategoryId</th>
+            <th width="30%">picCategoryName</th>
+            <th width="40%">picCategoryUrl</th>
+            <th width="10%">picCategoryCollection</th>
+        </tr>
+        </thead>
+
+            {% for line in projects %}
+                <tr>
+                    <td>{{ line.id }}</td>
+                    <td>{{ line.picCategoryName }}</td>
+                    <td>{{ line.picCategoryUrl }}</td>
+                    <td>{{ line.picCategoryCollection|date:"Y-m-d H:i:s" }}</td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>
