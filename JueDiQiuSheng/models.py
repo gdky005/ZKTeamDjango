@@ -32,3 +32,22 @@ class JDQSContent(models.Model):
     artifactUrl = models.TextField(default="")
     artifactSourceUrl = models.TextField(default="")
     artifactCollection = models.DateTimeField("CollectionTime", default=timezone.now)
+
+
+class JDQSPicCategory(models.Model):
+    picCategoryId = models.IntegerField(primary_key=True, default=1).auto_created
+    picCategoryName = models.TextField(default="")
+    picCategoryUrl = models.TextField(default="")
+    picCategoryCollection = models.DateTimeField("CollectionTime", default=timezone.now)
+
+
+class JDQSPicUrl(models.Model):
+    id = models.IntegerField(primary_key=True, default=1).auto_created
+    picId = models.IntegerField(default=1)
+    picCategoryId = models.ForeignKey(JDQSPicCategory)
+    picUrl = models.TextField(default="")
+    picTinyUrl = models.TextField(default="")
+    picSmallUrl = models.TextField(default="")
+    picZKUrl = models.TextField(default="")
+    picName = models.TextField(default="")
+    picCollection = models.DateTimeField("CollectionTime", default=timezone.now)
