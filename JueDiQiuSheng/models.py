@@ -13,8 +13,7 @@ class JDQSCategory(models.Model):
 
 
 class JDQSRecommendedCategory(models.Model):
-    id = models.IntegerField(primary_key=True, default=1).auto_created
-    jId = models.TextField(default="")
+    jId = models.IntegerField(primary_key=True, default=1).auto_created
     tjName = models.TextField(default="")
     tjUrl = models.TextField(default="")
     tjCollection = models.DateTimeField("CollectionTime", default=timezone.now)
