@@ -13,4 +13,5 @@ urlpatterns = [
 
     url(r'^itemJson', views.JDQSItemJson, name="JDQS"),
     url(r'^picCategoryJson', views.JDQSPicCategoryJson, name="JDQS"),
+    url(r'^categoryJson', views.JDQSCategoryJson, name="JDQS"),
 ]

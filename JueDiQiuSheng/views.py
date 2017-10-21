@@ -86,6 +86,10 @@ def JDQSItemJson(request):
     return sendJsonResponse(request, models.JDQSItem)
 
 
+def JDQSCategoryJson(request):
+    return sendJsonResponse(request, models.JDQSCategory)
+
+
 def JDQSPicCategoryJson(request):
     maxData = 5
     count = request.GET.get("pageCount")
