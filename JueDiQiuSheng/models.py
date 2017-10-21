@@ -13,7 +13,8 @@ class JDQSCategory(models.Model):
 
 
 class JDQSRecommendedCategory(models.Model):
-    tjId = models.IntegerField(primary_key=True, default=1).auto_created
+    id = models.IntegerField(primary_key=True, default=1).auto_created
+    jId = models.TextField(default="")
     tjName = models.TextField(default="")
     tjUrl = models.TextField(default="")
     tjCollection = models.DateTimeField("CollectionTime", default=timezone.now)
@@ -28,6 +29,7 @@ class JDQSPicCategory(models.Model):
 
 class JDQSRecommendedItem(models.Model):
     id = models.IntegerField(primary_key=True, default=1).auto_created
+    jid = models.TextField(default="")
     tjCategoryId = models.ForeignKey(JDQSRecommendedCategory)
     tjPicUrl = models.TextField(default="")
     tjName = models.TextField(default="")
