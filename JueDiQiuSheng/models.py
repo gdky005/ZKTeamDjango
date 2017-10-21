@@ -51,7 +51,7 @@ class JDQSItem(models.Model):
 
 class JDQSPicUrl(models.Model):
     id = models.IntegerField(primary_key=True, default=1).auto_created
-    picId = models.IntegerField(default=1)
+    picId = models.TextField(default=1)
     picCategoryId = models.ForeignKey(JDQSPicCategory)
     picUrl = models.TextField(default="")
     picTinyUrl = models.TextField(default="")
