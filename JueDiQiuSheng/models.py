@@ -12,6 +12,31 @@ class JDQSCategory(models.Model):
     artifactCollection = models.DateTimeField("CollectionTime", default=timezone.now)
 
 
+class JDQSRecommendedCategory(models.Model):
+    tjId = models.IntegerField(primary_key=True, default=1).auto_created
+    tjName = models.TextField(default="")
+    tjUrl = models.TextField(default="")
+    tjCollection = models.DateTimeField("CollectionTime", default=timezone.now)
+
+
+class JDQSPicCategory(models.Model):
+    picCategoryId = models.IntegerField(primary_key=True, default=1).auto_created
+    picCategoryName = models.TextField(default="")
+    picCategoryUrl = models.TextField(default="")
+    picCategoryCollection = models.DateTimeField("CollectionTime", default=timezone.now)
+
+
+class JDQSRecommendedItem(models.Model):
+    id = models.IntegerField(primary_key=True, default=1).auto_created
+    tjCategoryId = models.ForeignKey(JDQSRecommendedCategory)
+    tjPicUrl = models.TextField(default="")
+    tjName = models.TextField(default="")
+    tjDate = models.DateTimeField(default=timezone.now)
+    tjSourceUrl = models.TextField(default="")
+    tjUrl = models.TextField(default="")
+    tjCollection = models.DateTimeField("CollectionTime", default=timezone.now)
+
+
 class JDQSItem(models.Model):
     id = models.IntegerField(primary_key=True, default=1).auto_created
     categoryId = models.ForeignKey(JDQSCategory)
@@ -21,24 +46,6 @@ class JDQSItem(models.Model):
     artifactSourceUrl = models.TextField(default="")
     artifactUrl = models.TextField(default="")
     artifactCollection = models.DateTimeField("CollectionTime", default=timezone.now)
-
-
-class JDQSContent(models.Model):
-    id = models.IntegerField(primary_key=True, default=1).auto_created
-    jid = models.ForeignKey(JDQSItem)
-    artifactName = models.TextField(default="")
-    artifactAuthor = models.TextField(default="")
-    artifactContent = models.TextField(default="")
-    artifactUrl = models.TextField(default="")
-    artifactSourceUrl = models.TextField(default="")
-    artifactCollection = models.DateTimeField("CollectionTime", default=timezone.now)
-
-
-class JDQSPicCategory(models.Model):
-    picCategoryId = models.IntegerField(primary_key=True, default=1).auto_created
-    picCategoryName = models.TextField(default="")
-    picCategoryUrl = models.TextField(default="")
-    picCategoryCollection = models.DateTimeField("CollectionTime", default=timezone.now)
 
 
 class JDQSPicUrl(models.Model):
@@ -51,3 +58,14 @@ class JDQSPicUrl(models.Model):
     picZKUrl = models.TextField(default="")
     picName = models.TextField(default="")
     picCollection = models.DateTimeField("CollectionTime", default=timezone.now)
+
+
+class JDQSContent(models.Model):
+    id = models.IntegerField(primary_key=True, default=1).auto_created
+    jid = models.ForeignKey(JDQSItem)
+    artifactName = models.TextField(default="")
+    artifactAuthor = models.TextField(default="")
+    artifactContent = models.TextField(default="")
+    artifactUrl = models.TextField(default="")
+    artifactSourceUrl = models.TextField(default="")
+    artifactCollection = models.DateTimeField("CollectionTime", default=timezone.now)
