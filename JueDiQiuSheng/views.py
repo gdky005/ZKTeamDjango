@@ -90,6 +90,10 @@ def JDQSCategoryJson(request):
     return sendJsonResponse(request, models.JDQSCategory)
 
 
+def JDQSRecommendedJson(request):
+    return sendJsonResponse(request, models.JDQSRecommendedCategory)
+
+
 def JDQSPicCategoryJson(request):
     maxData = 5
     count = request.GET.get("pageCount")
