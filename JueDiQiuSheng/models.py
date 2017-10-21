@@ -64,7 +64,7 @@ class JDQSPicUrl(models.Model):
 
 class JDQSContent(models.Model):
     id = models.IntegerField(primary_key=True, default=1).auto_created
-    jid = models.ForeignKey(JDQSItem)
+    jid = models.TextField(default="")
     artifactName = models.TextField(default="")
     artifactAuthor = models.TextField(default="")
     artifactContent = models.TextField(default="")
