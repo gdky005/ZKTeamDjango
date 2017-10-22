@@ -28,7 +28,7 @@ def JDQSPicCategory(request):
 def JDQSDetail(request):
     jid = request.GET.get("jid")
     if jid is not None:
-        detail = models.JDQSContent.objects.get(jid_id=jid)
+        detail = models.JDQSContent.objects.get(jid=jid)
         return render(request, "JDQS_artifact_index.html", {"detail": detail})
     else:
         return JDQS(request)
@@ -51,6 +51,14 @@ def JDQSPicUrl(request):
 
 def JDQSContent(request):
     return getSplitData(request, "JDQS_content_index.html", models.JDQSContent)
+
+
+def JDQSRecommended(request):
+    return getSplitData(request, "JDQS_recommend_item_index.html", models.JDQSRecommendedItem)
+
+
+def JDQSRecommendedCategory(request):
+    return getSplitData(request, "JDQS_recommended_category_index.html", models.JDQSRecommendedCategory)
 
 
 # 对数据可以直接分页处理

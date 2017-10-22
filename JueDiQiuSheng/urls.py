@@ -11,6 +11,9 @@ urlpatterns = [
     url(r'^picCategory.html', views.JDQSPicCategory, name="JDQS"),
     url(r'^picUrl.html', views.JDQSPicUrl, name="JDQS"),
 
+    url(r'^recommended.html', views.JDQSRecommended, name="JDQS"),
+    url(r'^recommendedCategory.html', views.JDQSRecommendedCategory, name="JDQS"),
+
     url(r'^itemJson', views.JDQSItemJson, name="JDQS"),
     url(r'^picCategoryJson', views.JDQSPicCategoryJson, name="JDQS"),
     url(r'^categoryJson', views.JDQSCategoryJson, name="JDQS"),

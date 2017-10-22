@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绝地求生</title>
+</head>
+<body>
+<h1>展示所有 绝地求生 的数据</h1>
+
+<body>
+<div>
+    <table border="1" cellpadding="15">
+        <thead>
+        <tr>
+            <th width="5%">id</th>
+            <th width="5%">jid</th>
+            <th width="10%">CategoryId</th>
+
+            <th width="20%">tjName</th>
+            <th width="20%">tjUrl</th>
+            <th width="20%">tjSourceUrl</th>
+            <th width="10%">tjDate</th>
+            <th width="10%">tjCollection</th>
+        </tr>
+        </thead>
+
+            {% for line in projects %}
+                <tr>
+                    <td>{{ line.id }}</td>
+                    <td><b>{{ line.jid }}</b></td>
+                    <td>{{ line.tjCategoryId_id }}</td>
+                    <td>{{ line.tjName }}</td>
+                    <td>{{ line.tjUrl|safe }}</td>
+                    <td>{{ line.tjSourceUrl }}</td>
+                    <td>{{ line.tjDate|date:"Y-m-d H:i:s" }}</td>
+                    <td>{{ line.tjCollection|date:"Y-m-d H:i:s" }}</td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>
