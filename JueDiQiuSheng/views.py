@@ -143,13 +143,20 @@ def sendResponse(request, obj, template_name):
 # 发送通用的 Json Response
 def sendJsonResponse(request, obj):
     maxData = 5
+    jid = request.GET.get("jid")
     count = request.GET.get("pageCount")
+
     if count:
         maxData = int(count)
     try:
         # projects = models.ProjectInfo.objects.all()
 
-        project_info = obj.objects.values()[:maxData]  # 取出该表所有的数据
+        if jid is not None:
+            obj = obj.objects.filter(categoryId_id=jid)
+        else:
+            obj = obj.objects
+
+        project_info = obj.values()[:maxData]  # 取出该表所有的数据
         projects = list(project_info)
 
         return getHttpResponse(0, "ok", projects)
