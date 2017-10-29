@@ -102,6 +102,10 @@ def JDQSRecommendedJson(request):
     return sendJsonResponse(request, models.JDQSRecommendedCategory)
 
 
+def JDQSRecommendedItemJson(request):
+    return sendJsonResponse(request, models.JDQSRecommendedItem)
+
+
 def JDQSPicCategoryJson(request):
     maxData = 5
     count = request.GET.get("pageCount")
@@ -152,7 +156,11 @@ def sendJsonResponse(request, obj):
         # projects = models.ProjectInfo.objects.all()
 
         if jid is not None:
-            obj = obj.objects.filter(categoryId_id=jid)
+            try:
+                obj = obj.objects.filter(categoryId_id=jid)
+            except:
+                obj = obj.objects.filter(tjCategoryId_id=jid)
+                pass
         else:
             obj = obj.objects
 
