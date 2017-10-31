@@ -98,6 +98,10 @@ def JDQSCategoryJson(request):
     return sendJsonResponse(request, models.JDQSCategory)
 
 
+def JDQSPicUrlJson(request):
+    return sendJsonResponse(request, models.JDQSPicUrl)
+
+
 def JDQSRecommendedJson(request):
     return sendJsonResponse(request, models.JDQSRecommendedCategory)
 
@@ -156,10 +160,13 @@ def sendJsonResponse(request, obj):
         # projects = models.ProjectInfo.objects.all()
 
         if jid is not None:
-            try:
-                obj = obj.objects.filter(categoryId_id=jid)
-            except:
-                obj = obj.objects.filter(tjCategoryId_id=jid)
+            if obj == models.JDQSPicUrl:
+                obj = obj.objects.filter(picCategoryId_id=jid)
+            else:
+                try:
+                    obj = obj.objects.filter(categoryId_id=jid)
+                except:
+                    obj = obj.objects.filter(tjCategoryId_id=jid)
                 pass
         else:
             obj = obj.objects
