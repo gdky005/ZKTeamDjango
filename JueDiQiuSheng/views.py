@@ -63,14 +63,23 @@ def JDQSRecommendedCategory(request):
 
 # 对数据可以直接分页处理
 def getSplitData(request, html, obj):
+
     maxData = 5
+    page = 0
+
     count = request.GET.get("pageCount")
+    currentPage = request.GET.get("page")
+
     if count:
         maxData = int(count)
+
+    if currentPage:
+        page = int(currentPage)
+
     try:
-        projects = obj.objects.values()[:maxData]
+        projects = obj.objects.values()[page * maxData:(page + 1) * maxData]
     except Exception as e:
-        projects = obj.values()[:maxData]
+        projects = obj.values()[page * maxData:(page + 1) * maxData]
         pass
     # projects = list(projects)
     # projects = models.JDQSContent.objects.all()
@@ -78,19 +87,6 @@ def getSplitData(request, html, obj):
 
 
 def JDQSItemJson(request):
-    # maxData = 5
-    # count = request.GET.get("pageCount")
-    # if count:
-    #     maxData = int(count)
-    #
-    # try:
-    #     project_info = models.JDQSItem.objects.values()[:maxData]  # 取出该表所有的数据
-    #     projects = list(project_info)
-    #
-    #     return getHttpResponse(0, "ok", projects)
-    # except Error:
-    #     return getHttpResponse(10000, "Error", "")
-
     return sendJsonResponse(request, models.JDQSItem)
 
 
@@ -111,35 +107,26 @@ def JDQSRecommendedItemJson(request):
 
 
 def JDQSPicCategoryJson(request):
-    maxData = 5
-    count = request.GET.get("pageCount")
-    if count:
-        maxData = int(count)
-
-    try:
-        project_info = models.JDQSPicCategory.objects.values()[:maxData]  # 取出该表所有的数据
-        projects = list(project_info)
-
-        return getHttpResponse(0, "ok", projects)
-    except Error:
-        return getHttpResponse(10000, "Error", "")
+    return sendJsonResponse(request, models.JDQSPicCategory)
 
 
-def JDQSJson(request):
-    maxData = 5
-    count = request.GET.get("pageCount")
-    if count:
-        maxData = int(count)
-
-    try:
-        # projects = models.ProjectInfo.objects.all()
-
-        project_info = models.JDQSCategory.objects.values()[:maxData]  # 取出该表所有的数据
-        projects = list(project_info)
-
-        return getHttpResponse(0, "ok", projects)
-    except Error:
-        return getHttpResponse(10000, "Error", "")
+# def JDQSJson(request):
+#     maxData = 5
+#     count = request.GET.get("pageCount")
+#     page = request.GET.get("page")
+#     if count:
+#         maxData = int(count)
+#         page = int(page)
+#
+#     try:
+#         # projects = models.ProjectInfo.objects.all()
+#
+#         project_info = models.JDQSCategory.objects.values()[page * maxData:(page + 1) * maxData]  # 取出该表所有的数据
+#         projects = list(project_info)
+#
+#         return getHttpResponse(0, "ok", projects)
+#     except Error:
+#         return getHttpResponse(10000, "Error", "")
 
 
 # 发送通用的 Response
@@ -151,11 +138,17 @@ def sendResponse(request, obj, template_name):
 # 发送通用的 Json Response
 def sendJsonResponse(request, obj):
     maxData = 5
+    page = 0
     jid = request.GET.get("jid")
     count = request.GET.get("pageCount")
+    currentPage = request.GET.get("page")
 
     if count:
         maxData = int(count)
+
+    if currentPage:
+        page = int(currentPage)
+
     try:
         # projects = models.ProjectInfo.objects.all()
 
@@ -171,7 +164,7 @@ def sendJsonResponse(request, obj):
         else:
             obj = obj.objects
 
-        project_info = obj.values()[:maxData]  # 取出该表所有的数据
+        project_info = obj.values()[page * maxData:(page + 1) * maxData]  # 取出该表所有的数据
         projects = list(project_info)
 
         return getHttpResponse(0, "ok", projects)
