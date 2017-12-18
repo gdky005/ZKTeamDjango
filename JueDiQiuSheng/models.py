@@ -23,6 +23,7 @@ class JDQSPicCategory(models.Model):
     picCategoryId = models.IntegerField(primary_key=True, default=1).auto_created
     picCategoryName = models.TextField(default="")
     picCategoryUrl = models.TextField(default="")
+    picCategoryPic = models.TextField(default="")
     picCategoryCollection = models.DateTimeField("CollectionTime", default=timezone.now)
 
 
