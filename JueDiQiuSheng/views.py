@@ -28,7 +28,7 @@ def JDQSPicCategory(request):
 def JDQSDetail(request):
     jid = request.GET.get("jid")
     if jid is not None:
-        detail = models.JDQSContent.objects.get(jid=jid)
+        detail = models.JDQSContent.objects.filter(jid=jid)[0]
         return render(request, "JDQS_artifact_index.html", {"detail": detail})
     else:
         return JDQS(request)
