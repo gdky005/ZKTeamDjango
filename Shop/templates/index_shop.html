@@ -1,1 +1,38 @@
-Hello, Shop!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>商品录入信息</h1>
+
+<body>
+<div>
+    <table border="1" cellpadding="15">
+        <thead>
+        <tr>
+            <th width="30%">商品 ID 信息</th>
+            <th width="20%">商品名称</th>
+            <th width="20%">商品价格</th>
+            <th width="30%">商品描述</th>
+        </tr>
+        </thead>
+
+            {% for  shop in shops %}
+                <tr>
+                    <td><b>{{ shop.id }}</b></td>
+                    <td><b>{{ shop.name }}</b></td>
+                    <td><b>{{ shop.price }}</b></td>
+                    <td>{{ shop.des }}</td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>
