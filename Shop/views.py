@@ -24,7 +24,7 @@ def addData(request):
     des = request.GET.get("des")
 
     if not pid:
-        return getHttpResponse(10000, "Error", "id not null!")
+        return getHttpResponse(10000, "Error", "pid not null!")
 
     try:
         maxData = 100 #默认取100条数据
@@ -37,6 +37,22 @@ def addData(request):
         obj.save()
 
         return getHttpResponse(0, "ok", "")
+    except Error:
+        return getHttpResponse(10000, "Error", "")
+
+
+def query(request):
+    pid = request.GET.get("pid")
+
+    if not pid:
+        return getHttpResponse(10000, "Error", "pid not null!")
+
+    try:
+        maxData = 5 #默认取100条数据
+
+        projects = models.ShopInfo.objects.all().values()[:maxData]  # 取出该表所有的数据
+        data = list(projects)
+        return getHttpResponse(0, "ok", data)
     except Error:
         return getHttpResponse(10000, "Error", "")
 
