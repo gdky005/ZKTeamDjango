@@ -18,11 +18,12 @@ def shop(request):
 
 def addData(request):
     id = request.GET.get("id")
+    pid = request.GET.get("pid")
     name = request.GET.get("name")
     price = request.GET.get("price")
     des = request.GET.get("des")
 
-    if not id:
+    if not pid:
         return getHttpResponse(10000, "Error", "id not null!")
 
     try:
@@ -32,7 +33,7 @@ def addData(request):
         # data = list(projects)
         # return getHttpResponse(0, "ok", data)
 
-        obj = models.ShopInfo(id=id, name=name, price=price, des=des)
+        obj = models.ShopInfo(id=id, name=name, price=price, des=des, pid=pid)
         obj.save()
 
         return getHttpResponse(0, "ok", "")

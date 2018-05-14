@@ -12,7 +12,8 @@
     <table border="1" cellpadding="15">
         <thead>
         <tr>
-            <th width="30%">商品 ID 信息</th>
+            <th width="10%"> id </th>
+            <th width="20%">商品 ID 信息</th>
             <th width="20%">商品名称</th>
             <th width="20%">商品价格</th>
             <th width="30%">商品描述</th>
@@ -22,6 +23,7 @@
             {% for  shop in shops %}
                 <tr>
                     <td><b>{{ shop.id }}</b></td>
+                    <td><b>{{ shop.pid }}</b></td>
                     <td><b>{{ shop.name }}</b></td>
                     <td><b>{{ shop.price }}</b></td>
                     <td>{{ shop.des }}</td>
