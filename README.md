@@ -116,3 +116,7 @@ python manage.py runserver
 ```
 http://127.0.0.1:8000/XXX/index.html
 ```
+
+### 添加缓存
+http://django-redis-chs.readthedocs.io/zh_CN/latest/
+
