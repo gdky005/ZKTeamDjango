@@ -30,7 +30,7 @@ class JDQSPicCategory(models.Model):
 class JDQSRecommendedItem(models.Model):
     id = models.IntegerField(primary_key=True, default=1).auto_created
     jid = models.TextField(default="")
-    tjCategoryId = models.ForeignKey(JDQSRecommendedCategory, on_delete=models.CASCADE)
+    tjCategoryId = models.ForeignKey(JDQSRecommendedCategory)
     tjPicUrl = models.TextField(default="")
     tjName = models.TextField(default="")
     tjDate = models.DateTimeField(default=timezone.now)
@@ -42,7 +42,7 @@ class JDQSRecommendedItem(models.Model):
 class JDQSItem(models.Model):
     id = models.IntegerField(primary_key=True, default=1).auto_created
     jid = models.TextField(default="")
-    categoryId = models.ForeignKey(JDQSCategory, on_delete=models.CASCADE)
+    categoryId = models.ForeignKey(JDQSCategory)
     picUrl = models.TextField(default="")
     artifactName = models.TextField(default="")
     artifactDate = models.DateTimeField(default=timezone.now)
@@ -54,7 +54,7 @@ class JDQSItem(models.Model):
 class JDQSPicUrl(models.Model):
     id = models.IntegerField(primary_key=True, default=1).auto_created
     picId = models.TextField(default=1)
-    picCategoryId = models.ForeignKey(JDQSPicCategory, on_delete=models.CASCADE)
+    picCategoryId = models.ForeignKey(JDQSPicCategory)
     picUrl = models.TextField(default="")
     picTinyUrl = models.TextField(default="")
     picSmallUrl = models.TextField(default="")
