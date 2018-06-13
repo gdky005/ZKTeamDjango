@@ -16,6 +16,10 @@ def shop(request):
     return render(request, 'index_shop.html', {"shops": projects})
 
 
+def jsonShow(request):
+    return sendJsonResponse(request, models.ShopInfo)
+
+
 def addData(request):
     id = request.GET.get("id")
     pid = request.GET.get("pid")
@@ -62,3 +66,46 @@ def getHttpResponse(code, message, word):
     return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False),
                         content_type="application/json")
     # return HttpResponse(data, content_type="application/json")
+
+
+# 发送通用的 Json Response
+def sendJsonResponse(request, obj):
+    maxData = 5
+    page = 0
+    jid = request.GET.get("id")
+    count = request.GET.get("pageCount")
+    currentPage = request.GET.get("page")
+
+    if count:
+        maxData = int(count)
+
+    if currentPage:
+        page = int(currentPage)
+
+    try:
+        # projects = models.ProjectInfo.objects.all()
+
+        if jid is not None:
+            if obj == models.ShopInfo:
+                obj = obj.objects.filter(id=jid)
+            else:
+                try:
+                    obj = obj.objects.filter(id=jid)
+                except:
+                    obj = obj.objects.filter(id=jid)
+                pass
+        else:
+            obj = obj.objects
+
+        project_info = obj.values()[page * maxData:(page + 1) * maxData]  # 取出该表所有的数据
+        projects = list(project_info)
+
+        return getHttpResponse(0, "ok", projects)
+    except Error:
+        return getHttpResponse(10000, "Error", "")
+
+
+def getHttpResponse(code, message, word):
+    resultResponse = ResultResponse(code, message, word)
+    return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False, ),
+                        content_type="application/json;charset=utf-8")
