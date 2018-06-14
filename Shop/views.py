@@ -31,7 +31,7 @@ def addData(request):
         return getHttpResponse(10000, "Error", "pid not null!")
 
     try:
-        maxData = 100 #默认取100条数据
+        maxData = 100  # 默认取100条数据
 
         # projects = models.ShopInfo.objects.all().values()[:maxData]  # 取出该表所有的数据
         # data = list(projects)
@@ -52,10 +52,17 @@ def query(request):
         return getHttpResponse(10000, "Error", "pid not null!")
 
     try:
-        maxData = 5 #默认取100条数据
 
-        projects = models.ShopInfo.objects.all().values()[:maxData]  # 取出该表所有的数据
-        data = list(projects)
+        # projects = models.ShopInfo.objects.all().values()[:maxData]  # 取出该表所有的数据
+
+        project = models.ShopInfo.objects.filter(pid=pid).values()
+
+        if project.__len__() > 0:
+            project = project[0]
+        else:
+            project = ''
+
+        data = project
         return getHttpResponse(0, "ok", data)
     except Error:
         return getHttpResponse(10000, "Error", "")
@@ -69,7 +76,7 @@ def delete(request):
         return getHttpResponse(10000, "Error", "pid not null!")
 
     try:
-        models.ShopInfo.objects.filter(pid__contains=pid).delete()
+        models.ShopInfo.objects.filter(pid=pid).delete()
 
         return getHttpResponse(0, "ok", "")
     except Error:
