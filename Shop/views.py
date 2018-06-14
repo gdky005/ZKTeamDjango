@@ -61,6 +61,21 @@ def query(request):
         return getHttpResponse(10000, "Error", "")
 
 
+# 删除指定的 pid
+def delete(request):
+    pid = request.GET.get("pid")
+
+    if not pid:
+        return getHttpResponse(10000, "Error", "pid not null!")
+
+    try:
+        models.ShopInfo.objects.filter(pid__contains=pid).delete()
+
+        return getHttpResponse(0, "ok", "")
+    except Error:
+        return getHttpResponse(10000, "Error", "")
+
+
 def getHttpResponse(code, message, word):
     resultResponse = ResultResponse(code, message, word)
     return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False),

@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^jsonShow', views.jsonShow, name="jsonShow"),
     url(r'^add', views.addData, name="addData"),
     url(r'^query', views.query, name="query"),
+    url(r'^delete', views.delete, name="delete"),
     # handler404 = views.page_not_found,
 
 ]
