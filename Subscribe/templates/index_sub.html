@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>这是订阅系统！！！</h1>
+
+<body>
+<div>
+    <table border="1" cellpadding="15">
+        <thead>
+        <tr>
+            <th width="10%"> id </th>
+            <th width="20%">订阅 ID 信息</th>
+            <th width="20%">订阅名称</th>
+            <th width="20%">订阅地址</th>
+            <th width="30%">订阅信息</th>
+        </tr>
+        </thead>
+
+            {% for  sub in subs %}
+                <tr>
+                    <td><b>{{ sub.id }}</b></td>
+                    <td><b>{{ sub.pid }}</b></td>
+                    <td><b>{{ sub.name }}</b></td>
+                    <td><b>{{ sub.url }}</b></td>
+                    <td>{{ sub.des }}</td>
+                </tr>
+            {% endfor %}
+
+
+    </table>
+</div>
+</body>
+
+
+</body>
+</html>

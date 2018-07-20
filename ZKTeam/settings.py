@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Consume12315',
     'JueDiQiuSheng',
     'Shop',
+    'Subscribe',
 ]
 
 MIDDLEWARE = [
