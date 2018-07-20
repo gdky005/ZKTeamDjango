@@ -143,4 +143,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     'api/templates',
     'aoc/templates',
+    'Subscribe/templates',
 ]
