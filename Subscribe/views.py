@@ -9,7 +9,6 @@ from Subscribe import models
 from api.ResultResponse import ResultResponse
 from dss.Serializer import serializer
 
-
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
@@ -158,10 +157,6 @@ def getHttpResponse(code, message, word):
                         content_type="application/json;charset=utf-8")
 
 
-
-
-
-
 # 用户注册
 @csrf_exempt
 def register(request):
@@ -197,23 +192,23 @@ def register(request):
             else:
                 errors.append('两次输入密码不一致')
 
-        if account is not None and password is not None and password2 is not None and email is not None and CompareFlag :
-            user = User.objects.create_user(account,email,password)
+        if account is not None and password is not None and password2 is not None and email is not None and CompareFlag:
+            user = User.objects.create_user(account, email, password)
             user.save()
 
-            userlogin = auth.authenticate(username = account,password = password)
-            auth.login(request,userlogin)
+            userlogin = auth.authenticate(username=account, password=password)
+            auth.login(request, userlogin)
 
             subs = models.SubInfo.objects.all()
             return render(request, 'index_sub.html', {"subs": subs})
 
-    return render(request,'blog/register.html', {'errors': errors})
+    return render(request, 'blog/register.html', {'errors': errors})
 
 
 # 用户登录
 @csrf_exempt
 def my_login(request):
-    errors =[]
+    errors = []
     account = None
     password = None
     if request.method == "POST":
@@ -228,17 +223,17 @@ def my_login(request):
             password = request.POST.get('password')
 
         if account is not None and password is not None:
-            user = auth.authenticate(username=account,password=password)
+            user = auth.authenticate(username=account, password=password)
             if user is not None:
                 if user.is_active:
-                    auth.login(request,user)
+                    auth.login(request, user)
                     subs = models.SubInfo.objects.all()
                     return render(request, 'index_sub.html', {"subs": subs})
                 else:
                     errors.append('用户名错误')
             else:
                 errors.append('用户名或密码错误')
-    return render(request,'blog/login.html', {'errors': errors})
+    return render(request, 'blog/login.html', {'errors': errors})
 
 
 # 用户退出
