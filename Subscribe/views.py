@@ -18,21 +18,21 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 
 
-def login(request):
-    username = request.GET.get('username', '')
-    password = request.GET.get('password', '')
-    user = auth.authenticate(username=username, password=password)
-    if user is not None and user.is_active:
-        # Correct password, and the user is marked "active"
-        auth.login(request, user)
-        return getHttpResponse(0, "ok", "登录成功")
-
-        # # Redirect to a success page.
-        # return HttpResponseRedirect("/account/loggedin/")
-    else:
-        # # Show an error page
-        return getHttpResponse(10000, "Error", "登录失败！！！")
-        # return HttpResponseRedirect("/account/invalid/")
+# def login(request):
+#     username = request.GET.get('username', '')
+#     password = request.GET.get('password', '')
+#     user = auth.authenticate(username=username, password=password)
+#     if user is not None and user.is_active:
+#         # Correct password, and the user is marked "active"
+#         auth.login(request, user)
+#         return getHttpResponse(0, "ok", "登录成功")
+#
+#         # # Redirect to a success page.
+#         # return HttpResponseRedirect("/account/loggedin/")
+#     else:
+#         # # Show an error page
+#         return getHttpResponse(10000, "Error", "登录失败！！！")
+#         # return HttpResponseRedirect("/account/invalid/")
 
 
 @login_required
@@ -199,8 +199,8 @@ def register(request):
             userlogin = auth.authenticate(username=account, password=password)
             auth.login(request, userlogin)
 
-            subs = models.SubInfo.objects.all()
-            return render(request, 'index_sub.html', {"subs": subs})
+            userInfo = get_user_info(userlogin)
+            return getHttpResponse(0, "ok", userInfo)
 
     return render(request, 'blog/register.html', {'errors': errors})
 
@@ -227,16 +227,25 @@ def my_login(request):
             if user is not None:
                 if user.is_active:
                     auth.login(request, user)
-                    subs = models.SubInfo.objects.all()
-                    return render(request, 'index_sub.html', {"subs": subs})
+                    userInfo = get_user_info(user)
+                    return getHttpResponse(0, "ok", userInfo)
                 else:
-                    errors.append('用户名错误')
+                    return getHttpResponse(10000, "Error", "用户名错误")
             else:
-                errors.append('用户名或密码错误')
+                return getHttpResponse(10000, "Error", "用户名或密码错误")
     return render(request, 'blog/login.html', {'errors': errors})
+
+
+def get_user_info(user):
+    userInfo = {}
+    userInfo.__setitem__("username", user.username)
+    userInfo.__setitem__("email", user.email)
+    userInfo.__setitem__("is_active", user.is_active)
+    return userInfo
 
 
 # 用户退出
 def my_logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/blog')
+    userInfo = get_user_info(request.user)
+    return getHttpResponse(0, "ok", "退出成功！")

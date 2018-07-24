@@ -120,3 +120,6 @@ http://127.0.0.1:8000/XXX/index.html
 ### 添加缓存
 http://django-redis-chs.readthedocs.io/zh_CN/latest/
 
+### 用户登录和注册
+https://blog.csdn.net/qq_37049050/article/details/79211059
+
