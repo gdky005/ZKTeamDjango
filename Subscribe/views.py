@@ -2,10 +2,11 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from pymysql import Error
 
 from Subscribe import models
+from ZKTeam import settings
 from api.ResultResponse import ResultResponse
 from dss.Serializer import serializer
 
@@ -18,29 +19,13 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 
 
-# def login(request):
-#     username = request.GET.get('username', '')
-#     password = request.GET.get('password', '')
-#     user = auth.authenticate(username=username, password=password)
-#     if user is not None and user.is_active:
-#         # Correct password, and the user is marked "active"
-#         auth.login(request, user)
-#         return getHttpResponse(0, "ok", "登录成功")
-#
-#         # # Redirect to a success page.
-#         # return HttpResponseRedirect("/account/loggedin/")
-#     else:
-#         # # Show an error page
-#         return getHttpResponse(10000, "Error", "登录失败！！！")
-#         # return HttpResponseRedirect("/account/invalid/")
-
-
 @login_required
 def show(request):
     subs = models.SubInfo.objects.all()
     return render(request, 'index_sub.html', {"subs": subs})
 
 
+@login_required
 def jsonShow(request):
     return sendJsonResponse(request, models.SubInfo)
 
@@ -236,16 +221,15 @@ def my_login(request):
     return render(request, 'blog/login.html', {'errors': errors})
 
 
+# 用户退出
+def my_logout(request):
+    auth.logout(request)
+    return getHttpResponse(0, "ok", "退出成功！")
+
+
 def get_user_info(user):
     userInfo = {}
     userInfo.__setitem__("username", user.username)
     userInfo.__setitem__("email", user.email)
     userInfo.__setitem__("is_active", user.is_active)
     return userInfo
-
-
-# 用户退出
-def my_logout(request):
-    auth.logout(request)
-    userInfo = get_user_info(request.user)
-    return getHttpResponse(0, "ok", "退出成功！")

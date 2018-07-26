@@ -145,3 +145,8 @@ STATICFILES_DIRS = [
     'aoc/templates',
     'Subscribe/templates',
 ]
+
+
+# 登录配置
+LOGIN_URL='/Subscribe/login/'
+# LOGIN_REDIRECT_URL='/Subscribe/login/'
