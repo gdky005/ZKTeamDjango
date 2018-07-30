@@ -1,18 +1,38 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- import Vue before Element -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-<h1>这是订阅系统！！！</h1>
 
-<body>
-<div>
-    <table border="1" cellpadding="15">
+<div id="app" style="text-align: left">
+
+
+    <h1>订阅数据</h1>
+    <div style="text-align: left" >
+        <el-table :data="tableData" border stripe v-show="isShowNewLayout">
+            <el-table-column prop="id" label="id" width="100"></el-table-column>
+            <el-table-column prop="pid" label="订阅 ID" width="100"></el-table-column>
+            <el-table-column prop="name" label="订阅名称" width="150"></el-table-column>
+            <el-table-column prop="url" label="订阅地址"></el-table-column>
+            <el-table-column prop="des" label="订阅信息"></el-table-column>
+        </el-table>
+    </div>
+
+
+    <table border="1" cellpadding="15" v-show="!isShowNewLayout">
         <thead>
         <tr>
-            <th width="10%"> id </th>
+            <th width="10%"> id</th>
             <th width="20%">订阅 ID 信息</th>
             <th width="20%">订阅名称</th>
             <th width="20%">订阅地址</th>
@@ -20,21 +40,74 @@
         </tr>
         </thead>
 
-            {% for  sub in subs %}
-                <tr>
-                    <td><b>{{ sub.id }}</b></td>
-                    <td><b>{{ sub.pid }}</b></td>
-                    <td><b>{{ sub.name }}</b></td>
-                    <td><b>{{ sub.url }}</b></td>
-                    <td>{{ sub.des }}</td>
-                </tr>
-            {% endfor %}
-
-
+        {% for  sub in subs %}
+            <tr>
+                <td><b>{{ sub.id }}</b></td>
+                <td><b>{{ sub.pid }}</b></td>
+                <td><b>{{ sub.name }}</b></td>
+                <td><b>{{ sub.url }}</b></td>
+                <td>{{ sub.des }}</td>
+            </tr>
+        {% endfor %}
     </table>
 </div>
 </body>
 
 
-</body>
+<script>
+    new Vue({
+        el: "#app",
+        name: 'ShowDetail',
+        data() {
+
+
+
+            var instance = axios.create({
+                baseURL: 'https://some-domain.com/api/',
+                timeout: 3000,
+                headers: {'Access-Control-Allow-Origin': '*'}
+            });
+
+            var that = this;
+            instance.get('http://127.0.0.1:8000/Subscribe/jsonShow?pageCount=1')
+                .then(function (response) {
+                    console.log(response.data);
+
+                    var objs = response.data;
+                    var code = objs['code'];
+                    var message = objs['message'];
+                    var resultJson = objs['result'];
+
+                    {#that.tableData.addAll(tableData)#}
+
+                    that.tableData = resultJson
+                    console.log(that.tableData)
+
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+            return {
+                isShowNewLayout: false,
+                tableData: [{
+                    id: '4',
+                    pid: '22991',
+                    name: '扶摇',
+                    url: 'https://www.80s.tw/ju/22991',
+                    des: '就是测试。'
+                }, {
+                    id: '4',
+                    pid: '22991',
+                    name: '扶摇',
+                    url: 'https://www.80s.tw/ju/22991',
+                    des: '就是测试。'
+                }]
+            };
+        },
+    });
+
+
+</script>
 </html>
