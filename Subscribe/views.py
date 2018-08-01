@@ -25,7 +25,7 @@ def show(request):
     return render(request, 'index_sub.html', {"subs": subs})
 
 
-# @login_required
+@login_required
 def jsonShow(request):
     return sendJsonResponse(request, models.SubInfo)
 
@@ -153,7 +153,7 @@ def register(request):
     email = None
     CompareFlag = False
 
-    if request.method == 'POST':
+    if request.method == 'POST' or request.method == "OPTIONS":
         if not request.POST.get('account'):
             errors.append('用户名不能为空')
         else:
@@ -197,7 +197,7 @@ def my_login(request):
     errors = []
     account = None
     password = None
-    if request.method == "POST":
+    if request.method == "POST" or request.method == "OPTIONS":
         if not request.POST.get('account'):
             errors.append('用户名不能为空')
         else:

@@ -68,7 +68,7 @@
             var instance = axios.create({
                 baseURL: 'https://www.zkteam.cc/',
                 timeout: 3000,
-                {#headers: {'Access-Control-Allow-Origin': '*'}#}
+                headers: {'Access-Control-Allow-Origin': '*'}
             });
 
             var that = this;
