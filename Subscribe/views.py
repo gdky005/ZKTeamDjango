@@ -25,7 +25,7 @@ def show(request):
     return render(request, 'index_sub.html', {"subs": subs})
 
 
-@login_required
+# @login_required
 def jsonShow(request):
     return sendJsonResponse(request, models.SubInfo)
 

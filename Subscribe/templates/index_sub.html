@@ -66,14 +66,18 @@
 
 
             var instance = axios.create({
-                baseURL: 'https://some-domain.com/api/',
+                baseURL: 'https://www.zkteam.cc/',
                 timeout: 3000,
                 headers: {'Access-Control-Allow-Origin': '*'}
             });
 
             var that = this;
-            {#instance.get('http://127.0.0.1:8000/Subscribe/jsonShow?pageCount=100')#}
-            instance.get('http://www.zkteam.cc/Subscribe/jsonShow?pageCount=100')
+
+            var params = new URLSearchParams();
+            params.append('pageCount', '100');
+
+            {#instance.post('https://127.0.0.1:8000/Subscribe/jsonShow', params)#}
+            instance.post('https://www.zkteam.cc/Subscribe/jsonShow', params)
                 .then(function (response) {
                     console.log(response.data);
 
@@ -96,17 +100,11 @@
             return {
                 isShowNewLayout: true,
                 tableData: [{
-                    id: '4',
-                    pid: '22991',
-                    name: '扶摇',
-                    url: 'https://www.80s.tw/ju/22991',
-                    des: '就是测试。'
-                }, {
-                    id: '4',
-                    pid: '22991',
-                    name: '扶摇',
-                    url: 'https://www.80s.tw/ju/22991',
-                    des: '就是测试。'
+                    id: '000',
+                    pid: '000',
+                    name: '默认数据',
+                    url: '',
+                    des: '默认数据'
                 }]
             };
         },
