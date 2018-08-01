@@ -35,6 +35,7 @@ def addData(request):
     pid = request.GET.get("pid")
     name = request.GET.get("name")
     url = request.GET.get("url")
+    number = request.GET.get("number")
     des = request.GET.get("des")
 
     if not pid:
@@ -47,7 +48,7 @@ def addData(request):
         # data = list(projects)
         # return getHttpResponse(0, "ok", data)
 
-        obj = models.SubInfo(id=id, name=name, url=url, des=des, pid=pid)
+        obj = models.SubInfo(id=id, name=name, url=url, des=des, pid=pid, new_number=number)
         obj.save()
 
         return getHttpResponse(0, "ok", "")

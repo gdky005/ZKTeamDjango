@@ -25,6 +25,7 @@
             <el-table-column prop="name" label="订阅名称" width="150"></el-table-column>
             <el-table-column prop="url" label="订阅地址"></el-table-column>
             <el-table-column prop="des" label="订阅信息"></el-table-column>
+            <el-table-column prop="new_number" label="当前最新集数"></el-table-column>
         </el-table>
     </div>
 
@@ -36,7 +37,8 @@
             <th width="20%">订阅 ID 信息</th>
             <th width="20%">订阅名称</th>
             <th width="20%">订阅地址</th>
-            <th width="30%">订阅信息</th>
+            <th width="20%">订阅信息</th>
+            <th width="10%">当前最新集数</th>
         </tr>
         </thead>
 
@@ -47,6 +49,7 @@
                 <td><b>{{ sub.name }}</b></td>
                 <td><b>{{ sub.url }}</b></td>
                 <td>{{ sub.des }}</td>
+                <td>{{ sub.new_number }}</td>
             </tr>
         {% endfor %}
     </table>
