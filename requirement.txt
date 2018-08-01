@@ -6,4 +6,5 @@ PyMySQL==0.7.10
 requests==2.13.0
 six==1.10.0
 django-simple-serializer==2.0.6
+django-cors-headers==2.4.0
 
