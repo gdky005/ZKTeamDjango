@@ -80,8 +80,8 @@
             var params = new URLSearchParams();
             params.append('pageCount', '100');
 
-            instance.post('http://127.0.0.1:8000/Subscribe/jsonShow', params)
-            {#instance.post('https://www.zkteam.cc/Subscribe/jsonShow', params)#}
+            {#instance.post('http://127.0.0.1:8000/Subscribe/jsonShow', params)#}
+            instance.post('https://www.zkteam.cc/Subscribe/jsonShow', params)
                 .then(function (response) {
                     console.log(response.data);
 
