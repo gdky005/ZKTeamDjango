@@ -72,7 +72,8 @@
             });
 
             var that = this;
-            instance.get('http://127.0.0.1:8000/Subscribe/jsonShow?pageCount=100')
+            {#instance.get('http://127.0.0.1:8000/Subscribe/jsonShow?pageCount=100')#}
+            instance.get('http://www.zkteam.cc/Subscribe/jsonShow?pageCount=100')
                 .then(function (response) {
                     console.log(response.data);
 
