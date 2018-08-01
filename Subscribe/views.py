@@ -25,9 +25,20 @@ def show(request):
     return render(request, 'index_sub.html', {"subs": subs})
 
 
+# 获取用户订阅信息
 # @login_required
 def jsonShow(request):
     return sendJsonResponse(request, models.SubInfo)
+
+
+# 获取用户关键数据信息 // 等待写入
+def jsonUserInfo(request):
+    return sendJsonResponse(request, models.SubInfo)
+
+
+# 获取更新表的信息
+def jsonLastInfo(request):
+    return sendJsonResponse(request, models.SubMovieLastestInfo)
 
 
 def addData(request):

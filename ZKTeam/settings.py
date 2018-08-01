@@ -153,6 +153,9 @@ STATICFILES_DIRS = [
 LOGIN_URL='/Subscribe/login/'
 # LOGIN_REDIRECT_URL='/Subscribe/login/'
 
+# 增加用户表
+AUTH_USER_MODEL = "user.UserInfo"
+
 
 #跨域增加忽略
 CORS_ALLOW_CREDENTIALS = True
