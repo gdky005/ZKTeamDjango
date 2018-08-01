@@ -68,7 +68,7 @@
             var instance = axios.create({
                 baseURL: 'https://www.zkteam.cc/',
                 timeout: 3000,
-                headers: {'Access-Control-Allow-Origin': '*'}
+                {#headers: {'Access-Control-Allow-Origin': '*'}#}
             });
 
             var that = this;
@@ -76,7 +76,7 @@
             var params = new URLSearchParams();
             params.append('pageCount', '100');
 
-            {#instance.post('https://127.0.0.1:8000/Subscribe/jsonShow', params)#}
+            {#instance.post('http://127.0.0.1:8000/Subscribe/jsonShow', params)#}
             instance.post('https://www.zkteam.cc/Subscribe/jsonShow', params)
                 .then(function (response) {
                     console.log(response.data);
@@ -98,7 +98,7 @@
                 });
 
             return {
-                isShowNewLayout: false,
+                isShowNewLayout: true,
                 tableData: [{
                     id: '000',
                     pid: '000',
