@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from pymysql import Error
 
 from Subscribe import models
+from Subscribe.models import SubInfo, SubMovieLastestInfo
 from ZKTeam import settings
 from ZKUser.models import ZKUser
 from api.ResultResponse import ResultResponse
@@ -29,6 +30,31 @@ def show(request):
 # @login_required
 def jsonShow(request):
     return sendJsonResponse(request, models.SubInfo)
+
+
+# 测试邮件系统。
+def jsonFJUpdate(request):
+    emailList = []
+
+    lastInfos = SubMovieLastestInfo.objects.all()
+    subInfos = SubInfo.objects.all()
+
+    for lastInfo in lastInfos:
+        fj_number = lastInfo.fj_number
+        pid_id = lastInfo.id
+
+        for subInfos in subInfos:
+            subPid = int(subInfos.pid)
+            subNumber = subInfos.new_number
+
+            if pid_id == subPid:
+                if int(fj_number) > int(subNumber):
+                    subInfos.new_number = fj_number
+                    emailList.append(subInfos)
+
+    projects = list(emailList)
+
+    return getHttpResponse(0, "ok", projects)
 
 
 # 获取用户关键数据信息 // 等待写入

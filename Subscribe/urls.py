@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^jsonLastInfo/', views.jsonLastInfo, name="jsonLastInfo"),
     url(r'^jsonUserInfo/', views.jsonUserInfo, name="jsonUserInfo"),
     url(r'^jsonSubInfo/', views.jsonShow, name="jsonSubInfo"),
+    url(r'^jsonFJUpdate/', views.jsonFJUpdate, name="jsonFJUpdate"),
 
 ]
