@@ -23,7 +23,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('api.urls', namespace='api', app_name='api')),
     url(r'^aoc/', include('aoc.urls', namespace='aoc', app_name='aoc')),
-    url(r'^DouYin/', include('DouYin.urls', namespace='DouYin', app_name='DouYin')),
     url(r'^Consume12315/', include('Consume12315.urls', namespace='Consume12315', app_name='Consume12315')),
     url(r'^JueDiQiuSheng/', include('JueDiQiuSheng.urls', namespace='JueDiQiuSheng', app_name='JueDiQiuSheng')),
     url(r'^Shop/', include('Shop.urls', namespace='Shop', app_name='Shop')),

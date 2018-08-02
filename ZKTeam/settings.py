@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'ZKUser',
     'api',
     'aoc',
-    'DouYin',
     'Consume12315',
     'JueDiQiuSheng',
     'Shop',
@@ -155,7 +155,11 @@ LOGIN_URL='/Subscribe/login/'
 
 # 增加用户表
 # AUTH_USER_MODEL = "user.UserInfo"
+# AUTH_USER_MODEL = 'Subscribe.User'
+AUTH_USER_MODEL = "ZKUser.ZKUser" #我的app叫 ZKUser
 
+TIME_ZONE = 'Asia/Shanghai'
+USE_TZ = False
 
 #跨域增加忽略
 CORS_ALLOW_CREDENTIALS = True
