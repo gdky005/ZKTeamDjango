@@ -33,7 +33,20 @@ def jsonShow(request):
 
 # 获取用户关键数据信息 // 等待写入
 def jsonUserInfo(request):
-    return sendJsonResponse(request, models.SubInfo)
+    try:
+        allUser = []
+
+        users = ZKUser.objects.all()
+
+        for user in users:
+            zkUser = get_user_info(user)
+            allUser.append(zkUser)
+
+        projects = list(allUser)
+
+        return getHttpResponse(0, "ok", projects)
+    except Error:
+        return getHttpResponse(10000, "Error", "")
 
 
 # 获取更新表的信息
