@@ -7,11 +7,11 @@ from pymysql import Error
 
 from Subscribe import models
 from ZKTeam import settings
+from ZKUser.models import ZKUser
 from api.ResultResponse import ResultResponse
 from dss.Serializer import serializer
 
 from django.contrib import auth
-from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 
@@ -190,7 +190,7 @@ def register(request):
                 errors.append('两次输入密码不一致')
 
         if account is not None and password is not None and password2 is not None and email is not None and CompareFlag:
-            user = User.objects.create_user(account, email, password)
+            user = ZKUser.objects.create_user(account, email, password)
             user.save()
 
             userlogin = auth.authenticate(username=account, password=password)
