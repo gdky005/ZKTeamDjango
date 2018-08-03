@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from pymysql import Error
 
 from Subscribe import models
-from Subscribe.models import SubInfo, SubMovieLastestInfo
+from Subscribe.models import SubInfo, SubMovieLastestInfo, SubMovieDownload
 from ZKTeam import settings
 from ZKUser.models import ZKUser
 from api.ResultResponse import ResultResponse
@@ -18,6 +18,7 @@ from django.http import HttpResponseRedirect
 
 
 # Create your views here.
+from utils.Email import send
 
 
 @login_required
@@ -33,6 +34,41 @@ def jsonShow(request):
 
 
 # 测试邮件系统。
+def emailNotify(emailList):
+    # 邮件通知
+    print("正在处理 邮件通知")
+    for data in emailList:
+        name = data.name
+        pid = data.pid
+        url = data.url
+        new_number = data.new_number
+
+        movieDownload = SubMovieDownload.objects.filter(pid=pid).values()[0]
+        fjUrl = movieDownload.get("fj_download_url")
+
+        emailTitle = name + " 更新到 第" + new_number + "集！"
+        emailDetail = '''
+            hi, 小同学, 您订阅的 {name}（{pid}） 已经更新到 {new_number} 啦！当前订阅内容是的最新资源是：
+        
+                {fjUrl}
+        
+            请拷贝连接，使用迅雷下载，后期将默认添加调用迅雷 or 小米路由器。
+            需要了解详情可以去官网查看：{url}'''\
+            .format(name=name, pid=pid, url=url, new_number=new_number, fjUrl=fjUrl)
+        send(emailTitle, emailDetail)
+
+
+def wxNotify(emailList):
+    # 微信通知
+    print("待处理 微信通知")
+
+
+def notifyMsg2User(emailList):
+    # send("我是测试主题，", "我是测试内容！")
+    emailNotify(emailList)
+    wxNotify(emailList)
+
+
 def jsonFJUpdate(request):
     emailList = []
 
@@ -53,6 +89,9 @@ def jsonFJUpdate(request):
                     emailList.append(subInfos)
 
     projects = list(emailList)
+
+    notifyMsg2User(emailList)
+
 
     return getHttpResponse(0, "ok", projects)
 

@@ -2,7 +2,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
 
-my_pass = ""  # 发件人密码
+my_pass = "wq12345678"  # 发件人密码
 my_sender = "gdky005@126.com"  # 发件人邮箱账号
 my_smtp = "smtp.126.com"  # smtp 地址
 my_smtp_port = 25  # smtp 端口号
@@ -30,7 +30,8 @@ def send(subject, info):
         server.sendmail(my_sender, [my_user], msg.as_string())
         server.quit()
         print("ok")
-    except Exception:
+    except Exception as e:
         ret = False
-        print("filed")
+        print("filed:")
+        print(e)
     return ret
