@@ -60,6 +60,11 @@ from utils.Email import send
 import hashlib
 
 
+
+# 测试数据：/Subscribe/weiXin/?signature=5e1c55f68fa10321419b62b171d3518a398096f3&echostr=7370345721803176943&timestamp=1533393832&nonce=2102056081, zkteam 服务器返回类似：6801932741839289079
+# 微信服务器的信息是：signature=5e1c55f68fa10321419b62b171d3518a398096f3, timestamp=1533393832, nonce=2102056081, echostr=7370345721803176943
+
+
 @csrf_exempt
 def weiXin(request):
     if request.method == "GET":
