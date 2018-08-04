@@ -67,6 +67,9 @@ def weiXin(request):
         timestamp = request.GET.get('timestamp')
         nonce = request.GET.get('nonce')
         echostr = request.GET.get('echostr')
+
+        print("微信服务器的信息是：signature=" + str(signature) + ", timestamp=" + str(timestamp) + ", nonce=" + str(nonce) + ", echostr=" + str(echostr))
+
         token = "zkteam"
         tmpArr = [token,timestamp,nonce]
         tmpArr.sort()
