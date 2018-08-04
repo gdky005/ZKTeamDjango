@@ -20,18 +20,18 @@ from utils.Email import send
 
 
 
-import hashlib
-import json
-from lxml import etree
-from django.utils.encoding import smart_str
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
+# import hashlib
+# import json
+# from lxml import etree
+# from django.utils.encoding import smart_str
+# from django.views.decorators.csrf import csrf_exempt
+# from django.http import HttpResponse
 
 
 # Create your views here.
 
 
-WEIXIN_TOKEN = 'write-a-value'
+# WEIXIN_TOKEN = 'write-a-value'
 
 
 # def weixin_main(request):
