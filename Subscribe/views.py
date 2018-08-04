@@ -127,6 +127,29 @@ def wxToken(request):
 
     return getHttpResponse(0, "ok", projects)
 
+
+def wxUsers(requst):
+    token = WXConstant.wx_access_token
+
+    # 默认从头拉取，也可以根据这个 id 获取后面的： &next_openid=NEXT_OPENID
+    result = requests.get("https://api.weixin.qq.com/cgi-bin/user/get?access_token=" + token).json()
+
+    projects = list(result["data"]["openid"])
+
+    return getHttpResponse(0, "ok", projects)
+
+
+def wxUserInfo(requst):
+    token = WXConstant.wx_access_token
+    OPENID = requst.GET.get("OPENID")
+
+    # 默认从头拉取，也可以根据这个 id 获取后面的： &next_openid=NEXT_OPENID
+    result = requests.get("https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + token + "&openid=" + OPENID +"&lang=zh_CN").json()
+
+    # projects = list(result)
+    return getHttpResponse(0, "ok", result)
+
+
 @login_required
 def show(request):
     subs = models.SubInfo.objects.all()

@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^jsonFJUpdate/', views.jsonFJUpdate, name="jsonFJUpdate"),
     url(r'^weiXin/', views.weiXin, name="weiXin"),
     url(r'^wxToken/', views.wxToken, name="wxToken"),
+    url(r'^wxUsers/', views.wxUsers, name="wxUsers"),
+    url(r'^wxUserInfo/', views.wxUserInfo, name="wxUserInfo"),
 
 ]
