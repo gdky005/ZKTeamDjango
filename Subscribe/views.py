@@ -57,28 +57,28 @@ from utils.Email import send
 #         response_xml = auto_reply_main(request_xml)# 修改这里
 #         return HttpResponse(response_xml)
 
-# import hashlib
-#
-#
-# @csrf_exempt
-# def weiXin(request):
-#     if request.method == "GET":
-#         signature = request.GET.get('signature')
-#         timestamp = request.GET.get('timestamp')
-#         nonce = request.GET.get('nonce')
-#         echostr = request.GET.get('echostr')
-#
-#         print("微信服务器的信息是：signature=" + str(signature) + ", timestamp=" + str(timestamp) + ", nonce=" + str(nonce) + ", echostr=" + str(echostr))
-#
-#         token = "zkteam"
-#         tmpArr = [token,timestamp,nonce]
-#         tmpArr.sort()
-#         string = ''.join(tmpArr).encode('utf-8')
-#         string = hashlib.sha1(string).hexdigest()
-#         if string == signature:
-#             return HttpResponse(echostr)
-#         else:
-#             return HttpResponse("false")
+import hashlib
+
+
+@csrf_exempt
+def weiXin(request):
+    if request.method == "GET":
+        signature = request.GET.get('signature')
+        timestamp = request.GET.get('timestamp')
+        nonce = request.GET.get('nonce')
+        echostr = request.GET.get('echostr')
+
+        print("微信服务器的信息是：signature=" + str(signature) + ", timestamp=" + str(timestamp) + ", nonce=" + str(nonce) + ", echostr=" + str(echostr))
+
+        token = "zkteam"
+        tmpArr = [token,timestamp,nonce]
+        tmpArr.sort()
+        string = ''.join(tmpArr).encode('utf-8')
+        string = hashlib.sha1(string).hexdigest()
+        if string == signature:
+            return HttpResponse(echostr)
+        else:
+            return HttpResponse("false")
 
 
 @login_required
