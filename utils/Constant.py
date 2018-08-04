@@ -13,4 +13,11 @@ class Constant:
     my_sender_nickname = config.get("global", "my_sender_nickname")
 
 
+class WXConstant:
+    wx_access_token = ""
+    expires_in = ""
+    refresh_time = ""
+
+
+
 print(Constant.my_user_nickname)

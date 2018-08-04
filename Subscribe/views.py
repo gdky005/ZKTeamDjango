@@ -15,6 +15,8 @@ from dss.Serializer import serializer
 from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
+
+from utils.Constant import WXConstant
 from utils.Email import send
 
 # import hashlib
@@ -85,6 +87,45 @@ def weiXin(request):
         else:
             return HttpResponse("false")
 
+
+
+
+import requests
+import time
+
+# 获取微信 Token
+def wxToken(request):
+    APPID = 'wx740fa691ebcc886c'
+    APPSECRET = 'e24c9a81a9991460600bda24a73f3a3b'
+    result = requests.get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + APPID + "&secret=" + APPSECRET).json()
+    # print(result)
+
+    wx_access_token = result["access_token"]
+    expires_in = result["expires_in"]
+
+    currentTime = int(time.time())
+
+    WXConstant.wx_access_token = wx_access_token
+    WXConstant.expires_in = expires_in
+    WXConstant.refresh_time = currentTime + expires_in
+
+    currentTimeStr = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(currentTime))
+    missTokenTimeStr = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(WXConstant.refresh_time))
+
+    print("微信当前的 Token 是：\n" + WXConstant.wx_access_token)
+    print("微信 Token 有效期时间是：" + str(WXConstant.expires_in))
+    print("获取 WXToken 的时间是：" + str(currentTime) + ", 服务器当前具体时间是：" + currentTimeStr)
+    print("WXToken 过期的时间是：" + str(WXConstant.refresh_time) + ", 变成具体时间是：" + missTokenTimeStr)
+
+    wxData = []
+    wxData.append(wx_access_token)
+    wxData.append(expires_in)
+    wxData.append(currentTimeStr)
+    wxData.append(missTokenTimeStr)
+
+    projects = list(wxData)
+
+    return getHttpResponse(0, "ok", projects)
 
 @login_required
 def show(request):

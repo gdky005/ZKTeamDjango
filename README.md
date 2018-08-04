@@ -123,3 +123,6 @@ http://django-redis-chs.readthedocs.io/zh_CN/latest/
 ### 用户登录和注册
 https://blog.csdn.net/qq_37049050/article/details/79211059
 
+
+10. 验证微信服务器接口
+https://www.cnblogs.com/johnlau/p/9080505.html
