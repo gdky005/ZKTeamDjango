@@ -96,3 +96,6 @@ ENV/
 .ropeproject
 *.out
 migrations
+
+# 忽略私密文件，只在本地和服务器存储
+.gdky005
