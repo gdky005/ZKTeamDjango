@@ -17,23 +17,20 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from utils.Email import send
 
-
-
-
 # import hashlib
 # import json
 # from lxml import etree
 # from django.utils.encoding import smart_str
 # from django.views.decorators.csrf import csrf_exempt
 # from django.http import HttpResponse
-
-
-# Create your views here.
-
-
+# from auto_reply.views import auto_reply_main  # 修改这里
+#
+#
+# # Create your views here.
+#
 # WEIXIN_TOKEN = 'write-a-value'
-
-
+#
+# @csrf_exempt
 # def weixin_main(request):
 #     """
 #     所有的消息都会先进入这个函数进行处理，函数包含两个功能，
@@ -57,17 +54,28 @@ from utils.Email import send
 #     else:
 #         xml_str = smart_str(request.body)
 #         request_xml = etree.fromstring(xml_str)
-#         response_xml = auto_reply_main(request_xml)# 修改这里, 自己完成自己的消息。
+#         response_xml = auto_reply_main(request_xml)# 修改这里
 #         return HttpResponse(response_xml)
 
+import hashlib
 
 
-
-
-
-
-
-
+@csrf_exempt
+def weiXin(request):
+    if request.method == "GET":
+        signature = request.GET.get('signature')
+        timestamp = request.GET.get('timestamp')
+        nonce = request.GET.get('nonce')
+        echostr = request.GET.get('echostr')
+        token = "zkteam"
+        tmpArr = [token,timestamp,nonce]
+        tmpArr.sort()
+        string = ''.join(tmpArr).encode('utf-8')
+        string = hashlib.sha1(string).hexdigest()
+        if string == signature:
+            return HttpResponse(echostr)
+        else:
+            return HttpResponse("false")
 
 
 @login_required

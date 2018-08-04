@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^jsonUserInfo/', views.jsonUserInfo, name="jsonUserInfo"),
     url(r'^jsonSubInfo/', views.jsonShow, name="jsonSubInfo"),
     url(r'^jsonFJUpdate/', views.jsonFJUpdate, name="jsonFJUpdate"),
+    url(r'^weiXin/', views.weiXin, name="weiXin"),
 
 ]
