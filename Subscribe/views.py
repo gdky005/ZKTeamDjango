@@ -138,7 +138,7 @@ def handleEvent(msg):
 
     return resultStr
 
-
+from urllib import parse
 #函数把微信XML格式信息转换成字典格式
 def xmlContent2Dic(xmlContent):
     print("wx xmlContent2Dic：" + xmlContent)
@@ -146,7 +146,8 @@ def xmlContent2Dic(xmlContent):
     elementTree = ElementTree.fromstring(xmlContent)
     if elementTree.tag == 'xml':
         for child in elementTree:
-            dics[child.tag] = child.text.__unicode__
+            dics[child.tag] = parse.unquote(child.text)
+
     print("wx xmlContent2Dic dics：" + dics.__str__())
     return dics
 
