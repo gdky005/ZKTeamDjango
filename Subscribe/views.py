@@ -109,9 +109,13 @@ def responseMsg(postContent):
     print("收到的微信内容smart_str后是：" + str(postStr))
     if postStr:
         msg = xmlContent2Dic(postStr)
-        if msg['MsgType']:
-            if msg['MsgType'] == 'event':
+        msgType = msg['MsgType']
+        if msgType:
+            print("收到的微信内容 MsgType 是：" + msgType)
+            if msgType == 'event':
                 resultStr = handleEvent(msg)  #处理事件推送
+            elif msgType == 'text':
+                resultStr = handleText(msg)  #处理消息文本推送
         else:
             resultStr = 'Input something...'
 
@@ -136,6 +140,21 @@ def handleEvent(msg):
     elif event == 'CLICK':
         pass
 
+    return resultStr
+
+
+# 处理微信的事件推送
+def handleText(msg):
+    resultStr = ''
+    print("wx handleText：" + str(msg))
+
+    userContent = msg["Content"]
+
+    resultStr = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType><Content><![CDATA[%s]]></Content></xml>"
+    resultStr = resultStr % (
+    msg['FromUserName'], msg['ToUserName'], str(int(time.time())), 'text', u'你好呀，你刚刚说了一个：' + userContent)
+
+    print("wx handleText resultStr：" + resultStr)
     return resultStr
 
 from urllib import parse
