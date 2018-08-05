@@ -90,10 +90,10 @@ def weiXin(request):
         else:
             return HttpResponse("false")
     elif request.method == "POST":
-
         response = HttpResponse(responseMsg(request.body), content_type="application/xml")
+        return response
 
-        pass
+
     return HttpResponse("false")
 
 
