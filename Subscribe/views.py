@@ -1,8 +1,10 @@
 import json
+from xml.etree import ElementTree
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.utils.encoding import smart_str, smart_unicode
 from pymysql import Error
 
 from Subscribe import models
@@ -69,6 +71,7 @@ import hashlib
 
 @csrf_exempt
 def weiXin(request):
+    response = None
     if request.method == "GET":
         signature = request.GET.get('signature')
         timestamp = request.GET.get('timestamp')
@@ -86,8 +89,52 @@ def weiXin(request):
             return HttpResponse(echostr)
         else:
             return HttpResponse("false")
+    elif request.method == "POST":
+
+        response = HttpResponse(responseMsg(request.body), content_type="application/xml")
+
+        pass
+    return HttpResponse("false")
 
 
+def responseMsg(postContent):
+    postStr = smart_str(postContent)
+    if postStr:
+        msg = xmlContent2Dic(postStr)
+        if msg['MsgType']:
+            if msg['MsgType'] == 'event':
+                resultStr = handleEvent(msg)  #处理事件推送
+        else:
+            resultStr = 'Input something...'
+
+    return resultStr
+
+
+# 处理微信的事件推送
+def handleEvent(msg):
+    resultStr = ''
+
+    event = msg['Event']
+
+    if event == 'subscribe':
+        resultStr="<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType><Content><![CDATA[%s]]></Content></xml>"
+        resultStr = resultStr % (msg['FromUserName'],msg['ToUserName'],str(int(time.time())),'text',u'感谢您关注【微人人公众号】\n目前功能如下：【1】 库存查询;')
+    elif event == 'unsubscribe':
+        pass
+    elif event == 'CLICK':
+        pass
+
+    return resultStr
+
+
+#函数把微信XML格式信息转换成字典格式
+def xmlContent2Dic(xmlContent):
+    dics = {}
+    elementTree = ElementTree.fromstring(xmlContent)
+    if elementTree.tag == 'xml':
+        for child in elementTree :
+            dics[child.tag] = smart_unicode(child.text)
+    return dics
 
 
 import requests
