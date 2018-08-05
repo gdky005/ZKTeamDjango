@@ -146,7 +146,13 @@ def xmlContent2Dic(xmlContent):
     elementTree = ElementTree.fromstring(xmlContent)
     if elementTree.tag == 'xml':
         for child in elementTree:
-            dics[child.tag] = parse.unquote(child.text)
+            text = child.text
+            if text is None:
+                text = ''
+            else:
+                text = parse.unquote(text)
+
+            dics[child.tag] = text
 
     print("wx xmlContent2Dic dics：" + dics.__str__())
     return dics
