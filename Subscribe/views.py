@@ -144,9 +144,36 @@ def wxUserInfo(requst):
     OPENID = requst.GET.get("OPENID")
 
     # 默认从头拉取，也可以根据这个 id 获取后面的： &next_openid=NEXT_OPENID
-    result = requests.get("https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + token + "&openid=" + OPENID +"&lang=zh_CN").json()
+    result = requests.get("https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + token + "&openid=" + str(OPENID) +"&lang=zh_CN").json()
 
     # projects = list(result)
+    return getHttpResponse(0, "ok", result)
+
+
+from urllib import parse
+def wxQRcode(requst):
+    # URL: https: // api.weixin.qq.com / cgi - bin / qrcode / create?access_token = TOKEN
+    # POST数据格式：json
+    # POST数据例子：{"expire_seconds": 604800, "action_name": "QR_SCENE", "action_info": {"scene": {"scene_id": 123}}}
+    #
+    # 或者也可以使用以下POST数据创建字符串形式的二维码参数：
+    # {"expire_seconds": 604800, "action_name": "QR_STR_SCENE", "action_info": {"scene": {"scene_str": "test"}}}
+
+    # requests.get("https://api.weixin.qq.com/cgi-bin/user/get?access_token=" + token).json()
+
+    params = '{"expire_seconds": 3600, "action_name": "QR_STR_SCENE", "action_info": {"zk": {"name": "wangqing"}}}'
+
+    token = WXConstant.wx_access_token
+    result = requests.post("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=" + token, data=params).json()
+
+    ticket = result["ticket"]
+    expire_seconds = result["expire_seconds"]
+    url = result["url"]
+
+    # result = requests.post("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + ticket)
+
+    result["url"] = "https://mp.weixin.qq.com/cgi-bin/showqrcode?" + parse.urlencode({'ticket': ticket})
+
     return getHttpResponse(0, "ok", result)
 
 
