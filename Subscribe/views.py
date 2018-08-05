@@ -90,21 +90,23 @@ def weiXin(request):
         else:
             return HttpResponse("false")
     elif request.method == "POST":
-        response = HttpResponse(responseMsg(request.body), content_type="application/xml")
+        responseData = responseMsg(request.body)
+        print("wx：weiXin responseData" + str(responseData))
 
-        print("wx：weiXin response" + response)
+        response = HttpResponse(responseData, content_type="application/xml")
+        print("wx：weiXin response" + str(response))
         return response
-
 
     return HttpResponse("false")
 
 
 def responseMsg(postContent):
-    print("收到的微信内容是：" + postContent)
+    print("收到的微信内容是：" + str(postContent))
+    resultStr = ''
 
     postStr = smart_str(postContent)
 
-    print("收到的微信内容smart_str后是：" + postStr)
+    print("收到的微信内容smart_str后是：" + str(postStr))
     if postStr:
         msg = xmlContent2Dic(postStr)
         if msg['MsgType']:
