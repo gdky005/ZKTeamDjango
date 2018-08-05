@@ -15,7 +15,7 @@ class Constant:
 
 class WXConstant:
     # 默认值，刷新成功后，会替换
-    wx_access_token = "12_fwlvrLgCjUrF2T1lXn440IJhmZ7actxoYLubKZH6KVuhtG631xpEQCntyC7E-rCggN_TUlZsNsUuMgTjrwyT8m6n4-6FsX2M-HNuPKQPUs5KKWA3Ubuy2RG8jhrcJiAWxY39zGGdG7yj3Hc8PNWiADASQZ"
+    wx_access_token = "12_433alEqCy2ajGVYkxndBWsWdpliuVIimiFxP24c7R7MgWie2XY-00CPIqHaExXsimU3Lm8OfNUcj4ndMIzr83pzY_Jk-pGvMZ9P3RUwfrqnRjEbh3ueU9H5ZOXhWOwaOwahnX6rMEvk-fJJMSIYgAAAKAQ"
     expires_in = ""
     refresh_time = ""
 

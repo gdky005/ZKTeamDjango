@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^wxUserInfo/', views.wxUserInfo, name="wxUserInfo"),
 
     url(r'^wxQRcode/', views.wxQRcode, name="wxQRcode"),
+    url(r'^wxTemplate/', views.wxTemplate, name="wxTemplate"),
 
 ]
