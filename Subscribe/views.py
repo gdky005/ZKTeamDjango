@@ -68,7 +68,7 @@ import hashlib
 # 测试数据：/Subscribe/weiXin/?signature=5e1c55f68fa10321419b62b171d3518a398096f3&echostr=7370345721803176943&timestamp=1533393832&nonce=2102056081, zkteam 服务器返回类似：6801932741839289079
 # 微信服务器的信息是：signature=5e1c55f68fa10321419b62b171d3518a398096f3, timestamp=1533393832, nonce=2102056081, echostr=7370345721803176943
 
-def wxTemplate(request):
+def wxTemplateMsg(request):
     openid = 'oQrNzwaFHdvdufYEGZhz4cNwhznk'
     # template_id = '5U1Ykxvb00WBt9WpMpaBKFpC3UFszbhQHGaZ9alczy0' #订阅模板消息
     template_id = '4KOE8MczMCka1CW_q_BcegEzBVrAacFv81oEeVNTPRw' #预约服务提醒
@@ -99,6 +99,17 @@ def wxTemplate(request):
     params = json.loads(params)
 
     result = requests.post(templeUrl + "?access_token=" + token, json=params).json()
+    return getHttpResponse(0, "ok", result)
+
+
+def wxAllTemplate(request):
+    getTemplateId = 'https://api.weixin.qq.com/cgi-bin/template/get_all_private_template'
+    token = WXConstant.wx_access_token
+
+    paramsData = {"access_token": token}
+
+    result = requests.post(getTemplateId + "?access_token=" + token, json=paramsData).json()
+
     return getHttpResponse(0, "ok", result)
 
 
