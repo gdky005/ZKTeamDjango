@@ -91,6 +91,8 @@ def weiXin(request):
             return HttpResponse("false")
     elif request.method == "POST":
         response = HttpResponse(responseMsg(request.body), content_type="application/xml")
+
+        print("wx：weiXin response" + response)
         return response
 
 
@@ -98,7 +100,11 @@ def weiXin(request):
 
 
 def responseMsg(postContent):
+    print("收到的微信内容是：" + postContent)
+
     postStr = smart_str(postContent)
+
+    print("收到的微信内容smart_str后是：" + postStr)
     if postStr:
         msg = xmlContent2Dic(postStr)
         if msg['MsgType']:
@@ -115,10 +121,14 @@ def handleEvent(msg):
     resultStr = ''
 
     event = msg['Event']
+    print("wx handleEvent：" + event)
 
     if event == 'subscribe':
+        print("wx handleEvent subscribe：" + event)
         resultStr="<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType><Content><![CDATA[%s]]></Content></xml>"
         resultStr = resultStr % (msg['FromUserName'],msg['ToUserName'],str(int(time.time())),'text',u'感谢您关注【微人人公众号】\n目前功能如下：【1】 库存查询;')
+
+        print("wx handleEvent resultStr：" + event)
     elif event == 'unsubscribe':
         pass
     elif event == 'CLICK':
@@ -129,11 +139,13 @@ def handleEvent(msg):
 
 #函数把微信XML格式信息转换成字典格式
 def xmlContent2Dic(xmlContent):
+    print("wx xmlContent2Dic：" + xmlContent)
     dics = {}
     elementTree = ElementTree.fromstring(xmlContent)
     if elementTree.tag == 'xml':
-        for child in elementTree :
+        for child in elementTree:
             dics[child.tag] = smart_unicode(child.text)
+    print("wx xmlContent2Dic dics：" + dics.__str__())
     return dics
 
 
