@@ -132,7 +132,7 @@ def handleEvent(msg):
     if event == 'subscribe':
         print("wx handleEvent subscribe：" + event)
         resultStr="<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType><Content><![CDATA[%s]]></Content></xml>"
-        resultStr = resultStr % (msg['FromUserName'],msg['ToUserName'],str(int(time.time())),'text',u'感谢您关注【微人人公众号】\n目前功能如下：【1】 库存查询;')
+        resultStr = resultStr % (msg['FromUserName'],msg['ToUserName'],str(int(time.time())),'text',u'感谢您关注哦！你说啥，我说啥，哈哈哈 😆')
 
         print("wx handleEvent resultStr：" + event)
     elif event == 'unsubscribe':
