@@ -4,7 +4,7 @@ from xml.etree import ElementTree
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.utils.encoding import smart_str, smart_unicode
+from django.utils.encoding import smart_str
 from pymysql import Error
 
 from Subscribe import models
@@ -144,7 +144,7 @@ def xmlContent2Dic(xmlContent):
     elementTree = ElementTree.fromstring(xmlContent)
     if elementTree.tag == 'xml':
         for child in elementTree:
-            dics[child.tag] = smart_unicode(child.text)
+            dics[child.tag] = child.text.__unicode__
     print("wx xmlContent2Dic dics：" + dics.__str__())
     return dics
 
