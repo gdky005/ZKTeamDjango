@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^logout/$',views.my_logout, name='my_logout'),
 
     url(r'^jsonQueryInfo/', views.jsonQueryInfo, name="jsonQueryInfo"),
+    url(r'^notifyUser/', views.notifyUser, name="notifyUser"),
 
 
     url(r'^jsonLastInfo/', views.jsonLastInfo, name="jsonLastInfo"),

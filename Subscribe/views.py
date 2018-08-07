@@ -356,14 +356,14 @@ def jsonFJUpdate(request):
         fj_number = lastInfo.fj_number
         pid_id = lastInfo.id
 
-        for subInfos in subInfos:
-            subPid = int(subInfos.pid)
-            subNumber = subInfos.new_number
+        for subInfo in subInfos:
+            subPid = int(subInfo.pid)
+            subNumber = subInfo.new_number
 
             if pid_id == subPid:
                 if int(fj_number) > int(subNumber):
-                    subInfos.new_number = fj_number
-                    emailList.append(subInfos)
+                    subInfo.new_number = fj_number
+                    emailList.append(subInfo)
 
     projects = list(emailList)
 
@@ -420,6 +420,13 @@ def addData(request):
         return getHttpResponse(0, "ok", "")
     except Error:
         return getHttpResponse(10000, "Error", "")
+
+
+def notifyUser(request):
+
+    requests.get("")
+
+    pass
 
 
 def jsonQueryInfo(request):
