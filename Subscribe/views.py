@@ -422,6 +422,21 @@ def addData(request):
         return getHttpResponse(10000, "Error", "")
 
 
+def jsonQueryInfo(request):
+    des = request.GET.get("des")
+
+    if not des:
+        return getHttpResponse(10000, "Error", "des not null!")
+
+    try:
+        # projects = models.ShopInfo.objects.all().values()[:maxData]  # 取出该表所有的数据
+
+        project = models.SubInfo.objects.filter(des=des).values()
+        return getHttpResponse(0, "ok", project)
+    except Error:
+        return getHttpResponse(10000, "Error", "")
+
+
 def query(request):
     pid = request.GET.get("pid")
 
