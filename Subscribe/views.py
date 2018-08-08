@@ -338,6 +338,69 @@ def emailNotify(emailList):
 def wxNotify(emailList):
     # 微信通知
     print("待处理 微信通知")
+    t = time.time()
+    currentTime = int(t)
+
+    # 用户的openid
+    openId = "oQrNzwaFHdvdufYEGZhz4cNwhznk" #默认是孤独狂饮的哈
+    zk_h5_url = 'http://www.zkteam.cc' #微信打开的 H5 页面哈，可以让用户下载视频，或者拷贝数据。
+
+    if currentTime > WXConstant.refresh_time:
+        wxToken(None)
+
+    for data in emailList:
+        name = data.name
+        pid = data.pid
+        url = data.url
+        new_number = data.new_number
+
+        movieDownload = SubMovieDownload.objects.filter(pid=pid).values()[0]
+        fjUrl = movieDownload.get("fj_download_url")
+
+        # emailTitle = name + " 更新到 第" + new_number + "集！"
+        # emailDetail = '''
+        #     hi, 小同学, 您订阅的 {name}（{pid}） 已经更新到 {new_number} 啦！当前订阅内容是的最新资源是：
+        #
+        #         {fjUrl}
+        #
+        #     请拷贝连接，使用迅雷下载，后期将默认添加调用迅雷 or 小米路由器。
+        #     需要了解详情可以去官网查看：{url}''' \
+        #     .format(name=name, pid=pid, url=url, new_number=new_number, fjUrl=fjUrl)
+
+        # 发起微信通知。
+        wxSendMsg(openId,
+                  zk_h5_url,
+                  "您订阅的 《" + name + "》有更新啦！",
+                  "最新一集是：第" + new_number + "集",
+                  "已经通过邮件和微信给您通知啦",
+                  "您可以点击详情将最新一集下载到您的 路由器 或者 电脑上。")
+
+
+# 这里会发起微信通知消息
+def wxSendMsg(openid, url, wx_msg_title, wx_msg_content, wx_msg_ps, wx_msg_des):
+    # url = "http://www.zkteam.cc"
+    # openid = 'oQrNzwaFHdvdufYEGZhz4cNwhznk' # 孤独狂饮的openid
+
+    template_id = '4KOE8MczMCka1CW_q_BcegEzBVrAacFv81oEeVNTPRw' #预约服务提醒
+    data = {
+        "content": {"value": "content！", "color": "#173177"},
+        "first": {"value": wx_msg_title, "color": "#173177"},
+        "keyword1": {"value": wx_msg_content, "color": "#173177"},
+        "keyword2": {"value": wx_msg_ps, "color": "#173177"},
+        "remark": {"value": wx_msg_des, "color": "#173177"},
+    }
+
+    templeUrl = 'https://api.weixin.qq.com/cgi-bin/message/template/send'
+    token = WXConstant.wx_access_token
+
+    paramsData = {"access_token": token,
+                  "touser": openid,
+                  "template_id": template_id,
+                  "url": url,
+                  "data": data}
+
+    result = requests.post(templeUrl + "?access_token=" + token, json=paramsData).json()
+    return getHttpResponse(0, "ok", result)
 
 
 def notifyMsg2User(emailList):
@@ -368,7 +431,6 @@ def jsonFJUpdate(request):
     projects = list(emailList)
 
     notifyMsg2User(emailList)
-
 
     return getHttpResponse(0, "ok", projects)
 
