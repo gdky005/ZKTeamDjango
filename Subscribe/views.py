@@ -271,29 +271,46 @@ def wxUserInfo(requst):
     return getHttpResponse(0, "ok", result)
 
 
+wx_QRcode_Cache = {}
 from urllib import parse
 def wxQRcode(requst):
-    # URL: https: // api.weixin.qq.com / cgi - bin / qrcode / create?access_token = TOKEN
-    # POST数据格式：json
-    # POST数据例子：{"expire_seconds": 604800, "action_name": "QR_SCENE", "action_info": {"scene": {"scene_id": 123}}}
-    #
-    # 或者也可以使用以下POST数据创建字符串形式的二维码参数：
-    # {"expire_seconds": 604800, "action_name": "QR_STR_SCENE", "action_info": {"scene": {"scene_str": "test"}}}
+    checkWXToken()
 
-    # requests.get("https://api.weixin.qq.com/cgi-bin/user/get?access_token=" + token).json()
+    user_id = requst.GET.get("user_id")
 
-    params = '{"expire_seconds": 3600, "action_name": "QR_STR_SCENE", "action_info": {"zk": {"name": "wangqing"}}}'
+    userBean = wx_QRcode_Cache.get(user_id)
+    result = {}
 
-    token = WXConstant.wx_access_token
-    result = requests.post("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=" + token, data=params).json()
+    nowTime = int(time.time())
+    exprise_time = 604800
 
-    ticket = result["ticket"]
-    expire_seconds = result["expire_seconds"]
-    url = result["url"]
+    if userBean is None or nowTime > int(userBean["time"] + exprise_time):
+        # 参考：https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1443433542
 
-    # result = requests.post("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + ticket)
+        # scene_str 字段: 场景值ID（字符串形式的ID），字符串类型，长度限制为1到64
+        # scene_id  字段: 场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）
 
-    result["url"] = "https://mp.weixin.qq.com/cgi-bin/showqrcode?" + parse.urlencode({'ticket': ticket})
+        # {"action_name": "QR_LIMIT_STR_SCENE", "action_info": {"scene": {"scene_str": "test"}}}
+        params = '{"expire_seconds": '\
+                 + str(exprise_time) + ', "action_name": "QR_LIMIT_STR_SCENE", "action_info":  {"scene": {"scene_str": '\
+                 + str(user_id) + '}}}'
+
+        token = WXConstant.wx_access_token
+        result = requests.post("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=" + token, data=params).json()
+        ticket = result["ticket"]
+        url = result["url"]
+
+        ticketUrl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?" + parse.urlencode({'ticket': ticket})
+
+        bean = {}
+        bean.__setitem__("time", nowTime)
+        bean.__setitem__("ticket", ticket)
+        bean.__setitem__("ticketUrl", ticketUrl)
+        wx_QRcode_Cache.__setitem__(user_id, bean)
+        result["url"] = ticketUrl
+    else:
+        result["url"] = userBean["ticketUrl"]
+        result["ticket"] = userBean["ticket"]
 
     return getHttpResponse(0, "ok", result)
 
@@ -338,15 +355,13 @@ def emailNotify(emailList):
 def wxNotify(emailList):
     # 微信通知
     print("待处理 微信通知")
-    t = time.time()
-    currentTime = int(t)
+    checkWXToken()
 
     # 用户的openid
     openId = "oQrNzwaFHdvdufYEGZhz4cNwhznk" #默认是孤独狂饮的哈
     zk_h5_url = 'http://www.zkteam.cc' #微信打开的 H5 页面哈，可以让用户下载视频，或者拷贝数据。
 
-    if currentTime > WXConstant.refresh_time:
-        wxToken(None)
+
 
     for data in emailList:
         name = data.name
@@ -374,6 +389,13 @@ def wxNotify(emailList):
                   "最新一集是：第" + new_number + "集",
                   "已经通过邮件和微信给您通知啦",
                   "您可以点击详情将最新一集下载到您的 路由器 或者 电脑上。")
+
+
+def checkWXToken():
+    t = time.time()
+    currentTime = int(t)
+    if currentTime > WXConstant.refresh_time:
+        wxToken(None)
 
 
 # 这里会发起微信通知消息
