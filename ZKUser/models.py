@@ -11,6 +11,7 @@ class ZKUser(AbstractUser):
     address = models.CharField(max_length=11, verbose_name=u'地址', null=True, blank=True)
     # image = models.ImageField(upload_to='image/%Y/%m', default=u"image/default.png", max_length=100)
     phone = models.CharField(max_length=11, verbose_name=u"手机号码", null=True, blank=True)
+    wx_openid = models.CharField(max_length=20, verbose_name=u"微信 OpenId", null=True, blank=True)
 
     class Meta:
         verbose_name = u"用户信息"
