@@ -737,6 +737,8 @@ def my_logout(request):
 
 def get_user_info(user):
     userInfo = {}
+    userInfo.__setitem__("user_id", user.id)
+    userInfo.__setitem__("wx_openid", user.wx_openid)
     userInfo.__setitem__("username", user.username)
     userInfo.__setitem__("email", user.email)
     userInfo.__setitem__("is_active", user.is_active)
