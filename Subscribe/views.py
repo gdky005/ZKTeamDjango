@@ -165,15 +165,50 @@ def handleEvent(msg):
 
     if event == 'subscribe':
         print("wx handleEvent subscribe：" + event)
-        resultStr="<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType><Content><![CDATA[%s]]></Content></xml>"
-        resultStr = resultStr % (msg['FromUserName'],msg['ToUserName'],str(int(time.time())),'text',u'感谢您关注哦！你说啥，我说啥，哈哈哈 😆')
 
-        print("wx handleEvent resultStr：" + event)
+        event_key = msg["EventKey"]
+        print("wx handleEvent subscribe：" + event_key)
+
+        subStr = "qrscene_"
+
+        if subStr in event_key:
+            event_key = str(event_key)
+            user_id = event_key[event_key.rindex("_") + 1: event_key.__len__()]
+
+            bindUser(user_id, msg["FromUserName"])
+            resultStr = sendMsgForSubUser(event, msg, u'感谢您关注哦！你说啥，我说啥，哈哈哈 😆')
+        else:
+            # resultStr = sendMsgForSubUser(event, msg, u'你又扫我了一下哈！')
+            pass
+
     elif event == 'unsubscribe':
         pass
     elif event == 'CLICK':
         pass
+    elif event == 'SCAN':
+        resultStr = sendMsgForSubUser(event, msg, u'你又扫我了一下哈！')
+        pass
 
+    return resultStr
+
+
+# 绑定微信的 openid  到 user 表中
+def bindUser(user_id, openid):
+    print("当前绑定的用户 user_id：" + user_id + ", openid:" + openid)
+    ZKUser.objects.filter(id=user_id).update(wx_openid=openid)
+    print("将用户 user_id：" + user_id + " 的openid 存入数据库中, openid:" + openid)
+
+
+# 给初次订阅的用户反馈消息
+def sendMsgForSubUser(event, msg, toUserMsg):
+    # 给关注的用户反馈 关注消息
+    resultStr = "<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[%s]]></MsgType><Content><![CDATA[%s]]></Content></xml>"
+    resultStr = resultStr % (
+        msg['FromUserName'],
+        msg['ToUserName'],
+        str(int(time.time())),
+        'text', toUserMsg)
+    print("wx handleEvent qrscene_ resultStr：" + event)
     return resultStr
 
 
