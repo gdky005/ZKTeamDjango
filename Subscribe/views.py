@@ -186,8 +186,10 @@ def handleEvent(msg):
     elif event == 'CLICK':
         pass
     elif event == 'SCAN':
-        resultStr = sendMsgForSubUser(event, msg, u'你又扫我了一下哈！')
-        pass
+        # user_id = msg["EventKey"] # 扫描过来的，直接检测是否需要更新用户的 token
+        # bindUser(user_id, msg["FromUserName"])
+
+        resultStr = sendMsgForSubUser(event, msg, u'你又扫我了一下, 我要 check 你哦！')
 
     return resultStr
 
