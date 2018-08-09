@@ -95,6 +95,9 @@ def addData(request):
     if not pid:
         return getHttpResponse(10000, "Error", "pid not null!")
 
+    if not uid:
+        return getHttpResponse(10000, "Error", "uid not null!")
+
     try:
         maxData = 100  # 默认取100条数据
 
