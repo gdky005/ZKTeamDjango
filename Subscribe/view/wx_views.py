@@ -306,16 +306,18 @@ def wxQRcode(requst):
     return getHttpResponse(0, "ok", result)
 
 
-def wxNotify(emailList):
+def wxNotify(notifyData, userWXOpenid):
     # 微信通知
     print("待处理 微信通知")
     checkWXToken()
 
     # 用户的openid
-    openId = "oQrNzwaFHdvdufYEGZhz4cNwhznk"  # 默认是孤独狂饮的哈
+    openId = userWXOpenid
+    # openId = "oQrNzwaFHdvdufYEGZhz4cNwhznk"  # 默认是孤独狂饮的哈
+
     zk_h5_url = 'http://www.zkteam.cc'  # 微信打开的 H5 页面哈，可以让用户下载视频，或者拷贝数据。
 
-    for data in emailList:
+    for data in notifyData:
         name = data.name
         pid = data.pid
         url = data.url
@@ -350,10 +352,13 @@ def checkWXToken():
         wxToken(None)
 
 
-# 这里会发起微信通知消息
 def wxSendMsg(openid, url, wx_msg_title, wx_msg_content, wx_msg_ps, wx_msg_des):
-    # url = "http://www.zkteam.cc"
-    # openid = 'oQrNzwaFHdvdufYEGZhz4cNwhznk' # 孤独狂饮的openid
+    return wxSendMsg(openid, url, wx_msg_title, wx_msg_content, wx_msg_ps, wx_msg_des, None)
+
+
+# 这里会发起微信通知消息, url = "http://www.zkteam.cc", openid = 'oQrNzwaFHdvdufYEGZhz4cNwhznk' # 孤独狂饮的openid
+def wxSendMsg(openid, url, wx_msg_title, wx_msg_content, wx_msg_ps, wx_msg_des, isJson):
+    checkWXToken()
 
     template_id = '4KOE8MczMCka1CW_q_BcegEzBVrAacFv81oEeVNTPRw'  # 预约服务提醒
     data = {
@@ -374,4 +379,8 @@ def wxSendMsg(openid, url, wx_msg_title, wx_msg_content, wx_msg_ps, wx_msg_des):
                   "data": data}
 
     result = requests.post(templeUrl + "?access_token=" + token, json=paramsData).json()
-    return getHttpResponse(0, "ok", result)
+
+    if not isJson:
+        return getHttpResponse(0, "ok", result)
+    else:
+        return result

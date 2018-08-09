@@ -5,7 +5,7 @@ from utils.Email import send
 from django.shortcuts import render
 from Subscribe.model.sub_models import SubInfo
 from Subscribe.model.sub_movie_models import SubMovieLastestInfo, SubMovieDownload
-from Subscribe.view.wx_views import wxNotify
+from Subscribe.view.wx_views import wxNotify, wxSendMsg
 from Subscribe.view.base_views import getHttpResponse
 from django.contrib.auth.decorators import login_required
 
@@ -21,17 +21,14 @@ def jsonShow(request):
     return sendJsonResponse(request, SubInfo)
 
 
-def notifyMsg2User(emailList):
-    # send("我是测试主题，", "我是测试内容！")
-    emailNotify(emailList)
-    wxNotify(emailList)
-
-
 # 测试邮件系统。
-def emailNotify(emailList):
+def notifyMsg2User(notifyData):
     # 邮件通知
     print("正在处理 邮件通知")
-    for data in emailList:
+
+    notifyResponse = {}
+
+    for data in notifyData:
         name = data.name
         pid = data.pid
         url = data.url
@@ -40,20 +37,57 @@ def emailNotify(emailList):
         movieDownload = SubMovieDownload.objects.filter(pid=pid).values()[0]
         fjUrl = movieDownload.get("fj_download_url")
 
-        emailTitle = name + " 更新到 第" + new_number + "集！"
-        emailDetail = '''
-            hi, 小同学, 您订阅的 {name}（{pid}） 已经更新到 {new_number} 啦！当前订阅内容是的最新资源是：
-        
-                {fjUrl}
-        
-            请拷贝连接，使用迅雷下载，后期将默认添加调用迅雷 or 小米路由器。
-            需要了解详情可以去官网查看：{url}''' \
-            .format(name=name, pid=pid, url=url, new_number=new_number, fjUrl=fjUrl)
-        send(emailTitle, emailDetail)
+        notifyDataResponse = {}
+
+        subInfoList = SubInfo.objects.filter(pid=pid)
+        for subInf in subInfoList:
+            zkUsers = subInf.zk_user.all()
+
+            zkUserResponse = {}
+
+            for zkUser in zkUsers:
+                userName = zkUser.username
+                userEmail = zkUser.email
+                userWXOpenid = zkUser.wx_openid
+
+                emailUserName = userName
+
+                emailTitle = name + " 更新到 第" + new_number + "集！"
+                emailDetail = '''
+                            hi, {emailUserName}, 您订阅的 {name}（{pid}） 已经更新到 {new_number} 啦！当前订阅内容是的最新资源是：
+
+                                {fjUrl}
+
+                            请拷贝连接，使用迅雷下载，后期将默认添加调用迅雷 or 小米路由器。
+                            需要了解详情可以去官网查看：{url}''' \
+                    .format(emailUserName=emailUserName, name=name, pid=pid, url=url, new_number=new_number,
+                            fjUrl=fjUrl)
+
+                print("查询用户信息：userName=" + userName + ", userEmail=" + userEmail + ", userWXOpenid=" + userWXOpenid)
+
+                zkUserResponse = {"sendUser": userEmail, "sendUserName": userName, "sendWXOpenid": userWXOpenid}
+
+                # 发送邮件内容
+                emailResponse = send(emailTitle, emailDetail, userEmail, userName)
+                zkUserResponse["emailType"] = emailResponse
+
+                # 发送微信消息通知
+                wxResponse = wxSendMsg(userWXOpenid,
+                          "http://www.zkteam.cc",
+                          "您订阅的 《" + name + "》有更新啦！",
+                          "最新一集是：第" + new_number + "集",
+                          "已经通过邮件和微信给您通知啦",
+                          "您可以点击详情将最新一集下载到您的 路由器 或者 电脑上。", "json")
+                zkUserResponse["wxType"] = wxResponse
+                notifyDataResponse[userName] = zkUserResponse
+
+        notifyResponse[pid] = notifyDataResponse
+
+    return notifyResponse
 
 
 def jsonFJUpdate(request):
-    emailList = []
+    notifyData = []
 
     lastInfos = SubMovieLastestInfo.objects.all()
     subInfos = SubInfo.objects.all()
@@ -69,13 +103,13 @@ def jsonFJUpdate(request):
             if pid_id == subPid:
                 if int(fj_number) > int(subNumber):
                     subInfo.new_number = fj_number
-                    emailList.append(subInfo)
+                    notifyData.append(subInfo)
 
-    projects = list(emailList)
+    projects = list(notifyData)
+    notifyResponseData = notifyMsg2User(notifyData)
+    response = {"notifyData": projects, "notifyResponseData": notifyResponseData}
 
-    notifyMsg2User(emailList)
-
-    return getHttpResponse(0, "ok", projects)
+    return getHttpResponse(0, "ok", response)
 
 
 # 获取更新表的信息

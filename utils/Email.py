@@ -6,20 +6,31 @@ from utils.Constant import Constant
 
 
 def send(subject, info):
+    return send(subject, info, None, None)
+
+
+def send(subject, info, sendUser, sendUserName):
     my_pass = Constant.secret_126
     my_sender = Constant.my_sender  # 发件人邮箱账号
-    my_smtp = Constant.my_smtp # smtp 地址
-    my_smtp_port = Constant.my_smtp_port # smtp 端口号
-    my_user = Constant.my_user # 收件人邮箱账号
+    my_smtp = Constant.my_smtp  # smtp 地址
+    my_smtp_port = Constant.my_smtp_port  # smtp 端口号
+    my_user = Constant.my_user  # 收件人邮箱账号
     my_sender_nickname = Constant.my_sender_nickname
     my_user_nickname = Constant.my_user_nickname
 
-    ret = True
+    if not sendUser:
+        my_user = sendUser
+    else:
+        my_user_nickname = sendUserName
+
+    # response = {"sendType": "Email", "sendUser": sendUser, "sendUserName": sendUserName}
+    response = {}
 
     if my_pass.__eq__(""):
         ret = False
-        print("filed， 请输入邮件发送人的密码，谢谢！（在项目根目录下配置 zk_local_secret.gdky005 文件）")
-        return ret
+        error = "filed， 请输入邮件发送人的密码，谢谢！（在项目根目录下配置 zk_local_secret.gdky005 文件）"
+        response["exception"] = error
+        return response
 
     try:
         msg = MIMEText(info, "plain", 'utf-8')
@@ -32,8 +43,11 @@ def send(subject, info):
         server.sendmail(my_sender, [my_user], msg.as_string())
         server.quit()
         print("ok")
+
+        response["SendState"] = "OK!"
     except Exception as e:
-        ret = False
-        print("filed:")
-        print(e)
-    return ret
+        errorStr = str(e)
+        print("filed:" + errorStr)
+        response["exception"] = errorStr
+
+    return response
