@@ -1,8 +1,9 @@
 from pymysql import Error
-from Subscribe import models
+from Subscribe.model import models
 from utils.Email import send
 from django.shortcuts import render
-from Subscribe.models import SubInfo, SubMovieLastestInfo, SubMovieDownload
+from Subscribe.model.sub_models import SubInfo
+from Subscribe.model.sub_movie_models import SubMovieLastestInfo, SubMovieDownload
 from Subscribe.view.wx_views import wxNotify
 from Subscribe.view.base_views import getHttpResponse
 from django.contrib.auth.decorators import login_required

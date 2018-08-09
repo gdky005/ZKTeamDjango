@@ -1,7 +1,7 @@
 from django.contrib import admin
-from Subscribe import models
+from Subscribe.model import sub_models
 
 # Register your models here.
 
 
-admin.site.register(models.SubInfo)
+admin.site.register(sub_models.SubInfo)

@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.utils.encoding import smart_str
 from django.views.decorators.csrf import csrf_exempt
 
-from Subscribe.models import SubMovieDownload
+from Subscribe.model.sub_movie_models import SubMovieDownload
 from Subscribe.view.base_views import getHttpResponse
 from ZKUser.models import ZKUser
 from utils.Constant import WXConstant
@@ -175,9 +175,6 @@ def handleText(msg):
 
     print("wx handleText resultStr：" + resultStr)
     return resultStr
-
-
-from urllib import parse
 
 
 # 函数把微信XML格式信息转换成字典格式
