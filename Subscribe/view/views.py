@@ -1,5 +1,5 @@
 from pymysql import Error
-from Subscribe.model import models
+
 from utils.Email import send
 from django.shortcuts import render
 from Subscribe.model.sub_models import SubInfo
@@ -11,13 +11,13 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def show(request):
-    subs = models.SubInfo.objects.all()
+    subs = SubInfo.objects.all()
     return render(request, 'index_sub.html', {"subs": subs})
 
 
 # 获取用户订阅信息
 def jsonShow(request):
-    return sendJsonResponse(request, models.SubInfo)
+    return sendJsonResponse(request, SubInfo)
 
 
 def notifyMsg2User(emailList):
@@ -79,7 +79,7 @@ def jsonFJUpdate(request):
 
 # 获取更新表的信息
 def jsonLastInfo(request):
-    return sendJsonResponse(request, models.SubMovieLastestInfo)
+    return sendJsonResponse(request, SubMovieLastestInfo)
 
 
 def addData(request):
@@ -100,7 +100,7 @@ def addData(request):
         # data = list(projects)
         # return getHttpResponse(0, "ok", data)
 
-        obj = models.SubInfo(id=jid, name=name, url=url, des=des, pid=pid, new_number=number)
+        obj = SubInfo(id=jid, name=name, url=url, des=des, pid=pid, new_number=number)
         obj.save()
 
         return getHttpResponse(0, "ok", "")
@@ -117,7 +117,7 @@ def jsonQueryInfo(request):
     try:
         # projects = models.ShopInfo.objects.all().values()[:maxData]  # 取出该表所有的数据
 
-        project = models.SubInfo.objects.filter(des=des).values()
+        project = SubInfo.objects.filter(des=des).values()
         return getHttpResponse(0, "ok", project)
     except Error:
         return getHttpResponse(10000, "Error", "")
@@ -132,7 +132,7 @@ def query(request):
     try:
         # projects = models.ShopInfo.objects.all().values()[:maxData]  # 取出该表所有的数据
 
-        project = models.SubInfo.objects.filter(pid=pid).values()
+        project = SubInfo.objects.filter(pid=pid).values()
 
         if project.__len__() > 0:
             project = project[0]
@@ -153,7 +153,7 @@ def delete(request):
         return getHttpResponse(10000, "Error", "pid not null!")
 
     try:
-        models.SubInfo.objects.filter(pid=pid).delete()
+        SubInfo.objects.filter(pid=pid).delete()
 
         return getHttpResponse(0, "ok", "")
     except Error:
@@ -176,7 +176,7 @@ def sendJsonResponse(request, obj):
 
     try:
         if jid is not None:
-            if obj == models.SubInfo:
+            if obj == SubInfo:
                 obj = obj.objects.filter(id=jid)
             else:
                 try:
