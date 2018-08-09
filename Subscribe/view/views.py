@@ -98,13 +98,13 @@ def addData(request):
     try:
         maxData = 100  # 默认取100条数据
 
-        subInfoObj = SubInfo.objects.create(name=name, url=url, des=des, new_number=number)
+        subInfoObj = SubInfo.objects.get_or_create(pid=pid, name=name, url=url, des=des, new_number=number)[0]
         userObj = ZKUser.objects.get(id=uid)
-        SubInfo.objects.filter(id=subInfoObj.id).first().pid.add(userObj)
+        SubInfo.objects.filter(pid=subInfoObj.pid).first().zk_user.add(userObj)
 
         return getHttpResponse(0, "ok", subInfoObj)
-    except Error:
-        return getHttpResponse(10000, "Error", "")
+    except Exception as e:
+        return getHttpResponse(10000, "Error", "" + str(e))
 
 
 def jsonQueryInfo(request):
