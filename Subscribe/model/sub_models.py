@@ -4,10 +4,10 @@ from django.db import models
 # Create your models here.
 class SubInfo(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
-    # pid = models.TextField(max_length=50)
+    pid = models.TextField(max_length=50, default='', null=False)
     # 创建多对多的关系
     # cid = models.ManyToManyField(to="Class", name="teacher")
-    pid = models.ManyToManyField(to="ZKUser.ZKUser", name="pid")
+    zk_user = models.ManyToManyField(to="ZKUser.ZKUser", name="zk_user")
 
     name = models.TextField(max_length=50, default='', null=True)
     url = models.TextField(max_length=50, default='', null=True)
