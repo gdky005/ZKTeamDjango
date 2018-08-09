@@ -1,5 +1,6 @@
 from pymysql import Error
 
+from ZKUser.models import ZKUser
 from utils.Email import send
 from django.shortcuts import render
 from Subscribe.model.sub_models import SubInfo
@@ -83,7 +84,8 @@ def jsonLastInfo(request):
 
 
 def addData(request):
-    jid = request.GET.get("id")
+    uid = request.GET.get("user_id")
+    # jid = request.GET.get("id")
     pid = request.GET.get("pid")
     name = request.GET.get("name")
     url = request.GET.get("url")
@@ -96,14 +98,11 @@ def addData(request):
     try:
         maxData = 100  # 默认取100条数据
 
-        # projects = models.ShopInfo.objects.all().values()[:maxData]  # 取出该表所有的数据
-        # data = list(projects)
-        # return getHttpResponse(0, "ok", data)
+        subInfoObj = SubInfo.objects.create(name=name, url=url, des=des, new_number=number)
+        userObj = ZKUser.objects.get(id=uid)
+        SubInfo.objects.filter(id=subInfoObj.id).first().pid.add(userObj)
 
-        obj = SubInfo(id=jid, name=name, url=url, des=des, pid=pid, new_number=number)
-        obj.save()
-
-        return getHttpResponse(0, "ok", "")
+        return getHttpResponse(0, "ok", subInfoObj)
     except Error:
         return getHttpResponse(10000, "Error", "")
 
