@@ -1,7 +1,9 @@
 from django.conf.urls import url
 from django.conf.urls import handler404, handler500
 
-from Subscribe import views
+from Subscribe.view import views
+from Subscribe.view import wx_views
+from Subscribe.view import user_views
 
 urlpatterns = [
     url(r'^show', views.show, name="show"),
@@ -12,25 +14,25 @@ urlpatterns = [
     # url(r'^login', views.login, name="login"),
     # handler404 = views.page_not_found,
 
-    url(r'^register/$',views.register, name='register'),
-    url(r'^login/$',views.my_login, name='my_login'),
-    url(r'^logout/$',views.my_logout, name='my_logout'),
+    # 用户登录操作
+    url(r'^register/$', user_views.register, name='register'),
+    url(r'^login/$', user_views.my_login, name='my_login'),
+    url(r'^logout/$', user_views.my_logout, name='my_logout'),
 
+    # json 数据操作
+    url(r'^jsonUserInfo/', user_views.jsonUserInfo, name="jsonUserInfo"),
     url(r'^jsonQueryInfo/', views.jsonQueryInfo, name="jsonQueryInfo"),
-    url(r'^notifyUser/', views.notifyUser, name="notifyUser"),
-
-
     url(r'^jsonLastInfo/', views.jsonLastInfo, name="jsonLastInfo"),
-    url(r'^jsonUserInfo/', views.jsonUserInfo, name="jsonUserInfo"),
     url(r'^jsonSubInfo/', views.jsonShow, name="jsonSubInfo"),
     url(r'^jsonFJUpdate/', views.jsonFJUpdate, name="jsonFJUpdate"),
-    url(r'^weiXin/', views.weiXin, name="weiXin"),
-    url(r'^wxToken/', views.wxToken, name="wxToken"),
-    url(r'^wxUsers/', views.wxUsers, name="wxUsers"),
-    url(r'^wxUserInfo/', views.wxUserInfo, name="wxUserInfo"),
 
-    url(r'^wxQRcode/', views.wxQRcode, name="wxQRcode"),
-    url(r'^wxTemplateMsg/', views.wxTemplateMsg, name="wxTemplateMsg"),
-    url(r'^wxAllTemplate/', views.wxAllTemplate, name="wxAllTemplate"),
+    # 微信views
+    url(r'^weiXin/', wx_views.weiXin, name="weiXin"),
+    url(r'^wxToken/', wx_views.wxToken, name="wxToken"),
+    url(r'^wxUsers/', wx_views.wxUsers, name="wxUsers"),
+    url(r'^wxUserInfo/', wx_views.wxUserInfo, name="wxUserInfo"),
+    url(r'^wxQRcode/', wx_views.wxQRcode, name="wxQRcode"),
+    url(r'^wxTemplateMsg/', wx_views.wxTemplateMsg, name="wxTemplateMsg"),
+    url(r'^wxAllTemplate/', wx_views.wxAllTemplate, name="wxAllTemplate"),
 
 ]
