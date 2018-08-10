@@ -9,7 +9,7 @@ def send(subject, info):
     return send(subject, info, None, None)
 
 
-def send(subject, info, sendUser, sendUserName):
+def send(subject, info, userEmail, userName):
     my_pass = Constant.secret_126
     my_sender = Constant.my_sender  # 发件人邮箱账号
     my_smtp = Constant.my_smtp  # smtp 地址
@@ -18,10 +18,10 @@ def send(subject, info, sendUser, sendUserName):
     my_sender_nickname = Constant.my_sender_nickname
     my_user_nickname = Constant.my_user_nickname
 
-    if not sendUser:
-        my_user = sendUser
+    if userEmail:
+        my_user = userEmail
     else:
-        my_user_nickname = sendUserName
+        my_user_nickname = userName
 
     # response = {"sendType": "Email", "sendUser": sendUser, "sendUserName": sendUserName}
     response = {}
