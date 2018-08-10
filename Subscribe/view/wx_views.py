@@ -358,27 +358,31 @@ def wxSendMsg(openid, url, wx_msg_title, wx_msg_content, wx_msg_ps, wx_msg_des):
 
 # 这里会发起微信通知消息, url = "http://www.zkteam.cc", openid = 'oQrNzwaFHdvdufYEGZhz4cNwhznk' # 孤独狂饮的openid
 def wxSendMsg(openid, url, wx_msg_title, wx_msg_content, wx_msg_ps, wx_msg_des, isJson):
-    checkWXToken()
+    global result
+    try:
+        checkWXToken()
 
-    template_id = '4KOE8MczMCka1CW_q_BcegEzBVrAacFv81oEeVNTPRw'  # 预约服务提醒
-    data = {
-        "content": {"value": "content！", "color": "#173177"},
-        "first": {"value": wx_msg_title, "color": "#173177"},
-        "keyword1": {"value": wx_msg_content, "color": "#173177"},
-        "keyword2": {"value": wx_msg_ps, "color": "#173177"},
-        "remark": {"value": wx_msg_des, "color": "#173177"},
-    }
+        template_id = '4KOE8MczMCka1CW_q_BcegEzBVrAacFv81oEeVNTPRw'  # 预约服务提醒
+        data = {
+            "content": {"value": "content！", "color": "#173177"},
+            "first": {"value": wx_msg_title, "color": "#173177"},
+            "keyword1": {"value": wx_msg_content, "color": "#173177"},
+            "keyword2": {"value": wx_msg_ps, "color": "#173177"},
+            "remark": {"value": wx_msg_des, "color": "#173177"},
+        }
 
-    templeUrl = 'https://api.weixin.qq.com/cgi-bin/message/template/send'
-    token = WXConstant.wx_access_token
+        templeUrl = 'https://api.weixin.qq.com/cgi-bin/message/template/send'
+        token = WXConstant.wx_access_token
 
-    paramsData = {"access_token": token,
-                  "touser": openid,
-                  "template_id": template_id,
-                  "url": url,
-                  "data": data}
+        paramsData = {"access_token": token,
+                      "touser": openid,
+                      "template_id": template_id,
+                      "url": url,
+                      "data": data}
 
-    result = requests.post(templeUrl + "?access_token=" + token, json=paramsData).json()
+        result = requests.post(templeUrl + "?access_token=" + token, json=paramsData).json()
+    except Exception as e:
+        result["wxSendMsgError"] = "May be local ip while list error. " + str(e)
 
     if not isJson:
         return getHttpResponse(0, "ok", result)
