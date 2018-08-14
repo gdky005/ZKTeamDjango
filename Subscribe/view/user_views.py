@@ -43,14 +43,24 @@ def register(request):
                 errors.append('两次输入密码不一致')
 
         if account is not None and password is not None and password2 is not None and email is not None and CompareFlag:
-            user = ZKUser.objects.create_user(account, email, password)
-            user.save()
+            try:
+                user = ZKUser.objects.create_user(account, email, password)
+                user.save()
 
-            userlogin = auth.authenticate(username=account, password=password)
-            auth.login(request, userlogin)
+                userlogin = auth.authenticate(username=account, password=password)
+                auth.login(request, userlogin)
 
-            userInfo = get_user_info(userlogin)
-            return getHttpResponse(0, "ok", userInfo)
+                userInfo = get_user_info(userlogin)
+                return getHttpResponse(0, "ok", userInfo)
+            except Exception as e:
+                baseException = e.args
+                errorCode = baseException[0]
+                errorMsg = baseException[1]
+
+                if errorCode == 1062:
+                    errorMsg = "该用户名已经注册：" + errorMsg
+
+                return getHttpResponse(errorCode, "error", errorMsg)
 
     return render(request, 'blog/register.html', {'errors': errors})
 
