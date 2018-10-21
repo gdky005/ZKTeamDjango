@@ -122,7 +122,9 @@ def jsonQueryLQMX(request):
             data['spendState'] = spendState
             projects.append(data)
 
-        newData = sorted(projects, key=operator.itemgetter("newTime"))
+        # https: // jingyan.baidu.com / article / f3ad7d0ffe8e1409c2345b48.html
+
+        newData = sorted(projects, key=operator.itemgetter("newTime"), reverse=1)
         return getHttpResponse(0, "ok", newData)
     except Error:
         return getHttpResponse(10000, "Error", "")
