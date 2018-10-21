@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'JueDiQiuSheng',
     'Shop',
     'Subscribe',
+    'WXMoney',
 ]
 
 MIDDLEWARE = [

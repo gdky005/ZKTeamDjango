@@ -16,16 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from api import views
+from WXMoney import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('api.urls', namespace='api', app_name='api')),
-    url(r'^aoc/', include('aoc.urls', namespace='aoc', app_name='aoc')),
-    url(r'^Consume12315/', include('Consume12315.urls', namespace='Consume12315', app_name='Consume12315')),
-    url(r'^JueDiQiuSheng/', include('JueDiQiuSheng.urls', namespace='JueDiQiuSheng', app_name='JueDiQiuSheng')),
-    url(r'^Shop/', include('Shop.urls', namespace='Shop', app_name='Shop')),
-    url(r'^Subscribe/', include('Subscribe.urls', namespace='Subscribe', app_name='Subscribe')),
-    url(r'^WXMoney/', include('WXMoney.urls', namespace='WXMoney', app_name='WXMoney')),
+    url(r'^qb', views.jsonQueryMoney, name="jsonQueryMoney"),
+    url(r'^setQB', views.setQB, name="setQB"),
+    url(r'^lqMX', views.jsonQueryLQMX, name="jsonQueryLQMX"),
+    url(r'^lqmxPZ', views.jsonQueryLQMXPZ, name="jsonQueryLQMXPZ"),
+    url(r'^setLQMXPZ', views.setLQMXPZ, name="setLQMXPZ"),
 ]
+
