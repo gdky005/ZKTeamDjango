@@ -114,6 +114,8 @@ def jsonQueryLQMX(request):
             newTime = random.randint(startTime, endTime)
             newMoney = random.randint(startMoney, endMoney)
 
+            newMoney = format(float(newMoney), '0.2f')
+
             data['id'] = i + 1
             data['name'] = name
             data['newTime'] = newTime
