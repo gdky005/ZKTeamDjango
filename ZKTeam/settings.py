@@ -147,6 +147,7 @@ STATICFILES_DIRS = [
     'api/templates',
     'aoc/templates',
     'Subscribe/templates',
+    'WXMoney/templates',
 ]
 
 
