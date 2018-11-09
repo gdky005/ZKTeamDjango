@@ -241,7 +241,10 @@ def setLQMXPZ(request):
             spendState = 1
 
         if not count:
-            count = 200  #默认生成200条数据
+            count = 500  #默认生成500条数据
+
+        # 每次生成数据清空之前的表数据
+        WXMoneyItemInfo.objects.all().delete()
 
         pz = WXMoneyPZ.objects.filter(id=id)
         if pz.__len__() > 0:
