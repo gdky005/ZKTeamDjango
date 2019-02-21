@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'Shop',
     'Subscribe',
     'WXMoney',
+    'MapPro',
 ]
 
 MIDDLEWARE = [
