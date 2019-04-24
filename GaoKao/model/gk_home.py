@@ -14,3 +14,10 @@ class GKCategoryInfo(models.Model):
     imgUrl = models.TextField()
     url = models.TextField()
 
+
+class GKNewsInfo(models.Model):
+    id = models.IntegerField(primary_key=True).auto_created
+    title = models.TextField()
+    imgUrl = models.TextField()
+    url = models.TextField()
+
