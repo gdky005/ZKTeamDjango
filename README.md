@@ -124,10 +124,12 @@ http://django-redis-chs.readthedocs.io/zh_CN/latest/
 https://blog.csdn.net/qq_37049050/article/details/79211059
 
 
-10. 验证微信服务器接口
+#### 验证微信服务器接口
 https://www.cnblogs.com/johnlau/p/9080505.html
 
-11. Module 和 Views 的拆分
+
+
+#### Module 和 Views 的拆分
 
 https://blog.csdn.net/loveinsilence/article/details/20916179
 

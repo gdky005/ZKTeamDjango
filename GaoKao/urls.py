@@ -1,9 +1,9 @@
 from django.conf.urls import url
 
-from GaoKao import views
+from GaoKao.view import gk_home_views
+from GaoKao.view import gk_user_views
 
 urlpatterns = [
-    url(r'^show', views.show, name="GKDataView"),
-    url(r'^index.html', views.GKDataView, name="GKDataView"),
-    url(r'^gkJson', views.JsonGKDataView, name="JsonGKDataView"),
+    url(r'^gkUserJson', gk_user_views.JsonGKUserDataView, name="JsonGKUserDataView"),
+    url(r'^gkRecommendJson', gk_home_views.JsonGKRecommendDataView, name="JsonGKRecommendDataView"),
 ]
