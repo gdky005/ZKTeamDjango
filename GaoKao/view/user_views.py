@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from pymysql import Error
 
 from ZKUser.models import ZKUser
@@ -116,6 +117,7 @@ def get_user_info(user):
 
 
 # 获取用户关键数据信息 // 等待写入
+@login_required(login_url='/login')
 def jsonUserInfo(request):
     try:
         allUser = []

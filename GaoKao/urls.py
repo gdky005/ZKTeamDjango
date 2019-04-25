@@ -29,5 +29,5 @@ urlpatterns = {
     url(r'^register', user_views.register, name='register'),
     url(r'^login', user_views.my_login, name='my_login'),
     url(r'^logout', user_views.my_logout, name='my_logout'),
-    url(r'^jsonUserInfo/', user_views.jsonUserInfo, name="jsonUserInfo"),
+    url(r'^userInfo', user_views.jsonUserInfo, name="jsonUserInfo"),
 }
