@@ -2,12 +2,24 @@ import json
 
 from django.http import HttpResponse
 from dss.Serializer import serializer
+from pymysql import Error
 
 
 def getHttpResponse(code, message, word):
     resultResponse = ResultResponse(code, message, word)
     return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False, ),
                         content_type="application/json;charset=utf-8")
+
+
+def loginData(request, data):
+    try:
+        if request.user.is_authenticated():
+            return getHttpResponse(0, "ok", data)
+
+    except Error as e:
+        return getHttpResponse(10000, "Error", e)
+
+    return getHttpResponse(10001, "User not login!", "用户没登录，请登录去")
 
 
 class ResultResponse(object):

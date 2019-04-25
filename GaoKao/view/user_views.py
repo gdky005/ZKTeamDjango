@@ -1,6 +1,4 @@
-from django.contrib.auth.decorators import login_required
-from pymysql import Error
-
+from GaoKao.view.base_views import loginData
 from ZKUser.models import ZKUser
 from django.contrib import auth
 from django.shortcuts import render
@@ -108,28 +106,17 @@ def my_logout(request):
 
 def get_user_info(user):
     userInfo = {}
-    userInfo.__setitem__("user_id", user.id)
-    userInfo.__setitem__("wx_openid", user.wx_openid)
-    userInfo.__setitem__("username", user.username)
-    userInfo.__setitem__("email", user.email)
-    userInfo.__setitem__("is_active", user.is_active)
+    try:
+        userInfo.__setitem__("user_id", user.id)
+        userInfo.__setitem__("wx_openid", user.wx_openid)
+        userInfo.__setitem__("username", user.username)
+        userInfo.__setitem__("email", user.email)
+        userInfo.__setitem__("is_active", user.is_active)
+    except:
+        pass
     return userInfo
 
 
 # 获取用户关键数据信息 // 等待写入
-@login_required(login_url='/login')
 def jsonUserInfo(request):
-    try:
-        allUser = []
-
-        users = ZKUser.objects.all()
-
-        for user in users:
-            zkUser = get_user_info(user)
-            allUser.append(zkUser)
-
-        projects = list(allUser)
-
-        return getHttpResponse(0, "ok", projects)
-    except Error as e:
-        return getHttpResponse(10000, "Error", "")
+    return loginData(request, get_user_info(request.user))
