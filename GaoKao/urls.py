@@ -3,6 +3,7 @@ from django.conf.urls import url
 from GaoKao.view import gk_home_views
 from GaoKao.view import gk_user_views
 from GaoKao.view import gk_list_views
+from GaoKao.view import user_views
 
 urlpatterns = {
 
@@ -24,6 +25,9 @@ urlpatterns = {
 
     url(r'^list', gk_list_views.JsonGKListView, name="JsonGKListView"),
 
-    # todo
-    url(r'^login', gk_user_views.JsonUserInfoView, name="JsonGKUserDataView"),
+    # 用户登录操作
+    url(r'^register', user_views.register, name='register'),
+    url(r'^login', user_views.my_login, name='my_login'),
+    url(r'^logout', user_views.my_logout, name='my_logout'),
+    url(r'^jsonUserInfo/', user_views.jsonUserInfo, name="jsonUserInfo"),
 }
