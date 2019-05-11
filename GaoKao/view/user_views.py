@@ -46,7 +46,7 @@ def register(request):
         # if account is not None and password is not None and password2 is not None and email is not None and CompareFlag:
         if account is not None and password is not None and password2 is not None:
             try:
-                user = ZKUser.objects.create_user(account, email, password)
+                user = ZKUser.objects.create_user(account, email, password, phone=account)
                 user.save()
 
                 userlogin = auth.authenticate(username=account, password=password)
@@ -118,6 +118,7 @@ def get_user_info(user):
         userInfo.__setitem__("wx_openid", user.wx_openid)
         userInfo.__setitem__("username", user.username)
         userInfo.__setitem__("email", user.email)
+        userInfo.__setitem__("phone", user.phone)
         userInfo.__setitem__("is_active", user.is_active)
     except:
         pass
