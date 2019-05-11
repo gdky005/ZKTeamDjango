@@ -44,7 +44,7 @@ def register(request):
 
         # 暂时去除邮箱
         # if account is not None and password is not None and password2 is not None and email is not None and CompareFlag:
-        if account is not None and password is not None and password2 is not None and CompareFlag:
+        if account is not None and password is not None and password2 is not None:
             try:
                 user = ZKUser.objects.create_user(account, email, password)
                 user.save()
@@ -63,6 +63,9 @@ def register(request):
                     errorMsg = "该用户名已经注册：" + errorMsg
 
                 return getHttpResponse(errorCode, "error", errorMsg)
+        else:
+            errorMsg = "填写的登录信息有误"
+            return getHttpResponse(10001, "error", errorMsg)
 
     return render(request, 'blog/register.html', {'errors': errors})
 
@@ -95,6 +98,10 @@ def my_login(request):
                     return getHttpResponse(10000, "Error", "用户名错误")
             else:
                 return getHttpResponse(10000, "Error", "用户名或密码错误")
+        else:
+            errorMsg = "填写的登录信息有误"
+            return getHttpResponse(10001, "error", errorMsg)
+
     return render(request, 'blog/login.html', {'errors': errors})
 
 
