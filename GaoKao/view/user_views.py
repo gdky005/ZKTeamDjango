@@ -114,7 +114,8 @@ def get_user_info(user):
     try:
         userInfo.__setitem__("user_id", user.id)
         userInfo.__setitem__("wx_openid", user.wx_openid)
-        userInfo.__setitem__("username", user.username)
+        user_name = user.username
+        userInfo.__setitem__("username", user_name.replace(user_name[3:7], "****"))
         userInfo.__setitem__("email", user.email)
         userInfo.__setitem__("phone", user.phone)
         userInfo.__setitem__("is_active", user.is_active)
