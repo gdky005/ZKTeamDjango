@@ -62,10 +62,9 @@ def register(request):
                 if errorCode == 1062:
                     errorMsg = "该用户名已经注册：" + errorMsg
 
-                return getHttpResponse(errorCode, "error", errorMsg)
+            return getUserErrorResponseInfo(errorCode, errorMsg)
         else:
-            errorMsg = "填写的登录信息有误"
-            return getHttpResponse(10001, "error", errorMsg)
+            return getUserErrorResponse("填写的登录信息有误")
 
     return render(request, 'blog/register.html', {'errors': errors})
 
@@ -95,12 +94,11 @@ def my_login(request):
                     userInfo = get_user_info(user)
                     return getHttpResponse(0, "ok", userInfo)
                 else:
-                    return getHttpResponse(10000, "Error", "用户名错误")
+                    return getUserErrorResponse("用户名或密码错误")
             else:
-                return getHttpResponse(10000, "Error", "用户名或密码错误")
+                return getUserErrorResponse("用户名或密码错误")
         else:
-            errorMsg = "填写的登录信息有误"
-            return getHttpResponse(10001, "error", errorMsg)
+            return getUserErrorResponse(errors)
 
     return render(request, 'blog/login.html', {'errors': errors})
 
@@ -128,3 +126,12 @@ def get_user_info(user):
 # 获取用户关键数据信息 // 等待写入
 def jsonUserInfo(request):
     return loginData(request, get_user_info(request.user))
+
+
+def getUserErrorResponse(errorMsg):
+    return getUserErrorResponseInfo(10001, errorMsg)
+
+
+def getUserErrorResponseInfo(errorCode, errorMsg):
+    userInfo = {}
+    return getHttpResponse(errorCode, errorMsg, userInfo)
