@@ -6,6 +6,10 @@ from GaoKao.view import gk_list_views
 from GaoKao.view import user_views
 from GaoKao.view import gk_school_view
 
+from GaoKao.view import gk_lql_view
+from GaoKao.view import gk_skx_view
+from GaoKao.view import gk_zy_view
+
 urlpatterns = {
 
     url(r'^gkRecommendJson', gk_home_views.JsonGKRecommendView, name="JsonGKRecommendDataView"),
@@ -34,4 +38,10 @@ urlpatterns = {
 
     # 学校相关
     url(r'^school', gk_school_view.JsonSchoolView, name="JsonSchoolView"),
+    # 录取率
+    url(r'^lql', gk_lql_view.JsonLQLView, name="JsonLQLView"),
+    # 省控线
+    url(r'^skx', gk_skx_view.JsonSKXView, name="JsonSKXView"),
+    # 专业
+    url(r'^zy', gk_zy_view.JsonZYView, name="JsonZYView"),
 }
