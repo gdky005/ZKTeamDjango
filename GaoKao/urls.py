@@ -4,6 +4,7 @@ from GaoKao.view import gk_home_views
 from GaoKao.view import gk_user_views
 from GaoKao.view import gk_list_views
 from GaoKao.view import user_views
+from GaoKao.view import gk_school_view
 
 urlpatterns = {
 
@@ -30,4 +31,7 @@ urlpatterns = {
     url(r'^login', user_views.my_login, name='my_login'),
     url(r'^logout', user_views.my_logout, name='my_logout'),
     url(r'^userInfo', user_views.jsonUserInfo, name="jsonUserInfo"),
+
+    # 学校相关
+    url(r'^school', gk_school_view.JsonSchoolView, name="JsonSchoolView"),
 }
