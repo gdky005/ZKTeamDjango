@@ -6,5 +6,6 @@ class GKSKX(models.Model):
     name = models.TextField()
     year = models.TextField()
     kind = models.TextField()
-    pici = models.TextField()
-    scoreLine = models.TextField()
+    ben1 = models.IntegerField(default=0)
+    ben2 = models.IntegerField(default=0)
+    gz = models.IntegerField(default=0)
