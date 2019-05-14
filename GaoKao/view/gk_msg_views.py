@@ -46,3 +46,19 @@ def saveMsg(request):
         errorMsg = e
 
     return getHttpResponse(10000, errorMsg, errorMsg)
+
+
+def msgDetail(request):
+    errorMsg = ""
+    try:
+        if request.method == 'GET':
+            msgId = request.GET.get('id')
+            projects = GKMsgInfo.objects.filter(id=msgId).values()
+
+            return getHttpResponse(0, "ok", projects[0])
+        else:
+            errorMsg = "请使用 GET 请求"
+    except Error as e:
+        errorMsg = e
+
+    return getHttpResponse(10000, errorMsg, errorMsg)

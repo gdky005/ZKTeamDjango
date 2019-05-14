@@ -29,8 +29,9 @@ urlpatterns = {
     url(r'^newList', gk_home_views.JsonGKNewsView, name="JsonGKNewsView"),
 
     url(r'^list', gk_msg_views.JsonGKListView, name="JsonGKListView"),
-    url(r'^msg', gk_msg_views.JsonGKListView, name="JsonGKListView"),
-    url(r'^saveMsg', gk_msg_views.saveMsg, name="JsonGKListView"),
+    url(r'^msgList', gk_msg_views.JsonGKListView, name="JsonGKListView"),
+    url(r'^saveMsg', gk_msg_views.saveMsg, name="saveMsg"),
+    url(r'^msgDetail', gk_msg_views.msgDetail, name="msgDetail"),
 
     # 用户登录操作
     url(r'^register', user_views.register, name='register'),
