@@ -52,7 +52,7 @@ def getPagingData(request, infoData):
         except EmptyPage:
             newData = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
 
-        return getHttpResponse(0, "ok", newData)
+        return getHttpResponse(0, paginator.count, newData)
     except Error:
         return getHttpResponse(10000, "Error", "")
 
