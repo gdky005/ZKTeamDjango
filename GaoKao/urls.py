@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from GaoKao.view import gk_home_views
 from GaoKao.view import gk_user_views
-from GaoKao.view import gk_list_views
+from GaoKao.view import gk_msg_views
 from GaoKao.view import user_views
 from GaoKao.view import gk_school_view
 
@@ -16,7 +16,7 @@ urlpatterns = {
     url(r'^gkCategoryJson', gk_home_views.JsonGKCategoryView, name="JsonGKCategoryView"),
     url(r'^gkNewsJson', gk_home_views.JsonGKNewsView, name="JsonGKNewsView"),
 
-    url(r'^gkListJson', gk_list_views.JsonGKListView, name="JsonGKListView"),
+    url(r'^gkListJson', gk_msg_views.JsonGKListView, name="JsonGKListView"),
 
     # todo
     url(r'^gkUserJson', gk_user_views.JsonUserInfoView, name="JsonGKUserDataView"),
@@ -28,7 +28,8 @@ urlpatterns = {
     url(r'^category', gk_home_views.JsonGKCategoryView, name="JsonGKCategoryView"),
     url(r'^newList', gk_home_views.JsonGKNewsView, name="JsonGKNewsView"),
 
-    url(r'^list', gk_list_views.JsonGKListView, name="JsonGKListView"),
+    url(r'^list', gk_msg_views.JsonGKListView, name="JsonGKListView"),
+    url(r'^msg', gk_msg_views.JsonGKListView, name="JsonGKListView"),
 
     # 用户登录操作
     url(r'^register', user_views.register, name='register'),

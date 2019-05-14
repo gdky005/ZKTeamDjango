@@ -1,6 +1,6 @@
 from pymysql import Error
 
-from GaoKao.model import GKListInfo
+from GaoKao.model import GKMsgInfo
 from GaoKao.view.base_views import getHttpResponse
 
 
@@ -11,7 +11,7 @@ def JsonGKListView(request):
         maxData = int(count)
 
     try:
-        project_info = GKListInfo.objects.values()[:maxData]  # 取出该表所有的数据
+        project_info = GKMsgInfo.objects.values()[:maxData]  # 取出该表所有的数据
         projects = list(project_info)
 
         return getHttpResponse(0, "ok", projects)
