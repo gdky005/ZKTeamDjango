@@ -21,3 +21,6 @@ class GKNewsInfo(models.Model):
     imgUrl = models.TextField()
     url = models.TextField()
 
+    class Meta:
+        ordering = ['-id']
+

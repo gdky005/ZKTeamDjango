@@ -12,3 +12,5 @@ class GKMsgInfo(models.Model):
     des = models.TextField(default="")
     createTime = models.DateTimeField("createTime", default=timezone.now)
 
+    class Meta:
+        ordering = ['-createTime']
