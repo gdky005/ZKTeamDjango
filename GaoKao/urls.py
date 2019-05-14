@@ -30,6 +30,7 @@ urlpatterns = {
 
     url(r'^list', gk_msg_views.JsonGKListView, name="JsonGKListView"),
     url(r'^msg', gk_msg_views.JsonGKListView, name="JsonGKListView"),
+    url(r'^saveMsg', gk_msg_views.saveMsg, name="JsonGKListView"),
 
     # 用户登录操作
     url(r'^register', user_views.register, name='register'),
