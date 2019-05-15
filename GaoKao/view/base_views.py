@@ -6,12 +6,7 @@ from dss.Serializer import serializer
 from pymysql import Error
 
 
-def getHttpResponse(code, message, word):
-    resultResponse = ResultResponse(code, message, word)
-    return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False, ),
-                        content_type="application/json;charset=utf-8")
-
-
+# 用户登录 返回数据体
 def loginData(request, data):
     try:
         if request.user.is_authenticated():
@@ -50,9 +45,10 @@ def getPagingData(request, infoData):
         except PageNotAnInteger:
             newData = paginator.page(1)  # 如果用户输入的页码不是整数时,显示第1页的内容
         except EmptyPage:
-            newData = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
+            # newData = paginator.page(paginator.num_pages)  # 如果用户输入的页数不在系统的页码列表中时,显示最后一页的内容
+            newData = []
 
-        return getHttpResponse(0, paginator.count, newData)
+        return getHttpTotalResponse(0, "ok", paginator.count, newData)
     except Error:
         return getHttpResponse(10000, "Error", "")
 
@@ -67,35 +63,30 @@ class ResultResponse(object):
     def __str__(self):
         return '{"code":%s,"message":%s,"result":%s}' % (self.code, self.message, self.result)
 
-    # @property
-    # def code(self):
-    #     return self.code
-    #
-    # @code.setter
-    # def code(self, code):
-    #     self.code = code
-    #
-    # @property
-    # def message(self):
-    #     return self.message
-    #
-    # @message.setter
-    # def message(self, message):
-    #     self.message = message
-    #
-    # @property
-    # def result(self):
-    #     return self.result
-    #
-    # @result.setter
-    # def result(self, result):
-    #     self.result = result
 
-#     def __str__(self):
-#         return '%s,%s,%s' % (self.code, self.message, self.result)
-#
-# t = ResultResponse(0, "ok", "test")
-# t.code = 200
-# t.message = "hello"
-# t.result = "data"
-# print(t)
+class ResultTotalResponse(object):
+
+    def __init__(self, code, message, total, result):
+        self.code = code
+        self.message = message
+        self.total = total
+        self.result = result
+
+    def __str__(self):
+        return '{"code":%s,"message":%s, "total":%s, "result":%s}' % (self.code, self.message, self.total, self.result)
+
+
+# 返回 有 total 总数分页的Json结构体
+def getHttpTotalResponse(code, message, total, word):
+    return getJsonHttpResponse(ResultTotalResponse(code, message, total, word))
+
+
+# 返回 标准的Json结构体
+def getHttpResponse(code, message, word):
+    return getJsonHttpResponse(ResultResponse(code, message, word))
+
+
+# 返回 Json 的通用结构
+def getJsonHttpResponse(resultResponse):
+    return HttpResponse(json.dumps(serializer(resultResponse.__dict__), ensure_ascii=False, ),
+                        content_type="application/json;charset=utf-8")
