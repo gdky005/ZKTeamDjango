@@ -2,11 +2,9 @@ import operator
 import random
 import time
 
-from django.shortcuts import render
 
 # Create your views here.
 from pymysql import Error
-from twisted.python.compat import cmp
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from WXMoney.base_views import getHttpResponse

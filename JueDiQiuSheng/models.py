@@ -9,6 +9,7 @@ class JDQSCategory(models.Model):
     categoryId = models.IntegerField(primary_key=True, default=1).auto_created
     categoryName = models.TextField(default="")
     categoryUrl = models.TextField(default="")
+    categoryPicUrl = models.TextField(default="")
     artifactCollection = models.DateTimeField("CollectionTime", default=timezone.now)
 
 
