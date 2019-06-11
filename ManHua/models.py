@@ -45,3 +45,12 @@ class MHDetailChapter(models.Model):
     pCount = models.TextField()
     count = models.IntegerField(default=0)
 
+
+class MHChapterPic(models.Model):
+    id = models.IntegerField(primary_key=True).auto_created
+    mid = models.IntegerField()
+    mid2 = models.TextField()
+    picUrl = models.TextField()
+    count = models.IntegerField()
+    sourceUrl = models.TextField()
+
