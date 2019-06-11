@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^WXMoney/', include('WXMoney.urls', namespace='WXMoney', app_name='WXMoney')),
     url(r'^MapPro/', include('MapPro.urls', namespace='MapPro', app_name='MapPro')),
     url(r'^GaoKao/', include('GaoKao.urls', namespace='GaoKao', app_name='GaoKao')),
+    url(r'^ManHua/', include('ManHua.urls', namespace='ManHua', app_name='ManHua')),
 ]

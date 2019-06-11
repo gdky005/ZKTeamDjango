@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'WXMoney',
     'MapPro',
     'GaoKao',
+    'ManHua',
 ]
 
 MIDDLEWARE = [
