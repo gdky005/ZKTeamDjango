@@ -37,4 +37,11 @@ class MHDetail(models.Model):
     tag = models.TextField()
 
 
+class MHDetailChapter(models.Model):
+    id = models.IntegerField(primary_key=True).auto_created
+    mid = models.IntegerField()
+    name = models.TextField()
+    url = models.TextField()
+    pCount = models.TextField()
+    count = models.IntegerField(default=0)
 
