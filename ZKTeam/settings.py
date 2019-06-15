@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     'MapPro',
     'GaoKao',
     'ManHua',
+    'xadmin',
+    'crispy_forms',
+    'reversion',
 ]
 
 MIDDLEWARE = [
