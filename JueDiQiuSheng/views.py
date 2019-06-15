@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django.views.decorators.cache import cache_page
 from dss.Serializer import serializer
 from pymysql import Error
 
@@ -11,20 +12,24 @@ from JueDiQiuSheng import models
 from api.ResultResponse import ResultResponse
 
 
+@cache_page(60 * 15)
 def JDQS(request):
     # projects = models.JDQSCategory.objects.all()
     projects = None
     return render(request, "JDQS_index.html", {"projects": projects})
 
 
+@cache_page(60 * 15)
 def JDQSCategory(request):
     return getSplitData(request, "JDQS_category_index.html", models.JDQSCategory)
 
 
+@cache_page(60 * 15)
 def JDQSPicCategory(request):
     return getSplitData(request, "JDQS_pic_category_index.html", models.JDQSPicCategory)
 
 
+@cache_page(60 * 15)
 def JDQSDetail(request):
     jid = request.GET.get("jid")
     if jid is not None:
@@ -34,6 +39,7 @@ def JDQSDetail(request):
         return JDQS(request)
 
 
+@cache_page(60 * 15)
 def JDQSItem(request):
     jid = request.GET.get("jid")
     obj = None
@@ -45,25 +51,28 @@ def JDQSItem(request):
     return getSplitData(request, "JDQS_item_index.html", obj)
 
 
+@cache_page(60 * 15)
 def JDQSPicUrl(request):
     return getSplitData(request, "JDQS_pic_url_item_index.html", models.JDQSPicUrl)
 
 
+@cache_page(60 * 15)
 def JDQSContent(request):
     return getSplitData(request, "JDQS_content_index.html", models.JDQSContent)
 
 
+@cache_page(60 * 15)
 def JDQSRecommended(request):
     return getSplitData(request, "JDQS_recommend_item_index.html", models.JDQSRecommendedItem)
 
 
+@cache_page(60 * 15)
 def JDQSRecommendedCategory(request):
     return getSplitData(request, "JDQS_recommended_category_index.html", models.JDQSRecommendedCategory)
 
 
 # 对数据可以直接分页处理
 def getSplitData(request, html, obj):
-
     maxData = 5
     page = 0
 
@@ -86,26 +95,32 @@ def getSplitData(request, html, obj):
     return render(request, html, {"projects": projects})
 
 
+@cache_page(60 * 15)
 def JDQSItemJson(request):
     return sendJsonResponse(request, models.JDQSItem)
 
 
+@cache_page(60 * 15)
 def JDQSCategoryJson(request):
     return sendJsonResponse(request, models.JDQSCategory)
 
 
+@cache_page(60 * 15)
 def JDQSPicUrlJson(request):
     return sendJsonResponse(request, models.JDQSPicUrl)
 
 
+@cache_page(60 * 15)
 def JDQSRecommendedJson(request):
     return sendJsonResponse(request, models.JDQSRecommendedCategory)
 
 
+@cache_page(60 * 15)
 def JDQSRecommendedItemJson(request):
     return sendJsonResponse(request, models.JDQSRecommendedItem)
 
 
+@cache_page(60 * 15)
 def JDQSPicCategoryJson(request):
     return sendJsonResponse(request, models.JDQSPicCategory)
 
