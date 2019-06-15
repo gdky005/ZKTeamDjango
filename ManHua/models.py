@@ -24,9 +24,12 @@ class Category(models.Model):
         ordering = ['id']
         verbose_name_plural = '漫画分类表'
 
-    class ShowItem(admin.ModelAdmin):
-        # 需要显示的字段信息
-        list_display = ('id', 'mid', 'name', 'url')
+    def __str__(self):
+        return self.name
+
+    # class ShowItem(admin.ModelAdmin):
+    #     # 需要显示的字段信息
+    #     list_display = ('id', 'mid', 'name', 'url')
 
 
 class HotData(models.Model):
@@ -40,9 +43,12 @@ class HotData(models.Model):
         verbose_name_plural = '热门'
         ordering = ['id']
 
-    class ShowItem(admin.ModelAdmin):
-        # 需要显示的字段信息
-        list_display = ('id', 'mid', 'name', 'picUrl', 'newPage')
+    def __str__(self):
+        return self.name
+    #
+    # class ShowItem(admin.ModelAdmin):
+    #     # 需要显示的字段信息
+    #     list_display = ('id', 'mid', 'name', 'picUrl', 'newPage')
 
 
 class MHDetail(models.Model):
@@ -61,9 +67,12 @@ class MHDetail(models.Model):
         verbose_name_plural = '漫画详情'
         ordering = ['id']
 
-    class ShowItem(admin.ModelAdmin):
-        # 需要显示的字段信息
-        list_display = ('id', 'mid', 'name', 'author', 'picUrl', 'state', 'time', 'detail', 'category', 'tag')
+    def __str__(self):
+        return self.name
+
+    # class ShowItem(admin.ModelAdmin):
+    #     # 需要显示的字段信息
+    #     list_display = ('id', 'mid', 'name', 'author', 'picUrl', 'state', 'time', 'detail', 'category', 'tag')
 
 
 class MHDetailChapter(models.Model):
@@ -78,9 +87,12 @@ class MHDetailChapter(models.Model):
         verbose_name_plural = '漫画章节'
         ordering = ['id']
 
-    class ShowItem(admin.ModelAdmin):
-        # 需要显示的字段信息
-        list_display = ('id', 'mid', 'name', 'url', 'pCount', 'count')
+    def __str__(self):
+        return self.name
+
+    # class ShowItem(admin.ModelAdmin):
+    #     # 需要显示的字段信息
+    #     list_display = ('id', 'mid', 'name', 'url', 'pCount', 'count')
 
 
 class MHChapterPic(models.Model):
