@@ -10,7 +10,7 @@ from GaoKao.view import gk_lql_view
 from GaoKao.view import gk_skx_view
 from GaoKao.view import gk_zy_view
 
-urlpatterns = {
+urlpatterns = [
 
     url(r'^gkRecommendJson', gk_home_views.JsonGKRecommendView, name="JsonGKRecommendDataView"),
     url(r'^gkCategoryJson', gk_home_views.JsonGKCategoryView, name="JsonGKCategoryView"),
@@ -47,4 +47,4 @@ urlpatterns = {
     url(r'^skx', gk_skx_view.JsonSKXView, name="JsonSKXView"),
     # 专业
     url(r'^zy', gk_zy_view.JsonZYView, name="JsonZYView"),
-}
+]
