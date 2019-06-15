@@ -19,6 +19,8 @@ class Category(models.Model):
     url = models.TextField()
 
     class Meta:
+        db_table = 'ManHua_category'
+        verbose_name_plural = '漫画分类表'
         ordering = ['id']
 
 
