@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 
 
 # Create your models here.
@@ -19,9 +20,13 @@ class Category(models.Model):
     url = models.TextField()
 
     class Meta:
-        db_table = 'ManHua_category'
-        verbose_name_plural = '漫画分类表'
+        # db_table = 'ManHua_category'
         ordering = ['id']
+        verbose_name_plural = '漫画分类表'
+
+    class ShowItem(admin.ModelAdmin):
+        # 需要显示的字段信息
+        list_display = ('id', 'mid', 'name', 'url')
 
 
 class HotData(models.Model):
@@ -32,7 +37,12 @@ class HotData(models.Model):
     newPage = models.TextField()
 
     class Meta:
+        verbose_name_plural = '热门'
         ordering = ['id']
+
+    class ShowItem(admin.ModelAdmin):
+        # 需要显示的字段信息
+        list_display = ('id', 'mid', 'name', 'picUrl', 'newPage')
 
 
 class MHDetail(models.Model):
@@ -48,7 +58,12 @@ class MHDetail(models.Model):
     tag = models.TextField()
 
     class Meta:
+        verbose_name_plural = '漫画详情'
         ordering = ['id']
+
+    class ShowItem(admin.ModelAdmin):
+        # 需要显示的字段信息
+        list_display = ('id', 'mid', 'name', 'author', 'picUrl', 'state', 'time', 'detail', 'category', 'tag')
 
 
 class MHDetailChapter(models.Model):
@@ -60,7 +75,12 @@ class MHDetailChapter(models.Model):
     count = models.IntegerField(default=0)
 
     class Meta:
+        verbose_name_plural = '漫画章节'
         ordering = ['id']
+
+    class ShowItem(admin.ModelAdmin):
+        # 需要显示的字段信息
+        list_display = ('id', 'mid', 'name', 'url', 'pCount', 'count')
 
 
 class MHChapterPic(models.Model):
@@ -72,5 +92,9 @@ class MHChapterPic(models.Model):
     sourceUrl = models.TextField()
 
     class Meta:
+        verbose_name_plural = '漫画图片'
         ordering = ['id']
 
+    class ShowItem(admin.ModelAdmin):
+        # 需要显示的字段信息
+        list_display = ('id', 'mid', 'mid2', 'picUrl', 'count', 'sourceUrl')
