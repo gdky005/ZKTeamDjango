@@ -163,7 +163,6 @@ STATICFILES_DIRS = [
     'aoc/templates',
     'Subscribe/templates',
     'WXMoney/templates',
-    'ZKTeam/templates',
 ]
 
 
