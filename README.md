@@ -134,3 +134,57 @@ https://www.cnblogs.com/johnlau/p/9080505.html
 https://blog.csdn.net/loveinsilence/article/details/20916179
 
 https://blog.csdn.net/jamal117/article/details/63685883
+
+#### admin 的安装和 UI 界面
+https://code.ziqiangxuetang.com/django/django-admin.html
+
+#### Xadmin 的安装
+
+不能使用 pip install xadmin 安装，很容易出错，而且修改起来非常麻烦，还不能修改好，直接安装对应版本：
+
+可以根据官网步骤：
+
+1.
+
+```
+pip install git+git://github.com/sshwsfc/xadmin.git
+```
+
+2.
+
+```
+INSTALLED_APPS = (
+    ...
+
+    'xadmin',
+    'crispy_forms',
+    'reversion',
+
+    ...
+)
+```
+
+3.
+
+```
+import xadmin
+xadmin.autodiscover()
+```
+
+4.
+
+```
+# version模块自动注册需要版本控制的 Model
+from xadmin.plugins import xversion
+xversion.register_models()
+
+urlpatterns = patterns('',
+    url(r'xadmin/', include(xadmin.site.urls)),
+)
+```
+
+
+官网地址：https://xadmin.readthedocs.io/en/docs-chinese/quickstart.html
+github 地址：https://github.com/sshwsfc/xadmin
+
+参考这个：https://www.jianshu.com/p/fa7944bdcc1b
