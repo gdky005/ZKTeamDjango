@@ -1,3 +1,4 @@
+import xadmin
 from django.db import models
 from django.contrib import admin
 
@@ -110,3 +111,12 @@ class MHChapterPic(models.Model):
     class ShowItem(admin.ModelAdmin):
         # 需要显示的字段信息
         list_display = ('id', 'mid', 'mid2', 'picUrl', 'count', 'sourceUrl')
+
+    class ShowXItem(object):
+        # 需要显示的字段信息
+        list_display = ('id', 'mid', 'mid2', 'picUrl', 'count', 'sourceUrl')
+
+        # class BannerAdmin(object):
+        #     list_display = ['title', 'image', 'url', 'index', 'add_time']
+        #     search_fields = ['title', 'image', 'url', 'index']
+        #     list_filter = ['title', 'image', 'url', 'index', 'add_time']
