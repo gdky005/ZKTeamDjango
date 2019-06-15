@@ -8,12 +8,18 @@ class ManHua(models.Model):
     name = models.TextField()
     url = models.TextField()
 
+    class Meta:
+        ordering = ['id']
+
 
 class Category(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
     mid = models.IntegerField()
     name = models.TextField()
     url = models.TextField()
+
+    class Meta:
+        ordering = ['id']
 
 
 class HotData(models.Model):
@@ -22,6 +28,9 @@ class HotData(models.Model):
     name = models.TextField()
     picUrl = models.TextField()
     newPage = models.TextField()
+
+    class Meta:
+        ordering = ['id']
 
 
 class MHDetail(models.Model):
@@ -36,6 +45,9 @@ class MHDetail(models.Model):
     category = models.TextField()
     tag = models.TextField()
 
+    class Meta:
+        ordering = ['id']
+
 
 class MHDetailChapter(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
@@ -45,6 +57,9 @@ class MHDetailChapter(models.Model):
     pCount = models.TextField()
     count = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ['id']
+
 
 class MHChapterPic(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
@@ -53,4 +68,7 @@ class MHChapterPic(models.Model):
     picUrl = models.TextField()
     count = models.IntegerField()
     sourceUrl = models.TextField()
+
+    class Meta:
+        ordering = ['id']
 
