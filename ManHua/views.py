@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 
 from ManHua import models
-from ManHua.base_views import getPagingData, getHttpTotalResponse, getHttpResponse
+from ManHua.base_views import getPagingData, getHttpTotalResponse, getHttpResponse, getPagingDataForFilter
 from ManHua.models import Category, HotData, MHDetail, MHDetailChapter, MHChapterPic, MHBanner
 from pymysql import Error
 
@@ -20,12 +20,24 @@ def JsonMHHotDataView(request):
 
 @cache_page(60 * 5)
 def JsonMHDetailView(request):
-    return getPagingData(request, MHDetail)
+    mid = request.GET.get("mid")
+
+    if mid is not None:
+        obj = models.MHDetail.objects.filter(mid=mid).values()
+        return getPagingDataForFilter(request, obj)
+    else:
+        return getErrorResponse()
 
 
 @cache_page(60 * 5)
 def JsonMHDetailChapterView(request):
-    return getPagingData(request, MHDetailChapter)
+    mid = request.GET.get("mid")
+
+    if mid is not None:
+        obj = models.MHDetailChapter.objects.filter(mid=mid).values()
+        return getPagingDataForFilter(request, obj)
+    else:
+        return getErrorResponse()
 
 
 @cache_page(60 * 5)
@@ -41,7 +53,7 @@ def JsonMHChapterPicView(request):
             picUrl = chapterPic.picUrl
             prePicUrl = picUrl[0:picUrl.rindex('/') + 1]
             sufPicUrl = picUrl[picUrl.rindex('.'):len(picUrl)]
-            numPicUrl = picUrl[picUrl.rindex('/')+1:picUrl.rindex('.')]
+            numPicUrl = picUrl[picUrl.rindex('/') + 1:picUrl.rindex('.')]
 
             # 'https://mh3.xitangwenhua.com/upload/zhegedashutailengao/5312480/0000.jpg'
 
@@ -74,7 +86,7 @@ def JsonMHChapterPicView(request):
 
             return getHttpTotalResponse(0, "ok", count, chapterPicObj)
         else:
-            return getHttpResponse(10000, "Error", "请在接口中添加漫画 mid")
+            return getErrorResponse()
     except Error:
         return getHttpResponse(10000, "Error", "")
     except Exception as e:
@@ -86,7 +98,7 @@ def JsonMHBannerView(request):
     return getPagingData(request, MHBanner)
 
 
-# @cache_page(60 * 5)
+@cache_page(60 * 5)
 def JsonMHCategoryForCategoryIdView(request):
     try:
         # 根据漫画的分类 id，获取当前分类下的所有 漫画信息。
@@ -108,9 +120,12 @@ def JsonMHCategoryForCategoryIdView(request):
 
             return getHttpTotalResponse(0, "ok", chapterPic.count(), obj)
         else:
-            return getHttpResponse(10000, "Error", "请在接口扣添加参数：cid")
+            return getErrorResponse()
     except Error:
         return getHttpResponse(10000, "Error", "")
     except Exception as e:
         return getHttpResponse(10000, "Error", e)
 
+
+def getErrorResponse():
+    return getHttpResponse(10000, "请在接口扣添加参数：mid", {})

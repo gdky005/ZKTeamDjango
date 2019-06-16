@@ -19,6 +19,12 @@ def loginData(request, data):
 
 
 def getPagingData(request, infoData):
+    dataObjects = infoData.objects.all().values()
+    return getPagingDataForFilter(request, dataObjects)
+
+
+# 数据经过过滤
+def getPagingDataForFilter(request, infoData):
     try:
         page = request.GET.get("page")
         pageCount = request.GET.get("pageCount")
@@ -31,9 +37,9 @@ def getPagingData(request, infoData):
 
         # 取出所有数据（分页的形式）
         # 获取 数据表中的所有记录
-        dataObjects = infoData.objects.all().values()
+
         # 生成paginator对象,定义每页显示20条记录
-        paginator = Paginator(dataObjects, pageCount)
+        paginator = Paginator(infoData, pageCount)
         # 把当前的页码数转换成整数类型
         currentPage = int(page)
         page = int(page)
