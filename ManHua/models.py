@@ -49,19 +49,8 @@ class MHDetail(models.Model):
 
 class CategoryForCategoryId(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-
-    # zk_user = models.ManyToManyField(to="ZKUser.ZKUser", name="zk_user")
-
-    # cid = models.ForeignKey(Category, to_field='mid')
-    # cid = models.OneToOneField(to="ManHua.Category", name="mid")
-    # cid = models.IntegerField()
-    # mid = models.IntegerField()
-
-
-    # cid = models.ForeignKey(Category)
-    # mid = models.ForeignKey(MHDetail)
-    # cid = models.ForeignKey(Category, to_field=Category.mid)
-    # mid = models.ForeignKey(MHDetail, to_field=MHDetail.mid)
+    cid = models.ForeignKey(Category)
+    mid = models.ForeignKey(MHDetail)
 
     class Meta:
         # db_table = 'ManHua_category'
@@ -69,8 +58,7 @@ class CategoryForCategoryId(models.Model):
         verbose_name_plural = '分类下的所有漫画'
 
     def __str__(self):
-        return self.id
-        # return self.cid.name
+        return self.cid.name
 
 
 class HotData(models.Model):
