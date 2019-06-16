@@ -3,7 +3,7 @@ from django.views.decorators.cache import cache_page
 
 from ManHua import models
 from ManHua.base_views import getPagingData
-from ManHua.models import Category, HotData, MHDetail, MHDetailChapter, MHChapterPic
+from ManHua.models import Category, HotData, MHDetail, MHDetailChapter, MHChapterPic, MHBanner
 
 
 @cache_page(60 * 15)  # 秒数，这里指缓存 15 分钟，不直接写900是为了提高可读性
@@ -36,3 +36,8 @@ def JsonMHDetailChapterView(request):
 @cache_page(60 * 5)
 def JsonMHChapterPicView(request):
     return getPagingData(request, MHChapterPic)
+
+
+@cache_page(60 * 5)
+def JsonMHBannerView(request):
+    return getPagingData(request, MHBanner)

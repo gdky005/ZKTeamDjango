@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^jsonMHDetail', views.JsonMHDetailView, name="JsonMHDetailView"),
     url(r'^jsonMHChapter', views.JsonMHDetailChapterView, name="JsonMHDetailChapterView"),
     url(r'^jsonMHChapterPic', views.JsonMHChapterPicView, name="JsonMHChapterPicView"),
+    url(r'^jsonMHBanner', views.JsonMHBannerView, name="JsonMHBannerView"),
 ]

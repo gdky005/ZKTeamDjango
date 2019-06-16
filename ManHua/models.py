@@ -120,3 +120,17 @@ class MHChapterPic(models.Model):
         #     list_display = ['title', 'image', 'url', 'index', 'add_time']
         #     search_fields = ['title', 'image', 'url', 'index']
         #     list_filter = ['title', 'image', 'url', 'index', 'add_time']
+
+
+class MHBanner(models.Model):
+    id = models.IntegerField(primary_key=True).auto_created
+    mid = models.IntegerField()
+    name = models.TextField()
+    picUrl = models.TextField()
+
+    class Meta:
+        verbose_name_plural = '漫画推荐位'
+        ordering = ['id']
+
+    def __str__(self):
+        return self.name
