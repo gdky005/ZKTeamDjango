@@ -33,25 +33,6 @@ class Category(models.Model):
     #     list_display = ('id', 'mid', 'name', 'url')
 
 
-class HotData(models.Model):
-    id = models.IntegerField(primary_key=True).auto_created
-    mid = models.IntegerField()
-    name = models.TextField()
-    picUrl = models.TextField()
-    newPage = models.TextField()
-
-    class Meta:
-        verbose_name_plural = '热门'
-        ordering = ['id']
-
-    def __str__(self):
-        return self.name
-    #
-    # class ShowItem(admin.ModelAdmin):
-    #     # 需要显示的字段信息
-    #     list_display = ('id', 'mid', 'name', 'picUrl', 'newPage')
-
-
 class MHDetail(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
     mid = models.IntegerField()
@@ -74,6 +55,39 @@ class MHDetail(models.Model):
     # class ShowItem(admin.ModelAdmin):
     #     # 需要显示的字段信息
     #     list_display = ('id', 'mid', 'name', 'author', 'picUrl', 'state', 'time', 'detail', 'category', 'tag')
+
+
+class CategoryForCategoryId(models.Model):
+    id = models.IntegerField(primary_key=True).auto_created
+    cid = models.ForeignKey(Category)
+    mid = models.ForeignKey(MHDetail)
+
+    class Meta:
+        # db_table = 'ManHua_category'
+        ordering = ['id']
+        verbose_name_plural = '某分类下的具体漫画'
+
+    def __str__(self):
+        return self.cid
+
+
+class HotData(models.Model):
+    id = models.IntegerField(primary_key=True).auto_created
+    mid = models.IntegerField()
+    name = models.TextField()
+    picUrl = models.TextField()
+    newPage = models.TextField()
+
+    class Meta:
+        verbose_name_plural = '热门'
+        ordering = ['id']
+
+    def __str__(self):
+        return self.name
+    #
+    # class ShowItem(admin.ModelAdmin):
+    #     # 需要显示的字段信息
+    #     list_display = ('id', 'mid', 'name', 'picUrl', 'newPage')
 
 
 class MHDetailChapter(models.Model):
