@@ -90,13 +90,23 @@ def JsonMHBannerView(request):
 def JsonMHCategoryForCategoryIdView(request):
     try:
         # 根据漫画的分类 id，获取当前分类下的所有 漫画信息。
-        cid = request.GET.get("cid")
+        id = request.GET.get("id")
+        mid = request.GET.get("mid")
 
-        if cid is not None:
-            chapterPic = models.CategoryForCategoryId.objects.filter(cid_id=models.Category.objects.filter(mid=cid)[0].id)
-            # chapterPic = models.CategoryForCategoryId.objects.filter(cid_id=cid)
+        if mid is not None:
+            mid = models.Category.objects.filter(mid=mid)[0].id
+        else:
+            mid = id
 
-            return getHttpTotalResponse(0, "ok", chapterPic.count(), chapterPic)
+        if mid is not None:
+            # categoryId = models.Category.objects.filter(mid=cid)[0].id
+            chapterPic = models.CategoryForCategoryId.objects.filter(cid_id=mid)
+            obj = []
+
+            for chapter in chapterPic:
+                obj.append(chapter.mid)
+
+            return getHttpTotalResponse(0, "ok", chapterPic.count(), obj)
         else:
             return getHttpResponse(10000, "Error", "请在接口扣添加参数：cid")
     except Error:
