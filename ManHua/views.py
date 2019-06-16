@@ -23,8 +23,8 @@ def JsonMHDetailView(request):
     mid = request.GET.get("mid")
 
     if mid is not None:
-        obj = models.MHDetail.objects.filter(mid=mid).values()
-        return getPagingDataForFilter(request, obj)
+        obj = models.MHDetail.objects.filter(mid=mid).values()[0]
+        return getHttpResponse(0, "ok", obj)
     else:
         return getErrorResponse()
 
