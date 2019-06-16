@@ -4,16 +4,6 @@ from django.contrib import admin
 
 
 # Create your models here.
-class ManHua(models.Model):
-    id = models.IntegerField(primary_key=True).auto_created
-    jid = models.IntegerField()
-    name = models.TextField()
-    url = models.TextField()
-
-    class Meta:
-        ordering = ['id']
-
-
 class Category(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
     mid = models.IntegerField()
@@ -59,16 +49,28 @@ class MHDetail(models.Model):
 
 class CategoryForCategoryId(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    cid = models.ForeignKey(Category)
-    mid = models.ForeignKey(MHDetail)
+
+    # zk_user = models.ManyToManyField(to="ZKUser.ZKUser", name="zk_user")
+
+    # cid = models.ForeignKey(Category, to_field='mid')
+    # cid = models.OneToOneField(to="ManHua.Category", name="mid")
+    # cid = models.IntegerField()
+    # mid = models.IntegerField()
+
+
+    # cid = models.ForeignKey(Category)
+    # mid = models.ForeignKey(MHDetail)
+    # cid = models.ForeignKey(Category, to_field=Category.mid)
+    # mid = models.ForeignKey(MHDetail, to_field=MHDetail.mid)
 
     class Meta:
         # db_table = 'ManHua_category'
         ordering = ['id']
-        verbose_name_plural = '某分类下的具体漫画'
+        verbose_name_plural = '分类下的所有漫画'
 
     def __str__(self):
-        return self.cid.name
+        return self.id
+        # return self.cid.name
 
 
 class HotData(models.Model):

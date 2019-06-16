@@ -8,12 +8,6 @@ from pymysql import Error
 
 
 @cache_page(60 * 15)  # 秒数，这里指缓存 15 分钟，不直接写900是为了提高可读性
-def ManHuaIndex(request):
-    projects = models.ManHua.objects.all()
-    return render(request, 'manhua_index.html', {"projects": projects})
-
-
-@cache_page(60 * 5)
 def JsonMHCategoryView(request):
     print("开始读取 分类 数据")
     return getPagingData(request, Category)
@@ -90,3 +84,23 @@ def JsonMHChapterPicView(request):
 @cache_page(60 * 5)
 def JsonMHBannerView(request):
     return getPagingData(request, MHBanner)
+
+
+# @cache_page(60 * 5)
+def JsonMHCategoryForCategoryIdView(request):
+    try:
+        # 根据漫画的分类 id，获取当前分类下的所有 漫画信息。
+        cid = request.GET.get("cid")
+
+        if cid is not None:
+            chapterPic = models.CategoryForCategoryId.objects.filter(cid_id=models.Category.objects.filter(mid=cid)[0].id)
+            # chapterPic = models.CategoryForCategoryId.objects.filter(cid_id=cid)
+
+            return getHttpTotalResponse(0, "ok", chapterPic.count(), chapterPic)
+        else:
+            return getHttpResponse(10000, "Error", "请在接口扣添加参数：cid")
+    except Error:
+        return getHttpResponse(10000, "Error", "")
+    except Exception as e:
+        return getHttpResponse(10000, "Error", e)
+
