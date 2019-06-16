@@ -68,7 +68,7 @@ class CategoryForCategoryId(models.Model):
         verbose_name_plural = '某分类下的具体漫画'
 
     def __str__(self):
-        return self.cid
+        return self.cid.name
 
 
 class HotData(models.Model):
