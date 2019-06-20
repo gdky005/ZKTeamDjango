@@ -3,7 +3,7 @@ from django.views.decorators.cache import cache_page
 
 from ManHua import models
 from ManHua.base_views import getPagingData, getHttpTotalResponse, getHttpResponse, getPagingDataForFilter
-from ManHua.models import Category, HotData, MHDetail, MHDetailChapter, MHChapterPic, MHBanner
+from ManHua.models import Category, HotData, MHDetail, MHDetailChapter, MHChapterPic, MHBanner, SelectData
 from pymysql import Error
 
 
@@ -16,6 +16,11 @@ def JsonMHCategoryView(request):
 @cache_page(60 * 5)
 def JsonMHHotDataView(request):
     return getPagingData(request, HotData)
+
+
+@cache_page(60 * 5)
+def JsonMHSelectDataView(request):
+    return getPagingData(request, SelectData)
 
 
 @cache_page(60 * 5)
