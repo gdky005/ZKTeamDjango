@@ -69,15 +69,26 @@ class HotData(models.Model):
     newPage = models.TextField()
 
     class Meta:
-        verbose_name_plural = '热门'
+        verbose_name_plural = '热门漫画'
         ordering = ['id']
 
     def __str__(self):
         return self.name
-    #
-    # class ShowItem(admin.ModelAdmin):
-    #     # 需要显示的字段信息
-    #     list_display = ('id', 'mid', 'name', 'picUrl', 'newPage')
+
+
+class SelectData(models.Model):
+    id = models.IntegerField(primary_key=True).auto_created
+    mid = models.IntegerField()
+    name = models.TextField()
+    picUrl = models.TextField()
+    newPage = models.TextField()
+
+    class Meta:
+        verbose_name_plural = '精选漫画'
+        ordering = ['id']
+
+    def __str__(self):
+        return self.name
 
 
 class MHDetailChapter(models.Model):
