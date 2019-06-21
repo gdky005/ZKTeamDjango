@@ -160,6 +160,7 @@ class MHBanner(models.Model):
 class MHAllData(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
     mid2 = models.TextField()
+    mid = models.IntegerField(unique=True, default=0)
     name = models.TextField()
     picUrl = models.TextField()
     newPageName = models.TextField()
