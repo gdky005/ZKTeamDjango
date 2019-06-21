@@ -149,3 +149,26 @@ class MHBanner(models.Model):
 
     def __str__(self):
         return self.name
+
+
+# pic->https://mh1.zhengdongwuye.cn/upload/wudijiamian/cover.jpg
+# title->A·O·N无敌假面
+# mid0->aonmodijiamian
+# newPageName->02卷完
+# mhUrl->https://www.tohomh123.com/aonmodijiamian/
+# mhNewUrl->https://www.tohomh123.com/aonmodijiamian/2.html
+class MHAllData(models.Model):
+    id = models.IntegerField(primary_key=True).auto_created
+    mid2 = models.TextField()
+    name = models.TextField()
+    picUrl = models.TextField()
+    newPageName = models.TextField()
+    mhUrl = models.TextField()
+    mhNewUrl = models.TextField()
+
+    class Meta:
+        verbose_name_plural = '漫画所有数据'
+        ordering = ['id']
+
+    def __str__(self):
+        return self.name
