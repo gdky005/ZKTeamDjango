@@ -12,4 +12,8 @@ urlpatterns = [
     url(r'^jsonMHBanner', views.JsonMHBannerView, name="JsonMHBannerView"),
     url(r'^jsonMHKinds', views.JsonMHCategoryForCategoryIdView, name="JsonMHCategoryForCategoryIdView"),
     url(r'^jsonMHAllData', views.JsonMHAllDataView, name="JsonMHAllDataView"),
+
+    # 设置数据源接口
+    url(r'^setJsonMHDetailData', views.setMHDetailView, name="setMHDetailView"),
+    url(r'^setJsonMHChapterData', views.setJsonMHChapterData, name="setMHDetailView"),
 ]
