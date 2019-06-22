@@ -103,6 +103,7 @@ class SelectData(models.Model):
 class MHDetailChapter(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
     mid = models.IntegerField()
+    pid = models.IntegerField(default=0)
     name = models.TextField()
     url = models.TextField()
     pCount = models.TextField()
@@ -110,7 +111,7 @@ class MHDetailChapter(models.Model):
 
     class Meta:
         verbose_name_plural = '漫画章节'
-        ordering = ['id']
+        ordering = ['pid']
 
     def __str__(self):
         return self.name

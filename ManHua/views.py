@@ -226,33 +226,45 @@ def setMHDetailView(request):
 
 def setJsonMHChapterData(request):
     try:
+        errorMsg = ""
         if request.method == 'POST':
-            postBody = request.body
-            json_result = json.loads(postBody)
-            print(json_result)
-            print(json_result['sdf'])
+            try:
+                postBody = request.body
+                resultListData = json.loads(postBody)
+                # print(result)
 
-            return getHttpResponse(10001, "not is post.", json_result)
+                detail_list = []
+                for result in resultListData:
 
+                    name = result['name']
+                    pCount = result['pCount']
+                    url = result['url']
 
-            # if mid is not None:
-            #     mid = models.Category.objects.filter(mid=mid)[0].id
-            # else:
-            #     mid = id
-            #
-            # if mid is not None:
-            #     # categoryId = models.Category.objects.filter(mid=cid)[0].id
-            #     chapterPic = models.CategoryForCategoryId.objects.filter(cid_id=mid)
-            #     obj = []
-            #
-            #     for chapter in chapterPic:
-            #         obj.append(chapter.mid)
-            #
-            #     return getHttpTotalResponse(0, "ok", chapterPic.count(), obj)
-            # else:
-            #     return getErrorResponse()
+                    urlSource = url[url.index("com/") + 4:url.rindex("/")]
+                    mid = getHashCode(urlSource)
+
+                    count = pCount[pCount.index("（") + 1:pCount.index("P")]
+
+                    mhDetailChapter = MHDetailChapter()
+                    mhDetailChapter.name = name
+                    mhDetailChapter.mid = mid
+                    mhDetailChapter.url = url
+                    mhDetailChapter.pCount = pCount
+                    mhDetailChapter.count = count
+
+                    # obj = mhDetail.save()
+                    detail_list.append(mhDetailChapter)
+
+                models.MHDetailChapter.objects.bulk_create(detail_list)
+
+                return getHttpResponse(0, "ok", {})
+
+            except Exception as e:
+                print(e)
+            errorMsg = e
         else:
-            return getHttpResponse(10001, "not is post.", "")
+            errorMsg = "not is post."
+        return getHttpResponse(10001, errorMsg, {})
     except Error:
         return getHttpResponse(10000, "Error", "")
     except Exception as e:
