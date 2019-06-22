@@ -6,7 +6,7 @@ from django.contrib import admin
 # Create your models here.
 class Category(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.IntegerField(unique=True, default=0)
+    mid = models.BigIntegerField(unique=True, default=0)
     mid2 = models.IntegerField(default=0)
     name = models.TextField()
     url = models.TextField()
@@ -26,7 +26,7 @@ class Category(models.Model):
 
 class MHDetail(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.IntegerField(unique=True, default=0)
+    mid = models.BigIntegerField(unique=True, default=0)
     name = models.TextField()
     remind = models.TextField(default="")
 
@@ -34,7 +34,7 @@ class MHDetail(models.Model):
     picUrl = models.TextField()
 
     state = models.TextField()
-    stateId = models.IntegerField(default=0)
+    stateId = models.BigIntegerField(default=0)
 
     time = models.TextField()
     detail = models.TextField()
@@ -72,7 +72,7 @@ class CategoryForCategoryId(models.Model):
 
 class HotData(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.IntegerField()
+    mid = models.BigIntegerField()
     name = models.TextField()
     picUrl = models.TextField()
     newPage = models.TextField()
@@ -87,7 +87,7 @@ class HotData(models.Model):
 
 class SelectData(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.IntegerField()
+    mid = models.BigIntegerField()
     name = models.TextField()
     picUrl = models.TextField()
     newPage = models.TextField()
@@ -102,7 +102,7 @@ class SelectData(models.Model):
 
 class MHDetailChapter(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.IntegerField()
+    mid = models.BigIntegerField()
     pid = models.BigIntegerField(unique=True, default=0)
     name = models.TextField()
     url = models.TextField()
@@ -123,7 +123,7 @@ class MHDetailChapter(models.Model):
 
 class MHChapterPic(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.IntegerField()
+    mid = models.BigIntegerField()
     mid2 = models.TextField()
     picUrl = models.TextField()
     count = models.IntegerField()
@@ -149,7 +149,7 @@ class MHChapterPic(models.Model):
 
 class MHBanner(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.IntegerField()
+    mid = models.BigIntegerField()
     name = models.TextField()
     picUrl = models.TextField()
 
@@ -170,7 +170,7 @@ class MHBanner(models.Model):
 class MHAllData(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
     mid2 = models.TextField()
-    mid = models.IntegerField(unique=True, default=0)
+    mid = models.BigIntegerField(unique=True, default=0)
     name = models.TextField()
     picUrl = models.TextField()
     newPageName = models.TextField()
