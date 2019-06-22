@@ -7,6 +7,7 @@ from django.contrib import admin
 class Category(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
     mid = models.IntegerField()
+    mid2 = models.IntegerField(default=0)
     name = models.TextField()
     url = models.TextField()
 
