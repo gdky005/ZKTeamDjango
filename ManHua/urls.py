@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^jsonMHPicList', views.JsonMHChapterPicView, name="JsonMHChapterPicView"),
     url(r'^jsonMHBanner', views.JsonMHBannerView, name="JsonMHBannerView"),
     url(r'^jsonMHKinds', views.JsonMHCategoryForCategoryIdView, name="JsonMHCategoryForCategoryIdView"),
+    url(r'^jsonMHAllData', views.JsonMHAllDataView, name="JsonMHAllDataView"),
 ]

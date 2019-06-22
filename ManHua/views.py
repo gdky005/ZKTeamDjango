@@ -3,8 +3,13 @@ from django.views.decorators.cache import cache_page
 
 from ManHua import models
 from ManHua.base_views import getPagingData, getHttpTotalResponse, getHttpResponse, getPagingDataForFilter
-from ManHua.models import Category, HotData, MHDetail, MHDetailChapter, MHChapterPic, MHBanner, SelectData
+from ManHua.models import Category, HotData, MHDetail, MHDetailChapter, MHChapterPic, MHBanner, SelectData, MHAllData
 from pymysql import Error
+
+
+@cache_page(60 * 5)
+def JsonMHAllDataView(request):
+    return getPagingData(request, MHAllData)
 
 
 @cache_page(60 * 15)  # 秒数，这里指缓存 15 分钟，不直接写900是为了提高可读性
