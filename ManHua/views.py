@@ -242,12 +242,14 @@ def setJsonMHChapterData(request):
 
                     urlSource = url[url.index("com/") + 4:url.rindex("/")]
                     mid = getHashCode(urlSource)
+                    pid = int(str(mid) + str(url[url.rindex("/") + 1:url.rindex(".")]))
 
                     count = pCount[pCount.index("（") + 1:pCount.index("P")]
 
                     mhDetailChapter = MHDetailChapter()
                     mhDetailChapter.name = name
                     mhDetailChapter.mid = mid
+                    mhDetailChapter.pid = pid
                     mhDetailChapter.url = url
                     mhDetailChapter.pCount = pCount
                     mhDetailChapter.count = count

@@ -103,7 +103,7 @@ class SelectData(models.Model):
 class MHDetailChapter(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
     mid = models.IntegerField()
-    pid = models.IntegerField(default=0)
+    pid = models.BigIntegerField(unique=True, default=0)
     name = models.TextField()
     url = models.TextField()
     pCount = models.TextField()
