@@ -6,7 +6,7 @@ from django.contrib import admin
 # Create your models here.
 class Category(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.IntegerField(unique=True)
+    mid = models.IntegerField()
     mid2 = models.IntegerField(default=0)
     name = models.TextField()
     url = models.TextField()
@@ -26,22 +26,22 @@ class Category(models.Model):
 
 class MHDetail(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.IntegerField(unique=True)
+    mid = models.IntegerField()
     name = models.TextField()
-    remind = models.TextField()
+    remind = models.TextField(default="")
 
     author = models.TextField()
     picUrl = models.TextField()
 
     state = models.TextField()
-    stateId = models.IntegerField()
+    stateId = models.IntegerField(default=0)
 
     time = models.TextField()
     detail = models.TextField()
-    url = models.TextField()
+    url = models.TextField(default="")
 
     category = models.TextField()
-    categoryIdList = models.TextField()
+    categoryIdList = models.TextField(default="")
     tag = models.TextField()
 
     class Meta:
