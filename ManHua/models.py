@@ -123,7 +123,7 @@ class MHDetailChapter(models.Model):
 
 class MHChapterPic(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.BigIntegerField()
+    mid = models.BigIntegerField(unique=True, default=0)
     mid2 = models.TextField()
     picUrl = models.TextField()
     count = models.IntegerField()
