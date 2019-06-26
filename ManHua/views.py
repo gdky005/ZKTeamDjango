@@ -44,6 +44,11 @@ def JsonMHDetailView(request):
 
 
 @cache_page(60 * 5)
+def JsonMHAllDetailView(request):
+    return getPagingData(request, MHDetail)
+
+
+@cache_page(60 * 5)
 def JsonMHDetailChapterView(request):
     mid = request.GET.get("mid")
 
