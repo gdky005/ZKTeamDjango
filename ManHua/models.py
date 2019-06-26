@@ -72,7 +72,8 @@ class CategoryForCategoryId(models.Model):
 
 class HotData(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.BigIntegerField()
+    mid = models.BigIntegerField(unique=True, default=0)
+    mid2 = models.TextField(default="")
     name = models.TextField()
     picUrl = models.TextField()
     newPage = models.TextField()
@@ -150,7 +151,8 @@ class MHChapterPic(models.Model):
 
 class MHBanner(models.Model):
     id = models.IntegerField(primary_key=True).auto_created
-    mid = models.BigIntegerField()
+    mid2 = models.TextField(default="")
+    mid = models.BigIntegerField(unique=True, default=0)
     name = models.TextField()
     picUrl = models.TextField()
 
