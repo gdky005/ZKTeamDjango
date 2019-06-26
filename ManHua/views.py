@@ -6,7 +6,8 @@ from django.views.decorators.cache import cache_page
 from ManHua import models
 from ManHua.Utils import getHashCode
 from ManHua.base_views import getPagingData, getHttpTotalResponse, getHttpResponse, getPagingDataForFilter
-from ManHua.models import Category, HotData, MHDetail, MHDetailChapter, MHChapterPic, MHBanner, SelectData, MHAllData
+from ManHua.models import Category, HotData, MHDetail, MHDetailChapter, MHChapterPic, MHBanner, SelectData, MHAllData, \
+    CategoryForCategoryId
 from pymysql import Error
 
 
@@ -272,3 +273,45 @@ def setJsonMHChapterData(request):
     except Exception as e:
         return getHttpResponse(10000, "Error", e)
 
+
+def setJsonCategoryForIdData(request):
+    try:
+        errorMsg = ""
+        if request.method == 'POST':
+            try:
+                postBody = request.body
+                resultListData = json.loads(postBody)
+                # print(result)
+
+                categoryList = []
+                for result in resultListData:
+
+                    mid = result['mid']
+                    cidStr = result['cid']
+
+                    cidList = cidStr.split(",")
+
+                    for cid in cidList:
+                        categoryForCategoryId = CategoryForCategoryId()
+
+                        midDetail = MHDetail.objects.get(mid=mid)
+                        cidCategory = Category.objects.get(mid=cid)
+                        categoryForCategoryId.mid = midDetail
+                        categoryForCategoryId.cid = cidCategory
+
+                        categoryList.append(categoryForCategoryId)
+
+                models.CategoryForCategoryId.objects.bulk_create(categoryList)
+
+                return getHttpResponse(0, "ok", {})
+
+            except Exception as e:
+                print(e)
+            errorMsg = e
+        else:
+            errorMsg = "not is post."
+        return getHttpResponse(10001, errorMsg, {})
+    except Error:
+        return getHttpResponse(10000, "Error", "")
+    except Exception as e:
+        return getHttpResponse(10000, "Error", e)

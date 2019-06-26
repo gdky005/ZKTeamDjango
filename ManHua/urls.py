@@ -16,4 +16,5 @@ urlpatterns = [
     # 设置数据源接口
     url(r'^setJsonMHDetailData', views.setMHDetailView, name="setMHDetailView"),
     url(r'^setJsonMHChapterData', views.setJsonMHChapterData, name="setMHDetailView"),
+    url(r'^setJsonCategoryForIdData', views.setJsonCategoryForIdData, name="setMHDetailView"),
 ]
