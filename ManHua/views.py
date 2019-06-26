@@ -297,6 +297,9 @@ def setJsonCategoryForIdData(request):
                     cidList = cidStr.split(",")
 
                     for cid in cidList:
+                        if cid == '' or cid is None:
+                            continue
+
                         categoryForCategoryId = CategoryForCategoryId()
 
                         midDetail = MHDetail.objects.get(mid=mid)
@@ -309,10 +312,9 @@ def setJsonCategoryForIdData(request):
                 models.CategoryForCategoryId.objects.bulk_create(categoryList)
 
                 return getHttpResponse(0, "ok", {})
-
             except Exception as e:
                 print(e)
-            errorMsg = e
+                errorMsg = e
         else:
             errorMsg = "not is post."
         return getHttpResponse(10001, errorMsg, {})
