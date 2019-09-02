@@ -7,3 +7,4 @@ class NovelData(models.Model):
     pid = models.IntegerField()
     name = models.TextField()
     url = models.TextField()
+    sourceUrl = models.TextField(default="")
