@@ -4,11 +4,14 @@ from django.shortcuts import render
 import json
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.cache import cache_page
 
 from dss.Serializer import serializer
 from pymysql import Error
 
 from Novel import models
+from Novel.base_views import getPagingData
+from Novel.models import NovelDetailData, NovelData
 from api.ResultResponse import ResultResponse
 
 
@@ -17,19 +20,24 @@ def novel(request):
     return render(request, "novel.html")
 
 
-def novel(request):
-    maxData = 5
-    count = request.GET.get("pageCount")
-    if count:
-        maxData = int(count)
+@cache_page(60 * 5)
+def jsonDetailNovel(request):
+    return getPagingData(request, NovelDetailData)
+
+
+@cache_page(60 * 5)
+def jsonNovel(request):
+    return getPagingData(request, NovelData)
+
+
+def jsonSearch(request):
+    pid = request.GET.get("pid")
+    if pid:
+        pid = int(pid)
 
     try:
-        # projects = models.xxx.objects.all()
-
-        project_info = models.xxx.objects.values()[:maxData]  # 取出该表所有的数据
-        projects = list(project_info)
-
-        return getHttpResponse(0, "ok", projects)
+        project_info = models.NovelDetailData.objects.filter(pid=pid).values()[0]
+        return getHttpResponse(0, "ok", project_info)
     except Error:
         return getHttpResponse(10000, "Error", "")
 
