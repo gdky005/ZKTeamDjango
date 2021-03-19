@@ -1,7 +1,7 @@
 dj-static==0.0.6
 Django==1.11
 django-widget-tweaks==1.4.1
-djangorestframework==3.5.3
+djangorestframework==3.11.2
 PyMySQL==0.9.3
 requests==2.13.0
 six==1.10.0
